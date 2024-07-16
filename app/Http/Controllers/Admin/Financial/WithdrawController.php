@@ -12,7 +12,7 @@ class WithdrawController extends Controller
      */
     public function index()
     {
-        return view('admin.auth.admin.index');
+        return view('admin.financial.withdraw.index');
     }
 
     /**
@@ -20,7 +20,7 @@ class WithdrawController extends Controller
      */
     public function create()
     {
-        return view('admin.auth.admin.create');
+        return view('admin.financial.withdraw.create');
     }
 
     /**

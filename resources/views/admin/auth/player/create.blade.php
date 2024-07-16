@@ -19,7 +19,7 @@
             <div class="portlet-title">
                 <h3 class="title">                                        
                     <i class="icon-settings"></i>
-                    فرم  اایجاد بازیکن جدید
+                    فرم  ایجاد بازیکن جدید
                 </h3>
             </div><!-- /.portlet-title -->
             <div class="buttons-box">

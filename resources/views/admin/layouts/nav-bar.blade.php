@@ -54,13 +54,13 @@
                 </a>
                 <ul>
                     <li>
-                        <a href="#" class="">
+                        <a href="{{ route('depoceit.index') }}" class="">
                             <i class=" fas fa-arrow-up"></i>
                             <span>واریزی های سایت</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="">
+                        <a href="{{ route('withdraw.index') }}" class="">
                             <i class="fas fa-arrow-down-long"></i>
                             <span>برداشتی های سایت</span>
                         </a>

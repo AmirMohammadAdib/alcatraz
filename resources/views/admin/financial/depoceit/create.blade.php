@@ -1,14 +1,14 @@
 @extends('admin.layouts.master')
 
 @section('head-tag')
-    <title>فهرست ادمین های سایت - آلکاتراز</title>
+    <title>فهرست واریزی های سایت - آلکاتراز</title>
 @endsection
 
 @section('breadcrumb')
     <li><a href="{{ route('dashboard') }}">پیشخوان</a></li>
-    <li><a href="">احراز هویت</a></li>
-    <li><a href="{{ route('admin.index') }}">ادمین ها</a></li>
-    <li><a href="{{ route('admin.create') }}">ایجاد</a></li>
+    <li><a href="">مالی</a></li>
+    <li><a href="{{ route('depoceit.index') }}">واریزی ها</a></li>
+    <li><a href="{{ route('depoceit.create') }}">ایجاد</a></li>
 @endsection
 
 @section('content')
@@ -19,7 +19,7 @@
             <div class="portlet-title">
                 <h3 class="title">                                        
                     <i class="icon-settings"></i>
-                    فرم  اایجاد ادمین جدید
+                    فرم ایجاد واریزی جدید
                 </h3>
             </div><!-- /.portlet-title -->
             <div class="buttons-box">
@@ -32,7 +32,7 @@
             </div><!-- /.buttons-box -->
         </div><!-- /.portlet-heading -->
         <div class="portlet-body">
-            <form role="form" method="POST" accept="{{ route('admin.store') }}">
+            <form role="form" method="POST" accept="{{ route('depoceit.store') }}">
                 @csrf
 
                 <div class="form-body">
