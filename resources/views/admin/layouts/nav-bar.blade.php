@@ -32,7 +32,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="">
+                        <a href="{{ route('admin.index') }}" class="">
                             <i class=" fas fa-user-lock"></i>
                             <span>ادمین ها</span>
                         </a>
