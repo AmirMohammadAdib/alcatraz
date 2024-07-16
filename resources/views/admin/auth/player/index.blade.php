@@ -45,6 +45,8 @@
                             <th>نام کاربری</th>
                             <th>شماره تماس</th>
                             <th>وضعیت</th>
+                            <th>سطح</th>
+                            <th>کیف پول</th>
                             <th>مسابقات</th>
                             <th>برنده شده</th>
                             <th>تاریخ ساخت</th>
@@ -59,6 +61,8 @@
                             <td>
                                 <span class="alert-success">فعال</span>
                             </td>
+                            <td>نوب</td>
+                            <td>۱۳۰،۰۰۰ تومان</td>
                             <td>5</td>
                             <td>2</td>
                             <td>{{ verta(time())->format('Y-m-d') }}</td>
