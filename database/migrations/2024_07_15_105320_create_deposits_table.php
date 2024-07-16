@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId("user_id")->constrained("users")->onUpdate("cascade")->onDelete("cascade");
             $table->tinyInteger('type')->default(0)->comment('0 => getway, 1 => Card by card');
+            $table->tinyInteger('status')->default(0)->comment('0 => invalid, 1 => valid');
             $table->string('transaction_code')->nullable();
             $table->string('receipt')->nullable()->comment('receipt picture');
             $table->decimal('amount', 10, 2);
