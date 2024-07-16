@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Auth;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class PlayerController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('admin.auth.player.index');
+        return view('admin.dashboard');
     }
 
     /**
@@ -20,7 +20,7 @@ class PlayerController extends Controller
      */
     public function create()
     {
-        return view('admin.auth.player.create');
+        //
     }
 
     /**

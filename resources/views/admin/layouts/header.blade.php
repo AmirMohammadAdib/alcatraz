@@ -1,7 +1,7 @@
 <div class="navbar navbar-fixed-top" id="main-navbar">            
     <div class="header-right">
         <a href="dashboard.html" class="logo-con">
-            <img src="{{ asset('admin-assets/images/logo.png') }}" class="img-responsive center-block" alt="لوگو قالب مدیران">
+            <h1>آلکاتراز</h1>
         </a>
     </div><!-- /.header-right -->
     <div class="header-left">
@@ -120,7 +120,7 @@
                 <li class="dropdown dropdown-user">
                     <a href="#" class="dropdown-toggle dropdown-hover" data-bs-toggle="dropdown">
                         <img src="{{ asset('admin-assets/images/user/48.png') }}" alt="عکس پرفایل" class="img-circle img-responsive">
-                        <span>حمید آفرینش فر</span>
+                        <span>امیر ادیب</span>
                         <i class="icon-arrow-down"></i>
                     </a>
                     <ul class="dropdown-menu">

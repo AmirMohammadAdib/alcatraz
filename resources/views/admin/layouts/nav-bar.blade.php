@@ -13,7 +13,7 @@
     <div class="side-menu-container">
         <ul class="metismenu" id="side-menu">
             <li>
-                <a href="#" class="current">
+                <a href="{{ route('dashboard') }}" class="current">
                     <i class="icon-home"></i>
                     <span>داشبورد</span>
                 </a>
@@ -26,7 +26,7 @@
                 </a>
                 <ul>
                     <li>
-                        <a href="#" class="">
+                        <a href="{{ route('player.index') }}" class="">
                             <i class=" fas fa-gamepad"></i>
                             <span>بازیکنان</span>
                         </a>
