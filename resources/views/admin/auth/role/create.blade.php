@@ -1,14 +1,14 @@
 @extends('admin.layouts.master')
 
 @section('head-tag')
-    <title>فهرست ادمین های سایت - آلکاتراز</title>
+    <title>فهرست نقش های سایت - آلکاتراز</title>
 @endsection
 
 @section('breadcrumb')
     <li><a href="{{ route('dashboard') }}">پیشخوان</a></li>
     <li><a href="">احراز هویت</a></li>
-    <li><a href="{{ route('admin.index') }}">ادمین ها</a></li>
-    <li><a href="{{ route('admin.create') }}">ایجاد</a></li>
+    <li><a href="{{ route('role.index') }}">نقش ها</a></li>
+    <li><a href="{{ route('role.create') }}">ایجاد</a></li>
 @endsection
 
 @section('content')
@@ -19,7 +19,7 @@
             <div class="portlet-title">
                 <h3 class="title">                                        
                     <i class="icon-settings"></i>
-                    فرم  اایجاد ادمین جدید
+                    فرم ایجاد نقش جدید
                 </h3>
             </div><!-- /.portlet-title -->
             <div class="buttons-box">
@@ -32,19 +32,19 @@
             </div><!-- /.buttons-box -->
         </div><!-- /.portlet-heading -->
         <div class="portlet-body">
-            <form role="form" method="POST" accept="{{ route('admin.store') }}">
+            <form role="form" method="POST" accept="{{ route('role.store') }}">
                 @csrf
 
                 <div class="form-body">
                     <div class="form-group">
-                        <label>نام کاربری (اختیاری)</label>
-                        <div class="input-group @error('username') has-error @enderror">
+                        <label>عنوان نقش</label>
+                        <div class="input-group @error('name') has-error @enderror">
                             <span class="input-group-addon">
                                 <i class="icon-user"></i>
                             </span>
-                            <input type="text" class="form-control" placeholder="نام کاربری" value="{{ old('username') }}" name="username">
+                            <input type="text" class="form-control" placeholder="عنوان نقش" value="{{ old('name') }}" name="name">
 
-                            @error('username')
+                            @error('name')
                                 <span class="alert-danger">{{ $message }}</span>
                             @enderror
 
@@ -53,14 +53,29 @@
 
 
                     <div class="form-group">
-                        <label>شماره تماس</label>
-                        <div class="input-group @error('phone') has-error @enderror">
-                            <span class="input-group-addon">
-                                <i class="icon-user"></i>
-                            </span>
-                            <input type="text" class="form-control" placeholder="شماره تماس" value="{{ old('phone') }}" name="phone">
+                        <label>مجوز ها</label>
+                        <div class="input-group">
+                            
+                            <div class="col-12 d-flex">
+                                <div class="col-3">
+                                    <input type="checkbox" name="" id="1">
+                                    <label for="1">نمایش</label>
+                                </div>
+                                <div class="col-3">
+                                    <input type="checkbox" name="" id="2">
+                                    <label for="2">ساخت</label>
+                                </div>
+                                <div class="col-3">
+                                    <input type="checkbox" name="" id="3">
+                                    <label for="3">ویرایش</label>
+                                </div>
+                                <div class="col-3">
+                                    <input type="checkbox" name="" id="4">
+                                    <label for="4">حذف</label>
+                                </div>
+                            </div>
 
-                            @error('phone')
+                            @error('name')
                                 <span class="alert-danger">{{ $message }}</span>
                             @enderror
 
@@ -69,26 +84,6 @@
 
 
 
-                    <div class="form-group">
-                        <label>وضعیت</label>
-                        <div class="input-group @error('status') has-error @enderror">
-                            <span class="input-group-addon">
-                                <i class="icon-user"></i>
-                            </span>
-                            <select name="status" class="form-select">
-                                <option value="0">غیر فعال</option>
-                                <option value="1" selected>فعال</option>
-                            </select>
-
-                            @error('status')
-                                <span class="alert-danger">{{ $message }}</span>
-                            @enderror
-
-                        </div><!-- /.input-group -->
-                    </div><!-- /.form-group -->
-
-
-                    <input type="hidden" name="role" value="1">
 
                     
                 </div><!-- /.form-body -->
@@ -98,7 +93,7 @@
                         <i class="icon-check"></i>
                         ذخیره
                     </button>
-                    <a href="{{ route('admin.index') }}" class="btn btn-warning btn-round">
+                    <a href="{{ route('role.index') }}" class="btn btn-warning btn-round">
                         بازگشت
                         <i class="icon-close"></i>
                     </a>

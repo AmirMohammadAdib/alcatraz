@@ -38,7 +38,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="">
+                        <a href="{{ route('role.index') }}" class="">
                             <i class=" fas fa-masks-theater"></i>
                             <span>نقش ها</span>
                         </a>
