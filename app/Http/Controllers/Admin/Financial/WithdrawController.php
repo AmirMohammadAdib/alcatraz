@@ -20,7 +20,7 @@ class WithdrawController extends Controller
      */
     public function create()
     {
-        return view('admin.financial.withdraw.create');
+        //
     }
 
     /**
@@ -44,7 +44,7 @@ class WithdrawController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('admin.financial.withdraw.edit');
     }
 
     /**

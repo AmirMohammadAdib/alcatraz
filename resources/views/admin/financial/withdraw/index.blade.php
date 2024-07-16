@@ -52,7 +52,7 @@
                             <td>{{ number_format(150000) . ' تومان ' }}</td>
                             <td>{{ verta(time())->format('Y-m-d') }}</td>
                             <td>
-                                <a href="#" class="btn btn-warning">پرداخت کردن</a>
+                                <a href="{{ route('withdraw.edit', 1) }}" class="btn btn-warning">پرداخت کردن</a>
                                 <a href="#" class="btn btn-danger">کنسل</a>                                
                             </td>
                         </tr>
