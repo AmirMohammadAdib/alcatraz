@@ -1,14 +1,14 @@
 @extends('admin.layouts.master')
 
 @section('head-tag')
-    <title>فهرست بازیکنان سایت - آلکاتراز</title>
+    <title>فهرست محصولات سایت - آلکاتراز</title>
 @endsection
 
 @section('breadcrumb')
     <li><a href="{{ route('dashboard') }}">پیشخوان</a></li>
     <li><a href="">احراز هویت</a></li>
-    <li><a href="{{ route('player.index') }}">بازیکنان</a></li>
-    <li><a href="{{ route('player.create') }}">ایجاد</a></li>
+    <li><a href="{{ route('cp.index') }}">محصولات</a></li>
+    <li><a href="{{ route('cp.create') }}">ایجاد</a></li>
 @endsection
 
 @section('content')
@@ -19,7 +19,7 @@
             <div class="portlet-title">
                 <h3 class="title">                                        
                     <i class="icon-settings"></i>
-                    فرم ایجاد بازیکن جدید
+                    فرم ایجاد محصول جدید
                 </h3>
             </div><!-- /.portlet-title -->
             <div class="buttons-box">
@@ -32,19 +32,19 @@
             </div><!-- /.buttons-box -->
         </div><!-- /.portlet-heading -->
         <div class="portlet-body">
-            <form role="form" method="POST" accept="{{ route('player.store') }}">
+            <form role="form" method="POST" accept="{{ route('cp.store') }}">
                 @csrf
 
                 <div class="form-body">
                     <div class="form-group">
-                        <label>نام کاربری</label>
-                        <div class="input-group @error('username') has-error @enderror">
+                        <label>عنوان محصول</label>
+                        <div class="input-group @error('title') has-error @enderror">
                             <span class="input-group-addon">
                                 <i class="icon-user"></i>
                             </span>
-                            <input type="text" class="form-control" placeholder="نام کاربری" value="{{ old('username') }}" name="username">
+                            <input type="text" class="form-control" placeholder="عنوان محصول" value="{{ old('title') }}" name="title">
 
-                            @error('username')
+                            @error('title')
                                 <span class="alert-danger">{{ $message }}</span>
                             @enderror
 
@@ -53,14 +53,14 @@
 
 
                     <div class="form-group">
-                        <label>شماره تماس</label>
-                        <div class="input-group @error('phone') has-error @enderror">
+                        <label>مقدار</label>
+                        <div class="input-group @error('amount') has-error @enderror">
                             <span class="input-group-addon">
                                 <i class="icon-user"></i>
                             </span>
-                            <input type="text" class="form-control" placeholder="شماره تماس" value="{{ old('phone') }}" name="phone">
+                            <input type="number" class="form-control" placeholder="مقدار" value="{{ old('amount') }}" name="amount">
 
-                            @error('phone')
+                            @error('amount')
                                 <span class="alert-danger">{{ $message }}</span>
                             @enderror
 
@@ -68,26 +68,26 @@
                     </div><!-- /.form-group -->
 
 
-                    <div class="form-group">
-                        <label>سطح</label>
-                        <div class="input-group @error('level') has-error @enderror">
-                            <span class="input-group-addon">
-                                <i class="icon-user"></i>
-                            </span>
-                            <select name="level" class="form-select">
-                                <option value="0">نوب</option>
-                                <option value="1">پلیر</option>
-                                <option value="2">پرو پلیر</option>
-                                <option value="3">اولترا پلیر</option>
-                            </select>
 
-                            @error('level')
-                                <span class="alert-danger">{{ $message }}</span>
-                            @enderror
+                    <div class="form-group relative">
+                        <input type="file" class="form-control" name="img">  
+                        <label>تصویر نمایه محصول</label>
+                        <div class="input-group round @error('img') has-error @enderror"> 
+                            <input type="text" class="form-control file-input" placeholder="برای آپلود کلیک کنید"> 
+                            <span class="input-group-btn"> 
+                                <button type="button" class="btn btn-success"> 
+                                    <i class="icon-picture"></i>
+                                    آپلود عکس
+                                <div class="paper-ripple"><div class="paper-ripple__background"></div><div class="paper-ripple__waves"></div></div></button>
+                            </span> 
 
+                            @error('img')
+                            <span class="alert-danger">{{ $message }}</span>
+                        @enderror
                         </div><!-- /.input-group -->
-                    </div><!-- /.form-group -->
-
+                        <div class="help-block"></div>
+                        
+                    </div>
 
                     <div class="form-group">
                         <label>وضعیت</label>
@@ -96,8 +96,8 @@
                                 <i class="icon-user"></i>
                             </span>
                             <select name="status" class="form-select">
-                                <option value="0">غیر فعال</option>
-                                <option value="1" selected>فعال</option>
+                                <option value="0">ناموجود</option>
+                                <option value="1" selected>موجود</option>
                             </select>
 
                             @error('status')
@@ -109,14 +109,14 @@
 
 
                     <div class="form-group">
-                        <label>شماره کارت (اختیاری)</label>
-                        <div class="input-group @error('cart_number') has-error @enderror">
+                        <label>قیمت</label>
+                        <div class="input-group @error('price') has-error @enderror">
                             <span class="input-group-addon">
                                 <i class="icon-user"></i>
                             </span>
-                            <input type="text" class="form-control" placeholder="شماره کارت" value="{{ old('cart_number') }}" name="cart_number">
+                            <input type="number" class="form-control" placeholder="قیمت" value="{{ old('price') }}" name="price">
 
-                            @error('cart_number')
+                            @error('price')
                                 <span class="alert-danger">{{ $message }}</span>
                             @enderror
 
@@ -131,7 +131,7 @@
                         <i class="icon-check"></i>
                         ذخیره
                     </button>
-                    <a href="{{ route('player.index') }}" class="btn btn-warning btn-round">
+                    <a href="{{ route('cp.index') }}" class="btn btn-warning btn-round">
                         بازگشت
                         <i class="icon-close"></i>
                     </a>

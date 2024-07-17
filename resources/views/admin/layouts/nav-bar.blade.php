@@ -76,19 +76,19 @@
                 </a>
                 <ul>
                     <li>
-                        <a href="#" class="">
+                        <a href="{{ route('cp.index') }}" class="">
                             <i class="fab fa-product-hunt"></i>
                             <span>محصولات</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="">
+                        <a href="{{ route('order.index') }}" class="">
                             <i class=" fas fa-cart-shopping"></i>
                             <span>سفارشات</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="">
+                        <a href="{{ route('order.index', ['history']) }}" class="">
                             <i class=" fas fa-file-invoice-dollar"></i>
                             <span>تاریخچه معاملات</span>
                         </a>
