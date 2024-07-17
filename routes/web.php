@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\Auth\RoleController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Financial\DepoceitController;
 use App\Http\Controllers\Admin\Financial\WithdrawController;
+use App\Http\Controllers\Admin\Match\RoomController;
 use App\Http\Controllers\Admin\Shop\CPController;
 use App\Http\Controllers\Admin\Shop\OrderController;
 use Illuminate\Support\Facades\Route;
@@ -60,5 +61,14 @@ Route::group(['prefix' => 'admin'], function(){
 
         // Define resource routes for 'account' which will map to AccountController
         Route::resource('account', AccountController::class);
+    });
+
+    // Group routes under the 'admin/match' prefix
+    Route::group(['prefix' => 'match'], function(){
+        // Define resource routes for 'request' which will map to RoomController
+        Route::resource('room', RoomController::class);
+        
+        // Define resource routes for 'player' which will map to PlayerController
+        Route::resource('player', PlayerController::class);
     });
 });

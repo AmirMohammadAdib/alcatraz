@@ -12,7 +12,11 @@ class RoomController extends Controller
      */
     public function index()
     {
-        //
+        if(!isset($_GET['history'])){
+            return view('admin.match.room.index');
+        }else{
+            return view('admin.match.history.index');
+        }
     }
 
     /**
@@ -20,7 +24,7 @@ class RoomController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.match.room.create');
     }
 
     /**

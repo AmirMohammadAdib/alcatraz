@@ -138,19 +138,19 @@
                 </a>
                 <ul>
                     <li>
-                        <a href="#" class="">
+                        <a href="{{ route('room.index') }}" class="">
                             <i class="  far fa-circle-play"></i>
                             <span>روم های جاری</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="">
+                        <a href="{{ route('room.index', ['history']) }}" class="">
                             <i class="  fas fa-border-all"></i>
                             <span>روم های پایان یاقته</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="">
+                        <a href="{{ route('room.create') }}" class="">
                             <i class="  fas fa-plus"></i>
                             <span>روم جدید</span>
                         </a>

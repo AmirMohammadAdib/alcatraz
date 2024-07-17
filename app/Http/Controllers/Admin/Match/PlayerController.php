@@ -12,7 +12,7 @@ class PlayerController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.match.player.index');
     }
 
     /**
@@ -20,7 +20,7 @@ class PlayerController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.match.player.create');
     }
 
     /**
