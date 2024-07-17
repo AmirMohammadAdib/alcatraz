@@ -12,7 +12,11 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return view('admin.shop.order.index');
+        if(isset($_GET['history'])){
+            return view('admin.shop.history.index');
+        }else{
+            return view('admin.shop.order.index');
+        }
     }
 
     /**
