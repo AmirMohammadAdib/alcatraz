@@ -63,7 +63,7 @@
                             <td>amiradib</td>
                             <td>{{ verta(time())->format('Y-m-d') }}</td>
                             <td>
-                                <a href="#" class="btn btn-warning">بازیکنان</a>
+                                <a href="{{ route('room-player.index') }}" class="btn btn-warning">بازیکنان</a>
                             </td>
                         </tr>
 

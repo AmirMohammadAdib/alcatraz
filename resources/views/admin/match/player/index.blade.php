@@ -1,13 +1,13 @@
 @extends('admin.layouts.master')
 
 @section('head-tag')
-    <title>فهرست روم های سایت - آلکاتراز</title>
+    <title>فهرست برندگان سایت - آلکاتراز</title>
 @endsection
 
 @section('breadcrumb')
     <li><a href="{{ route('dashboard') }}">پیشخوان</a></li>
     <li><a href="">مسابقات</a></li>
-    <li><a href="{{ route('room.index') }}">روم ها</a></li>
+    <li><a href="{{ route('room-player.index') }}">برندگان</a></li>
 @endsection
 
 @section('content')
@@ -17,7 +17,7 @@
             <div class="portlet-title">
                 <h3 class="title">                                        
                     <i class="icon-frane"></i>
-                    لیست روم ها
+                    لیست برندگان
                 </h3>
             </div><!-- /.portlet-title -->
             <div class="buttons-box">
@@ -30,53 +30,37 @@
             </div><!-- /.buttons-box -->
         </div><!-- /.portlet-heading -->
         <div class="portlet-body">
-            <div class="top-buttons-box mb-2">
-                <a class="btn btn-success" href="{{ route('room.create') }}">
-                    <i class="icon-plus"></i>
-                    افزودن
-                </a>
-            </div><!-- /.top-buttons-box -->
+
 
             <div class="table-responsive">
                 <table class="table table-bordered table-hover table-striped" id="data-table">
                     <thead>
                         <tr>
                             <th>ردیف</th>
-                            <th>لینک اتاق</th>
-                            <th>فی</th>
-                            <th>جایزه</th>
-                            <th>نوع تخصیص جایزه</th>
-                            <th>ظرفیت</th>
-                            <th>بازیکنان فعلی</th>
+                            <th>نام کاربری</th>
+                            <th>شماره تماس</th>
                             <th>وضعیت</th>
-                            <th>تاریخ</th>
+                            <th>سطح</th>
+                            <th>کیف پول</th>
+                            <th>تاریخ ساخت</th>
                             <td>عملیات</td>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>1</td>
+                            <td>userX</td>
+                            <td>09904978193</td>
                             <td>
-                                <a href="#">click to redirect</a>
+                                <span class="alert-success">فعال</span>
                             </td>
-                            <td>
-                                {{ number_format(19000) . ' تومان '  }}
-                            </td>
-                            <td>
-                                {{ number_format(1000000) . ' تومان '  }}
-                            </td>
-                            <td>نفر اول</td>
-                            <td>100</td>
-                            <td>94</td>
-                            <td>در انتظار اجرا</td>
+                            <td>نوب</td>
+                            <td>۱۳۰،۰۰۰ تومان</td>
                             <td>{{ verta(time())->format('Y-m-d') }}</td>
                             <td>
-                                <a href="{{ route('room-player.index') }}" class="btn btn-warning">بازیکنان</a>
-                                <a href="#" class="btn btn-info">ویرایش</a>
-                                <a href="#" class="btn btn-danger">حذف</a>
+                                <a href="#" class="btn btn-warning">تاریخچه معاملات</a>
                             </td>
                         </tr>
-
                         
                     </tbody>
                 </table>
