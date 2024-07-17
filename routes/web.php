@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\Match\PlayerController as MatchPlayerController;
 use App\Http\Controllers\Admin\Match\RoomController;
 use App\Http\Controllers\Admin\Shop\CPController;
 use App\Http\Controllers\Admin\Shop\OrderController;
+use App\Http\Controllers\Admin\Ticket\TicketController;
 use Illuminate\Support\Facades\Route;
 
 // Group routes under the 'admin' prefix
@@ -72,4 +73,15 @@ Route::group(['prefix' => 'admin'], function(){
         // Define resource routes for 'player' which will map to MatchPlayerController
         Route::resource('room-player', MatchPlayerController::class);
     });
+
+
+    // Group routes under the 'admin/ticket' prefix
+    Route::group(['prefix' => 'ticket'], function(){
+        // Define resource routes for '/' which will map to TicketController
+        Route::get('/', [TicketController::class, 'index'])->name('admin.ticket.index');
+        Route::get('/show/{id}', [TicketController::class, 'show'])->name('admin.ticket.show');
+        Route::post('/answer/{id}', [TicketController::class, 'answer'])->name('admin.ticket.answer');
+        Route::get('/change/{id}', [TicketController::class, 'change'])->name('admin.ticket.change');
+    });
+
 });
