@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\Account\AccountController;
+use App\Http\Controllers\Admin\Account\OrderController as AccountOrderController;
+use App\Http\Controllers\Admin\Account\RequestController;
 use App\Http\Controllers\Admin\Auth\AdminController;
 use App\Http\Controllers\Admin\Auth\PlayerController;
 use App\Http\Controllers\Admin\Auth\RoleController;
@@ -44,5 +47,18 @@ Route::group(['prefix' => 'admin'], function(){
         
         // Define resource routes for 'order' which will map to OrderController
         Route::resource('order', OrderController::class);
+    });
+
+
+    // Group routes under the 'admin/account' prefix
+    Route::group(['prefix' => 'account'], function(){
+        // Define resource routes for 'request' which will map to RequestController
+        Route::resource('request', RequestController::class);
+        
+        // Define resource routes for 'order' which will map to AccountOrderController
+        Route::resource('order-account', AccountOrderController::class);
+
+        // Define resource routes for 'account' which will map to AccountController
+        Route::resource('account', AccountController::class);
     });
 });
