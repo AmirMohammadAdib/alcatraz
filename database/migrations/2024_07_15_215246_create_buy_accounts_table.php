@@ -17,10 +17,13 @@ return new class extends Migration
             $table->string('game_uid');
             $table->string('saler_price');
             $table->text('description')->nullable();
-            $table->string('site_price');
-            $table->string('email');
-            $table->string('password');
+            $table->string('site_price')->nullable();
+            $table->string('transaction_id')->nullable();
+            $table->string('email')->nullable();
+            $table->string('password')->nullable();
             $table->tinyInteger('status')->default('0')->comment('0 => unseen, 1 => waiting, 2 => confirm, 3 => finished');
+            $table->tinyInteger('user_confirm')->default('0')->comment('0 => unconfirm, 1 => confirm');
+            
             $table->timestamps();
             $table->softDeletes();
         });

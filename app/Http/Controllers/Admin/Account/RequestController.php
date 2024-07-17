@@ -36,7 +36,8 @@ class RequestController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('admin.account.request.payment');
+
     }
 
     /**
@@ -44,7 +45,7 @@ class RequestController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('admin.account.request.edit');
     }
 
     /**

@@ -104,25 +104,25 @@
                 </a>
                 <ul>
                     <li>
-                        <a href="#" class="">
+                        <a href="{{ route('request.index') }}" class="">
                             <i class=" fas fa-users-rectangle"></i>
                             <span>درخواست های جدید</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="">
+                        <a href="{{ route('account.index') }}" class="">
                             <i class=" fab fa-wpforms"></i>
                             <span>اکانت ها</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="">
+                        <a href="{{ route('account-order.index') }}" class="">
                             <i class=" fas fa-cart-shopping"></i>
                             <span>سفارشات</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="">
+                        <a href="{{ route('account-order.index', ['history']) }}" class="">
                             <i class=" fas fa-file-invoice-dollar"></i>
                             <span>تاریخچه معاملات</span>
                         </a>

@@ -56,7 +56,7 @@ Route::group(['prefix' => 'admin'], function(){
         Route::resource('request', RequestController::class);
         
         // Define resource routes for 'order' which will map to AccountOrderController
-        Route::resource('order-account', AccountOrderController::class);
+        Route::resource('account-order', AccountOrderController::class);
 
         // Define resource routes for 'account' which will map to AccountController
         Route::resource('account', AccountController::class);
