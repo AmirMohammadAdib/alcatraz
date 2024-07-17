@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\Auth\RoleController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Financial\DepoceitController;
 use App\Http\Controllers\Admin\Financial\WithdrawController;
+use App\Http\Controllers\Admin\Shop\CPController;
+use App\Http\Controllers\Admin\Shop\OrderController;
 use Illuminate\Support\Facades\Route;
 
 // Group routes under the 'admin' prefix
@@ -28,11 +30,19 @@ Route::group(['prefix' => 'admin'], function(){
 
     // Group routes under the 'admin/financial' prefix
     Route::group(['prefix' => 'financial'], function(){
-        
         // Define resource routes for 'depoceit' which will map to DepoceitController
         Route::resource('depoceit', DepoceitController::class);
         
         // Define resource routes for 'withdraw' which will map to WithdrawController
         Route::resource('withdraw', WithdrawController::class);
+    });
+
+    // Group routes under the 'admin/shop' prefix
+    Route::group(['prefix' => 'shop'], function(){
+        // Define resource routes for 'cp' which will map to CPController
+        Route::resource('cp', CPController::class);
+        
+        // Define resource routes for 'order' which will map to OrderController
+        Route::resource('order', OrderController::class);
     });
 });
