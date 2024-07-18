@@ -36,7 +36,7 @@ class PlayerController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('admin.auth.player.show');
     }
 
     /**

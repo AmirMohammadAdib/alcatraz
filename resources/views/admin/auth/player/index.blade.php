@@ -67,7 +67,7 @@
                             <td>2</td>
                             <td>{{ verta(time())->format('Y-m-d') }}</td>
                             <td>
-                                <a href="#" class="btn btn-warning">تاریخچه معاملات</a>
+                                <a href="{{ route('player.show', 1) }}" class="btn btn-warning">تاریخچه معاملات</a>
                                 <a href="#" class="btn btn-info">ویرایش</a>
                                 <a href="#" class="btn btn-danger">حذف</a>
                             </td>
