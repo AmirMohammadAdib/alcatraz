@@ -31,8 +31,8 @@
                     <input type="text" class="w-100 mt-10 font-bold" placeholder="شماره موبایل خود را وارد کنید">
                 </div>
                 <div class="input-feild">
-                    <label for="" class="font-bold text-white">نام کاربری</label>
-                    <input type="text" class="w-100 mt-10 font-bold" placeholder="شماره حساب">
+                    <label for="" class="font-bold text-white">شماره کارت</label>
+                    <input type="text" class="w-100 mt-10 font-bold" placeholder="شماره کارت">
                 </div>
 
                 <div class="text-left p-10">
