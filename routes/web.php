@@ -83,5 +83,6 @@ Route::group(['prefix' => 'admin'], function(){
         Route::post('/answer/{id}', [TicketController::class, 'answer'])->name('admin.ticket.answer');
         Route::get('/change/{id}', [TicketController::class, 'change'])->name('admin.ticket.change');
     });
-
 });
+
+
