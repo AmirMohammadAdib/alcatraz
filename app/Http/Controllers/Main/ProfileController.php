@@ -7,5 +7,12 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
-    //
+    public function profileView(){
+        return view('app.profile');
+    }
+
+    public function profileUpdateView(){
+        return view('app.update-profile');
+    }
+
 }

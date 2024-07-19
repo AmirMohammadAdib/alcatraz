@@ -102,7 +102,7 @@ Route::get('/stars', [IndexController::class, 'stars'])->name('app.stars');
 
 // Profile pages that run on ProfileController
 Route::get('/profile', [ProfileController::class, 'profileView'])->name('profile.view');
-Route::get('/profile-update', [ProfileController::class, 'profileUpdateView'])->name('profile.update.view');
+Route::get('/update-profile', [ProfileController::class, 'profileUpdateView'])->name('profile.update.view');
 
 
 // Wallet pages that run on WalletController
