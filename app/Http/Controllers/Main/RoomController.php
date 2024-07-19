@@ -7,5 +7,11 @@ use Illuminate\Http\Request;
 
 class RoomController extends Controller
 {
-    //
+    public function roomView(){
+        return view('app.room');
+    }
+
+    public function roomsView(){
+        return view('app.rooms');
+    }
 }
