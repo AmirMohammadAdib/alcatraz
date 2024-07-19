@@ -14,6 +14,13 @@ use App\Http\Controllers\Admin\Match\RoomController;
 use App\Http\Controllers\Admin\Shop\CPController;
 use App\Http\Controllers\Admin\Shop\OrderController;
 use App\Http\Controllers\Admin\Ticket\TicketController;
+use App\Http\Controllers\Main\AccountController as MainAccountController;
+use App\Http\Controllers\Main\CPController as MainCPController;
+use App\Http\Controllers\Main\IndexController;
+use App\Http\Controllers\Main\ProfileController;
+use App\Http\Controllers\Main\RoomController as MainRoomController;
+use App\Http\Controllers\Main\WalletController;
+use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 
 // Group routes under the 'admin' prefix
@@ -85,4 +92,34 @@ Route::group(['prefix' => 'admin'], function(){
     });
 });
 
+
+// Index or Main pages that run on IndexController
+Route::get('/', [IndexController::class, 'index'])->name('app.index');
+Route::get('/contact-us', [IndexController::class, 'contactUs'])->name('app.contact-us');
+Route::get('/question', [IndexController::class, 'question'])->name('app.question');
+Route::get('/notification', [IndexController::class, 'notification'])->name('app.notification');
+Route::get('/stars', [IndexController::class, 'stars'])->name('app.stars');
+
+// Profile pages that run on ProfileController
+Route::get('/profile', [ProfileController::class, 'profileView'])->name('profile.view');
+Route::get('/profile-update', [ProfileController::class, 'profileUpdateView'])->name('profile.update.view');
+
+
+// Wallet pages that run on WalletController
+Route::get('/wallet', [WalletController::class, 'walletView'])->name('wallet.view');
+
+// Room pages that run on MainRoomController
+Route::get('/rooms', [MainRoomController::class, 'roomsView'])->name('rooms.view');
+Route::get('/room/{id}', [MainRoomController::class, 'roomView'])->name('room.view');
+
+
+// ShopCP pages that run on MainCPController
+Route::get('/shop/cp', [MainCPController::class, 'shopView'])->name('shop.shop.view');
+Route::get('/shop/cp/{id}', [MainCPController::class, 'cpView'])->name('shop.cp.view');
+
+
+// Shop account pages that run on MainAccountController
+Route::get('/shop/account', [MainAccountController::class, 'shopView'])->name('shop.shop.view');
+Route::get('/shop/account/{id}', [MainAccountController::class, 'accountView'])->name('shop.account.view');
+Route::get('/account-request', [MainAccountController::class, 'accountRequestView'])->name('account.request.view');
 
