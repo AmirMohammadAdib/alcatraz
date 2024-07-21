@@ -17,31 +17,49 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'phone',
+        'username',
+        'level',
+        'role',
+        'status',
+        'wallet',
+        'award_wallet',
+        'cart_number',
+        'shabba_number',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    public function accountOrders()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->hasMany(AccountOrder::class);
+    }
+
+    public function buyAccounts()
+    {
+        return $this->hasMany(BuyAccount::class);
+    }
+
+    public function cpOrders()
+    {
+        return $this->hasMany(CpOrder::class);
+    }
+
+    public function deposits()
+    {
+        return $this->hasMany(Deposit::class);
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    public function players()
+    {
+        return $this->hasMany(Player::class);
+    }
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
     }
 }
