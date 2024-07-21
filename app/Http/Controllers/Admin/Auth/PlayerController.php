@@ -65,8 +65,10 @@ class PlayerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $player)
     {
-        //
+        $username = $player->username;
+        $player->delete();
+        return redirect()->route('player.index')->with('alert-success', 'کاربر ' . $username . ' با موفقیت حذف شد');
     }
 }

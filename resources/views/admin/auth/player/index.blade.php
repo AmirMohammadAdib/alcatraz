@@ -88,7 +88,11 @@
                                 <td>
                                     <a href="{{ route('player.show', [$player]) }}" class="btn btn-warning">تاریخچه معاملات</a>
                                     <a href="{{ route('player.edit', [$player]) }}" class="btn btn-info">ویرایش</a>
-                                    <a href="#" class="btn btn-danger">حذف</a>
+                                    <form action="{{ route('player.destroy', [$player]) }}" method="POST" style="display: inline-block">
+                                        @method('DELETE')
+                                        @csrf
+                                        <input type="submit" class="btn btn-danger" value="حذف">                                
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
