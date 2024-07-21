@@ -19,7 +19,9 @@ return new class extends Migration
             $table->tinyInteger('role')->default(0)->comment('0 => user, 1 => admin');
             $table->tinyInteger('status')->default(0);
             $table->decimal('wallet')->nullable();
+            $table->decimal('award_wallet')->nullable();
             $table->string('cart_number');
+            $table->string('shabba_number');
             $table->timestamps();
         });
     }
