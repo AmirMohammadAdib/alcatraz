@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreignId("cp_id")->constrained("cps")->onUpdate("cascade")->onDelete("cascade");
             $table->foreignId("payment_id")->constrained("payments")->onUpdate("cascade")->onDelete("cascade")->nullable();
             $table->tinyInteger('status')->default('0')->comment('0 => un payed, 1 => payed, 2 => finished');
+            $table->tinyInteger('type')->default('0')->comment('0 => instantaneous, 1 => super instantaneous');
+            $table->timestamp('expire_time')->nullable();
             $table->string('email');
             $table->string('password');
             $table->timestamps();

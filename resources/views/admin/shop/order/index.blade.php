@@ -2,6 +2,20 @@
 
 @section('head-tag')
     <title>فهرست سفارشات سایت - آلکاتراز</title>
+    <style>
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .super{
+            animation: blinker .8s linear infinite;
+            font-weight: 900;
+            color: rgb(215, 39, 39);
+            text-shadow: 0 5px 20px rgba(208, 30, 30, 0.8)
+        }
+    </style>
 @endsection
 
 @section('breadcrumb')
@@ -37,6 +51,7 @@
                             <th>ردیف</th>
                             <th>خریدار</th>
                             <th>محصول</th>
+                            <th>نوع</th>
                             <th>کد رهگیری</th>
                             <th>وضعیت پرداختی</th>
                             <th>ایمیل</th>
@@ -50,6 +65,9 @@
                             <td>1</td>
                             <td>09338744117</td>
                             <td>سی پی دبل (۸۰ عدد)</td>
+                            <td>
+                                <p class="super">سوپر فوری (<span class="timer">2:31</span>)</p>
+                            </td>
                             <td>۹۹۱۰۲۱</td>
                             <td>
                                 <span class="alert-success">پرداخت شده</span>
@@ -67,6 +85,7 @@
                             <td>2</td>
                             <td>09338744117</td>
                             <td>سی پی دبل (160 عدد)</td>
+                            <td>فوری</td>
                             <td>-</td>
                             <td>
                                 <span class="alert-warning">پرداخت نشده</span>
@@ -86,4 +105,11 @@
         </div><!-- /.portlet-body -->
     </div><!-- /.portlet -->
 </div><!-- /.col-lg-12 -->                  
+@endsection
+
+@section('scripts')
+    <script>
+
+
+    </script>
 @endsection

@@ -16,7 +16,9 @@ return new class extends Migration
             $table->string('title');
             $table->integer('amount');
             $table->string('img');
+            $table->string('cover');
             $table->decimal('price', 10, 2);
+            $table->decimal('super_price', 10, 2);
             $table->tinyInteger('status')->default('1')->comment('0 => Un Available, 1 => Available');
             $table->timestamps();
             $table->softDeletes();
