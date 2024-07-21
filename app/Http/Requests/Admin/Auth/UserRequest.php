@@ -22,15 +22,15 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'phone' => 'required|string|max:255',
-            'username' => 'required|string|max:255',
+            'phone' => 'required|string|max:11|min:11|unique:users,phone',
+            'username' => 'required|string|max:255||unique:users,username',
             'level' => 'required|integer',
-            'role' => 'required|string|max:255',
-            'status' => 'required|integer',
-            'wallet' => 'required|numeric',
-            'award_wallet' => 'required|numeric',
-            'cart_number' => 'nullable|string|max:255',
-            'shabba_number' => 'nullable|string|max:255'
+            'role' => 'nullable|string|max:255',
+            'status' => 'required|string',
+            'wallet' => 'nullable|numeric',
+            'award_wallet' => 'nullable|numeric',
+            'cart_number' => 'required|string|max:255|max:16|min:16',
+            'shabba_number' => 'required|string|max:255|max:24|min:24'
         ];
     }
 }

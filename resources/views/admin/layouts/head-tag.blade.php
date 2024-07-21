@@ -24,3 +24,11 @@
         <link href="{{ asset('admin-assets/plugins/kamadatepicker/kamadatepicker.min.css') }}" rel="stylesheet">
         <link href="{{ asset('admin-assets/css/effects.css') }}" rel="stylesheet">
         <!-- END PAGE CSS -->
+
+        <style>
+                .alert-danger
+                {
+                        display: inline-block;
+                        width: 100%
+                }
+        </style>

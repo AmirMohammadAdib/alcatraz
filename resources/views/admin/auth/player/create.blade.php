@@ -32,7 +32,7 @@
             </div><!-- /.buttons-box -->
         </div><!-- /.portlet-heading -->
         <div class="portlet-body">
-            <form role="form" method="POST" accept="{{ route('player.store') }}">
+            <form role="form" method="POST" action="{{ route('player.store') }}">
                 @csrf
 
                 <div class="form-body">
@@ -109,7 +109,7 @@
 
 
                     <div class="form-group">
-                        <label>شماره کارت (اختیاری)</label>
+                        <label>شماره کارت</label>
                         <div class="input-group @error('cart_number') has-error @enderror">
                             <span class="input-group-addon">
                                 <i class="icon-user"></i>
@@ -117,6 +117,21 @@
                             <input type="text" class="form-control" placeholder="شماره کارت" value="{{ old('cart_number') }}" name="cart_number">
 
                             @error('cart_number')
+                                <span class="alert-danger">{{ $message }}</span>
+                            @enderror
+
+                        </div><!-- /.input-group -->
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group">
+                        <label>شماره شبا</label>
+                        <div class="input-group @error('shabba_number') has-error @enderror">
+                            <span class="input-group-addon">
+                                <i class="icon-user"></i>
+                            </span>
+                            <input type="text" class="form-control" placeholder="شماره شبا" value="{{ old('shabba_number') }}" name="shabba_number">
+
+                            @error('shabba_number')
                                 <span class="alert-danger">{{ $message }}</span>
                             @enderror
 

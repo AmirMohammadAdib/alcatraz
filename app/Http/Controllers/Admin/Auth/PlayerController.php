@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Auth\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -28,9 +29,11 @@ class PlayerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $inputs = $request->all();
+        User::create($inputs);
+        return redirect()->route('player.index')->with('alert-success', 'بازیکن جدید با موفقیت ساخته شد');
     }
 
     /**

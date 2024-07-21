@@ -2,6 +2,8 @@
 
 @section('head-tag')
     <title>فهرست بازیکنان سایت - آلکاتراز</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 @endsection
 
 @section('breadcrumb')
@@ -45,6 +47,7 @@
                             <th>نام کاربری</th>
                             <th>شماره تماس</th>
                             <th>سطح</th>
+                            <th>وضعیت</th>
                             <th>کیف پول</th>
                             <th>کیف پول جوایز</th>
                             <th>مسابقات</th>
@@ -70,6 +73,13 @@
                                         اولترا پلیر
                                     @endif
                                 </td>
+                                <td>
+                                    @if($player->status == '1')
+                                        <span class="alert-success">فعال</span>
+                                    @else
+                                        <span class="alert-danger">غیرفعال</span>
+                                    @endif
+                                </td>
                                 <td>{{ number_format($player->wallet) . ' تومان ' }}</td>
                                 <td>{{ number_format($player->award_wallet) . ' تومان ' }}</td>
                                 <td>{{ $player->players()->count() }}</td>
@@ -89,4 +99,16 @@
         </div><!-- /.portlet-body -->
     </div><!-- /.portlet -->
 </div><!-- /.col-lg-12 -->                  
+@endsection
+
+@section('script')
+    @if(session()->has('alert-success'))
+        <script>
+            Swal.fire({
+                title: "پیام موفقیت آمیز!",
+                text: "{{ session('alert-success') }}",
+                icon: "success"
+            }); 
+        </script>
+    @endif
 @endsection
