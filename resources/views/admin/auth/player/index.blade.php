@@ -86,8 +86,8 @@
                                 <td>{{ $player->players()->where('status', '1')->get()->count() }}</td>
                                 <td>{{ verta($player->created_at)->format('Y-m-d') }}</td>
                                 <td>
-                                    <a href="{{ route('player.show', 1) }}" class="btn btn-warning">تاریخچه معاملات</a>
-                                    <a href="#" class="btn btn-info">ویرایش</a>
+                                    <a href="{{ route('player.show', [$player]) }}" class="btn btn-warning">تاریخچه معاملات</a>
+                                    <a href="{{ route('player.edit', [$player]) }}" class="btn btn-info">ویرایش</a>
                                     <a href="#" class="btn btn-danger">حذف</a>
                                 </td>
                             </tr>

@@ -21,16 +21,30 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'phone' => 'required|string|max:11|min:11|unique:users,phone',
-            'username' => 'required|string|max:255||unique:users,username',
-            'level' => 'required|integer',
-            'role' => 'nullable|string|max:255',
-            'status' => 'required|string',
-            'wallet' => 'nullable|numeric',
-            'award_wallet' => 'nullable|numeric',
-            'cart_number' => 'required|string|max:255|max:16|min:16',
-            'shabba_number' => 'required|string|max:255|max:24|min:24'
-        ];
+        if($this->isMethod('POST')){
+            return [
+                'phone' => 'required|string|max:11|min:11|unique:users,phone',
+                'username' => 'required|string|max:255||unique:users,username',
+                'level' => 'required|integer',
+                'role' => 'nullable|string|max:255',
+                'status' => 'required|string',
+                'wallet' => 'nullable|numeric',
+                'award_wallet' => 'nullable|numeric',
+                'cart_number' => 'required|string|max:255|max:16|min:16',
+                'shabba_number' => 'required|string|max:255|max:24|min:24'
+            ];
+        }else{
+            return [
+                'phone' => 'required|string|max:11|min:11|unique:users,phone,' . $this->player->id,
+                'username' => 'required|string|max:255||unique:users,username,' . $this->player->id,
+                'level' => 'required|integer',
+                'role' => 'nullable|string|max:255',
+                'status' => 'required|string',
+                'wallet' => 'nullable|numeric',
+                'award_wallet' => 'nullable|numeric',
+                'cart_number' => 'required|string|max:255|max:16|min:16',
+                'shabba_number' => 'required|string|max:255|max:24|min:24'
+            ];
+        }
     }
 }

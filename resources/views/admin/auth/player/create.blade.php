@@ -75,10 +75,10 @@
                                 <i class="icon-user"></i>
                             </span>
                             <select name="level" class="form-select">
-                                <option value="0">نوب</option>
-                                <option value="1">پلیر</option>
-                                <option value="2">پرو پلیر</option>
-                                <option value="3">اولترا پلیر</option>
+                                <option value="0" {{ old('level') == '0' ? 'selected' : '' }}>نوب</option>
+                                <option value="1" {{ old('level') == '1' ? 'selected' : '' }}>پلیر</option>
+                                <option value="2" {{ old('level') == '2' ? 'selected' : '' }}>پرو پلیر</option>
+                                <option value="3" {{ old('level') == '3' ? 'selected' : '' }}>اولترا پلیر</option>
                             </select>
 
                             @error('level')
@@ -96,8 +96,8 @@
                                 <i class="icon-user"></i>
                             </span>
                             <select name="status" class="form-select">
-                                <option value="0">غیر فعال</option>
-                                <option value="1" selected>فعال</option>
+                                <option value="0" {{ old('status') == '0' ? 'selected' : '' }}>غیر فعال</option>
+                                <option value="1" {{ old('status') == '1' ? 'selected' : '' }} selected>فعال</option>
                             </select>
 
                             @error('status')

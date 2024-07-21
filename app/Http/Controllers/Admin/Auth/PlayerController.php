@@ -39,7 +39,7 @@ class PlayerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $player)
     {
         return view('admin.auth.player.show');
     }
@@ -47,17 +47,19 @@ class PlayerController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $player)
     {
-        //
+        return view('admin.auth.player.edit', compact('player'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UserRequest $request, User $player)
     {
-        //
+        $inputs = $request->all();
+        $player->update($inputs);
+        return redirect()->route('player.index')->with('alert-success', 'کاربر ' . $player->username . ' با موفقیت ویرایش یافت');
     }
 
     /**
