@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PlayerController extends Controller
@@ -12,7 +13,8 @@ class PlayerController extends Controller
      */
     public function index()
     {
-        return view('admin.auth.player.index');
+        $players = User::where('role', '0')->orderBy('created_at', 'desc')->get();
+        return view('admin.auth.player.index', compact('players'));
     }
 
     /**

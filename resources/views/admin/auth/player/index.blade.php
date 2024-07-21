@@ -44,9 +44,9 @@
                             <th>ردیف</th>
                             <th>نام کاربری</th>
                             <th>شماره تماس</th>
-                            <th>وضعیت</th>
                             <th>سطح</th>
                             <th>کیف پول</th>
+                            <th>کیف پول جوایز</th>
                             <th>مسابقات</th>
                             <th>برنده شده</th>
                             <th>تاریخ ساخت</th>
@@ -54,24 +54,34 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>userX</td>
-                            <td>09904978193</td>
-                            <td>
-                                <span class="alert-success">فعال</span>
-                            </td>
-                            <td>نوب</td>
-                            <td>۱۳۰،۰۰۰ تومان</td>
-                            <td>5</td>
-                            <td>2</td>
-                            <td>{{ verta(time())->format('Y-m-d') }}</td>
-                            <td>
-                                <a href="{{ route('player.show', 1) }}" class="btn btn-warning">تاریخچه معاملات</a>
-                                <a href="#" class="btn btn-info">ویرایش</a>
-                                <a href="#" class="btn btn-danger">حذف</a>
-                            </td>
-                        </tr>
+                        @foreach ($players as $key => $player)
+                            <tr>
+                                <td>{{ $key += 1 }}</td>
+                                <td>{{ $player->username }}</td>
+                                <td>{{ $player->phone }}</td>
+                                <td>
+                                    @if($player->level == '0')
+                                        نوب
+                                    @elseif($player->level == '1')
+                                        پلیر
+                                    @elseif($player->level == '2')
+                                        پرو پلیر
+                                    @else
+                                        اولترا پلیر
+                                    @endif
+                                </td>
+                                <td>{{ number_format($player->wallet) . ' تومان ' }}</td>
+                                <td>{{ number_format($player->award_wallet) . ' تومان ' }}</td>
+                                <td>{{ $player->players()->count() }}</td>
+                                <td>{{ $player->players()->where('status', '1')->get()->count() }}</td>
+                                <td>{{ verta($player->created_at)->format('Y-m-d') }}</td>
+                                <td>
+                                    <a href="{{ route('player.show', 1) }}" class="btn btn-warning">تاریخچه معاملات</a>
+                                    <a href="#" class="btn btn-info">ویرایش</a>
+                                    <a href="#" class="btn btn-danger">حذف</a>
+                                </td>
+                            </tr>
+                        @endforeach
                         
                     </tbody>
                 </table>
