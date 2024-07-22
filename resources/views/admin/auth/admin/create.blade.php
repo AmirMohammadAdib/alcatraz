@@ -69,7 +69,6 @@
                     </div><!-- /.form-group -->
 
 
-
                     <div class="form-group">
                         <label>وضعیت</label>
                         <div class="input-group @error('status') has-error @enderror">
@@ -77,8 +76,8 @@
                                 <i class="icon-user"></i>
                             </span>
                             <select name="status" class="form-select">
-                                <option value="0">غیر فعال</option>
-                                <option value="1" selected>فعال</option>
+                                <option value="0" {{ old('status') == '0' ? 'selected' : '' }}>غیر فعال</option>
+                                <option value="1" {{ old('status') == '1' ? 'selected' : '' }} selected>فعال</option>
                             </select>
 
                             @error('status')

@@ -19,7 +19,7 @@
             <div class="portlet-title">
                 <h3 class="title">                                        
                     <i class="icon-settings"></i>
-                    فرم ویرایش بازیکن جدید
+                    فرم ویرایش بازیکن
                 </h3>
             </div><!-- /.portlet-title -->
             <div class="buttons-box">

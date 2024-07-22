@@ -46,7 +46,7 @@ class AdminController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $admin)
     {
         //
     }
@@ -54,17 +54,22 @@ class AdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $admin)
     {
-        //
+        return view('admin.auth.admin.edit', compact('admin'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(AdminRequest $request, User $admin)
     {
-        //
+        $inputs = $request->all();
+
+        //roles create ...
+
+        $admin->update($inputs);
+        return redirect()->route('admin.index')->with('alert-success', 'ادمین ' . $admin->username . ' با موفقیت ویرایش شد');
     }
 
     /**

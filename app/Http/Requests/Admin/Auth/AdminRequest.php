@@ -30,8 +30,8 @@ class AdminRequest extends FormRequest
             ];
         }else{
             return [
-                'phone' => 'required|string|max:11|min:11|unique:users,phone,' . $this->player->id,
-                'username' => 'required|string|max:255||unique:users,username,' . $this->player->id,
+                'phone' => 'required|string|max:11|min:11|unique:users,phone,' . $this->admin->id,
+                'username' => 'required|string|max:255||unique:users,username,' . $this->admin->id,
                 'status' => 'required|string',
                 'roles' => 'nullable|array',
             ];    
