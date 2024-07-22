@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Financial;
 
 use App\Http\Controllers\Controller;
+use App\Models\Deposit;
 use Illuminate\Http\Request;
 
 class DepoceitController extends Controller
@@ -12,7 +13,9 @@ class DepoceitController extends Controller
      */
     public function index()
     {
-        return view('admin.financial.depoceit.index');
+        $deposits = Deposit::orderBy('created_at', 'desc')->get();
+
+        return view('admin.financial.depoceit.index', compact('deposits'));
     }
 
     /**

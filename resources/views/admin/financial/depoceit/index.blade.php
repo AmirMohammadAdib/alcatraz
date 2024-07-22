@@ -46,20 +46,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>09338744117</td>
-                            <td>کارت به کارت</td>
-                            <td>
-                                موجود در فیش
-                            </td>
-                            <td>{{ number_format(150000) . ' تومان ' }}</td>
-                            <td>{{ verta(time())->format('Y-m-d') }}</td>
-                            <td>
-                                <a href="#" class="btn btn-warning">فیش پرداخت</a>
-                                <a href="#" class="btn btn-info">تایید واریزی</a>                                
-                            </td>
-                        </tr>
+                        @foreach ($deposits as $key => $deposit)
+                            <tr>
+                                <td>{{ $key += 1 }}</td>
+                                <td>{{ $deposit->user->username }}</td>
+                                <td>{{ $deposit->type == '0' ? 'درگاه پرداخت' : 'کارت به کارت'  }}</td>
+                                <td>{{ $deposit->transaction_code == null ? '-' : $deposit->transaction_code  }}</td>
+                                <td>{{ number_format($deposit->amount) . ' تومان ' }}</td>
+                                <td>{{ verta($deposit->created_at)->format('Y-m-d') }}</td>
+                                <td>
+                                    <a href="{{ $deposit->receipt }}" class="btn btn-warning">فیش پرداخت</a>
+
+                                    @if ($deposit->type == '1')
+                                        <a href="#" class="btn btn-info">تایید واریزی</a>                                                                    
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
                         
                     </tbody>
                 </table>
