@@ -2,6 +2,15 @@
 
 @section('head-tag')
     <title>فهرست برداشتی های سایت - آلکاتراز</title>
+
+    <style>
+        .waiting{
+            animation: blinker .8s linear infinite;
+            font-weight: 900;
+            color: rgb(215, 168, 39);
+            text-shadow: 0 5px 20px rgba(208, 184, 30, 0.8)
+        }
+    </style>
 @endsection
 
 @section('breadcrumb')
@@ -45,28 +54,35 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>09338744117</td>
-                            <td>درحالت انتظار</td>
-                            <td>{{ number_format(150000) . ' تومان ' }}</td>
-                            <td>{{ verta(time())->format('Y-m-d') }}</td>
-                            <td>
-                                <a href="{{ route('withdraw.edit', 1) }}" class="btn btn-warning">پرداخت کردن</a>
-                                <a href="#" class="btn btn-danger">کنسل</a>                                
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>09338744117</td>
-                            <td>پایان یافته</td>
-                            <td>{{ number_format(150000) . ' تومان ' }}</td>
-                            <td>{{ verta(time())->format('Y-m-d') }}</td>
-                            <td>
-                                <a href="#" class="btn btn-info">مشاهده فیش</a>
-                            </td>
-                        </tr>
-                        
+                        @foreach ($withdraws as $key => $withdraw)
+                            <tr>
+                                <td>{{ $key += 1 }}</td>
+                                <td>{{ $withdraw->user->username }}</td>
+                                @if ($withdraw == '0')
+                                    <td class="waiting">درحالت انتظار</td>
+                                @elseif($withdraw == '1')
+                                    <td>پایان یافته</td>
+                                @else
+                                    <td>کنسل شده</td>
+                                @endif
+                                <td>{{ number_format($withdraw->amount) . ' تومان ' }}</td>
+                                <td>{{ verta($withdraw->created_at)->format('Y-m-d') }}</td>
+                                <td>
+                                    @if ($withdraw->status == '1')
+                                        <a href="#" class="btn btn-info">مشاهده فیش</a>
+                                    @endif
+
+                                    @if ($withdraw->status == '0')
+                                        <a href="{{ route('withdraw.edit', [$withdraw]) }}" class="btn btn-warning">پرداخت کردن</a>
+                                        <a href="{{ route('withdraw.edit', [$withdraw, 'block']) }}" class="btn btn-danger">مسدود کردن</a>   
+                                    @endif
+
+                                    @if ($withdraw->status == '2')
+                                        <a href="{{ route('withdraw.edit', [$withdraw, 'block']) }}" class="btn btn-warning">رفع مسدودی</a>
+                                    @endif                       
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div><!-- /.table-responsive -->

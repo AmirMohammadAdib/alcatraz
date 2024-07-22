@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Financial;
 
 use App\Http\Controllers\Controller;
+use App\Models\Withdraw;
 use Illuminate\Http\Request;
 
 class WithdrawController extends Controller
@@ -12,7 +13,8 @@ class WithdrawController extends Controller
      */
     public function index()
     {
-        return view('admin.financial.withdraw.index');
+        $withdraws = Withdraw::orderBy('created_at', 'desc')->get();
+        return view('admin.financial.withdraw.index', compact('withdraws'));
     }
 
     /**

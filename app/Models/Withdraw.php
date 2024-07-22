@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Withdraw extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
     protected $fillable = [
         'user_id', 'status', 'transaction_code', 'receipt', 'amount', 'cart_number_freezer'
     ];
