@@ -44,17 +44,53 @@ class WithdrawController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Withdraw $withdraw)
     {
-        return view('admin.financial.withdraw.edit');
+        if(isset($_GET['block'])){
+            if($withdraw->status == '2'){
+                $withdraw->status = '0';
+                $msg = 'درخواست برداشت با موفقیت رفع مسدود شد';
+            }else{
+                $withdraw->status = '2';
+                $msg = 'درخواست برداشت با موفقیت مسدود شد';
+            }
+
+            $withdraw->save();
+            return redirect()->route('withdraw.index')->with('alert-success', $msg);
+
+        }else{
+            return view('admin.financial.withdraw.edit', compact('withdraw'));
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Withdraw $withdraw)
     {
-        //
+        $inputs = $request->validate([
+            'transaction_code' => 'required|string',
+            'receipt' => 'required|file|max:2048|mimes:png,jpg,pdf,jpeg',            
+        ]);
+
+        if($request->file('receipt')){
+            $name = time() . '.' . $request->file('receipt')->getClientOriginalExtension();
+            $request->receipt->move(public_path('images/withdraws/'), $name);
+            $inputs['receipt'] = $name;
+        }
+
+        $inputs['cart_number_freezer'] = $withdraw->user->cart_number;
+        $inputs['shabba_number_freezer'] = $withdraw->user->shabba_number;
+
+        $inputs['status'] = '1';
+
+        $withdraw->update($inputs);
+
+        $msg = 'عملیات برداشت کاربر ' . $withdraw->user->username . ' با شناسه ' . $withdraw->transaction_code . ' انجام شد';
+
+        //send SMS
+
+        return redirect()->route('withdraw.index')->with('alert-success', $msg);
     }
 
     /**

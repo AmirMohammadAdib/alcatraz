@@ -55,7 +55,7 @@
                                 <td>{{ number_format($deposit->amount) . ' تومان ' }}</td>
                                 <td>{{ verta($deposit->created_at)->format('Y-m-d') }}</td>
                                 <td>
-                                    <a href="{{ $deposit->receipt }}" class="btn btn-warning">فیش پرداخت</a>
+                                    <a href="{{ asset('images/deposits/' . $deposit->receipt) }}" download class="btn btn-info">مشاهده فیش</a>
 
                                     @if ($deposit->type == '1')
                                         <a href="#" class="btn btn-info">تایید واریزی</a>                                                                    

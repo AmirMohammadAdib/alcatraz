@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('transaction_code')->nullable();
             $table->string('receipt')->nullable()->comment('receipt picture');
             $table->decimal('amount', 10, 2);
-            $table->string('cart_number_freezer');
+            $table->string('cart_number_freezer')->nullable();
+            $table->string('shabba_number_freezer')->nullable();
             $table->timestamps();
         });
     }

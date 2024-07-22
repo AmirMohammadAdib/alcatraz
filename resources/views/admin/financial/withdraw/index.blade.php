@@ -69,7 +69,7 @@
                                 <td>{{ verta($withdraw->created_at)->format('Y-m-d') }}</td>
                                 <td>
                                     @if ($withdraw->status == '1')
-                                        <a href="#" class="btn btn-info">مشاهده فیش</a>
+                                        <a href="{{ asset('images/withdraws/' . $withdraw->receipt) }}" download class="btn btn-info">مشاهده فیش</a>
                                     @endif
 
                                     @if ($withdraw->status == '0')

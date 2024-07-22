@@ -8,7 +8,7 @@
     <li><a href="{{ route('dashboard') }}">پیشخوان</a></li>
     <li><a href="">احراز هویت</a></li>
     <li><a href="{{ route('admin.index') }}">برداشتی ها</a></li>
-    <li><a href="{{ route('admin.create') }}">ایجاد</a></li>
+    <li><a href="">تکمیل فرآیند پرداخت</a></li>
 @endsection
 
 @section('content')
@@ -32,7 +32,7 @@
             </div><!-- /.buttons-box -->
         </div><!-- /.portlet-heading -->
         <div class="portlet-body">
-            <form role="form" method="POST" accept="{{ route('admin.update', 1) }}">
+            <form role="form" method="POST" action="{{ route('withdraw.update', [$withdraw]) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -45,20 +45,41 @@
                             <span class="input-group-addon">
                                 <i class="icon-user"></i>
                             </span>
-                            <input type="text" class="form-control disabled" value="{{ '11111111111111111' }}" disabled>
+                            <input type="text" class="form-control disabled" value="{{ $withdraw->user->cart_number }}" disabled>
+                        </div><!-- /.input-group -->
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group">
+                        <label>شماره شبا کاربر</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="icon-user"></i>
+                            </span>
+                            <input type="text" class="form-control disabled" value="{{ $withdraw->user->shabba_number }}" disabled>
+                        </div><!-- /.input-group -->
+                    </div><!-- /.form-group -->
+
+
+                    <div class="form-group">
+                        <label>شماره تماس کاربر</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="icon-user"></i>
+                            </span>
+                            <input type="text" class="form-control disabled" value="{{ $withdraw->user->phone }}" disabled>
                         </div><!-- /.input-group -->
                     </div><!-- /.form-group -->
 
 
                     <div class="form-group">
                         <label>کد رهگیری</label>
-                        <div class="input-group @error('transaction_id') has-error @enderror">
+                        <div class="input-group @error('transaction_code') has-error @enderror">
                             <span class="input-group-addon">
                                 <i class="icon-user"></i>
                             </span>
-                            <input type="text" class="form-control" placeholder="کد رهگیری" value="{{ old('transaction_id') }}" name="transaction_id">
+                            <input type="text" class="form-control" placeholder="کد رهگیری" name="transaction_code" value="{{ old('transaction_code', $withdraw->transaction_code) }}" name="transaction_id">
 
-                            @error('transaction_id')
+                            @error('transaction_code')
                                 <span class="alert-danger">{{ $message }}</span>
                             @enderror
 
