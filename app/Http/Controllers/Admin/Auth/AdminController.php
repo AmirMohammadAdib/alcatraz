@@ -75,8 +75,10 @@ class AdminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $admin)
     {
-        //
+        $username = $admin->username;
+        $admin->delete();
+        return redirect()->route('player.index')->with('alert-success', 'کاربر ' . $username . ' با موفقیت حذف شد');
     }
 }
