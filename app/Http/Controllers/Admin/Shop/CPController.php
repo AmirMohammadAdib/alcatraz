@@ -106,8 +106,9 @@ class CPController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(CP $cp)
     {
-        //
+        $cp->delete();
+        return redirect()->route('cp.index')->with('alert-success', 'محصول با شناسه ' . $cp->id . ' با موفقیت حذف شد');
     }
 }
