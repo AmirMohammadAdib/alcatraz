@@ -116,8 +116,8 @@
                                 <i class="icon-user"></i>
                             </span>
                             <select name="status" class="form-select">
-                                <option value="0">ناموجود</option>
-                                <option value="1" selected>موجود</option>
+                                <option value="0" {{ old('status') == '0' ? 'selected' : '' }}>ناموجود</option>
+                                <option value="1" {{ old('status') == '1' ? 'selected' : '' }}>موجود</option>
                             </select>
 
                             @error('status')

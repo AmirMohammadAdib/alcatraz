@@ -61,17 +61,46 @@ class CPController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(CP $cp)
     {
-        //
+        if(isset($_GET['status'])){
+            if($cp->status == '0'){
+                $cp->status = '1';
+                $msg = 'محصول با شناسه ' . $cp->id . ' با موفقیت موجود شد';
+            }else{
+                $cp->status = '0';   
+                $msg = 'محصول با شناسه ' . $cp->id . ' با موفقیت ناموجود شد';
+            }
+            $cp->save();
+
+            return redirect()->route('cp.index')->with('alert-success', $msg);
+
+        }else{
+            return view('admin.shop.cp.edit', compact('cp'));
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CPRequest $request, CP $cp)
     {
-        //
+        $inputs = $request->all();
+
+        if($request->file('img')){
+            $name = time() . '.' . $request->file('img')->getClientOriginalExtension();
+            $request->img->move(public_path('images/cp/img/'), $name);
+            $inputs['img'] = $name;
+        }
+
+        if($request->file('cover')){
+            $secondName = time() . '.' . $request->file('cover')->getClientOriginalExtension();
+            $request->cover->move(public_path('images/cp/cover/'), $secondName);
+            $inputs['cover'] = $secondName;
+        }
+
+        $cp->update($inputs);
+        return redirect()->route('cp.index')->with('alert-success', 'محصول با شناسه ' . $cp->id . ' با موفقیت ویرایش شد');
     }
 
     /**
