@@ -44,51 +44,50 @@
                             <th>ردیف</th>
                             <th>عنوان محصول</th>
                             <th>مقدار</th>
-                            <th>تصویر</th>
+                            <th>کاور</th>
                             <th>مبلغ</th>
+                            <th>مبلغ سوپر فوری</th>
                             <th>وضعیت</th>
                             <th>تاریخ ساخت</th>
                             <td>عملیات</td>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>سی پی دوبل (فوری)</td>
-                            <td>90 عدد</td>
-                            <td>
-                                <img src="https://codpointsandcredits.com/wp-content/uploads/2019/11/Free-COD-Points.png" width="50">
-                            </td>
-                            <td>۱۳۰،۰۰۰ تومان</td>
-                            <td>
-                                <span class="alert-success">موجود</span>
-                            </td>
-                            <td>{{ verta(time())->format('Y-m-d') }}</td>
-                            <td>
-                                <a href="#" class="btn btn-warning">ناموجود کردن</a>
-                                <a href="#" class="btn btn-info">ویرایش</a>
-                                <a href="#" class="btn btn-danger">حذف</a>
-                            </td>
-                        </tr>
 
-                        <tr>
-                            <td>1</td>
-                            <td>سی پی دوبل (فوری)</td>
-                            <td>90 عدد</td>
-                            <td>
-                                <img src="https://codpointsandcredits.com/wp-content/uploads/2019/11/Free-COD-Points.png" width="50">
-                            </td>
-                            <td>۱۳۰،۰۰۰ تومان</td>
-                            <td>
-                                <span class="alert-danger">ناموجود</span>
-                            </td>
-                            <td>{{ verta(time())->format('Y-m-d') }}</td>
-                            <td>
-                                <a href="#" class="btn btn-warning">موجود کردن</a>
-                                <a href="#" class="btn btn-info">ویرایش</a>
-                                <a href="#" class="btn btn-danger">حذف</a>
-                            </td>
-                        </tr>
+                        @foreach ($cps as $key => $cp)
+                            <tr>
+                                <td>{{ $key += 1 }}</td>
+                                <td>{{ $cp->title }}</td>
+                                <td>{{ number_format($cp->amount) }} عدد</td>
+                                <td>
+                                    <img src="{{ asset('images/cp/' . $cp->cover) }}" width="50">
+                                </td>
+                                <td>{{ number_format($cp->price) . ' تومان ' }}</td>
+                                <td>{{ number_format($cp->super_price) . ' تومان ' }}</td>
+                                <td>
+                                    @if ($cp->status == '0')
+                                        <span class="alert-danger">ناموجود</span>
+                                    @else
+                                        <span class="alert-success">موجود</span>             
+                                    @endif
+                                </td>
+                                <td>{{ verta($cp->created_at)->format('Y-m-d') }}</td>
+                                <td>
+                                    @if ($cp->status == '0')
+                                        <a href="{{ route('cp.edit', [$cp, 'status']) }}" class="btn btn-warning">موجود کردن</a>
+                                    @else
+                                        <a href="{{ route('cp.edit', [$cp, 'status']) }}" class="btn btn-warning">ناموجود کردن</a>
+                                    @endif
+
+                                    <a href="{{ route('cp.edit', [$cp]) }}" class="btn btn-info">ویرایش</a>
+                                    <form action="{{ route('cp.destroy', [$cp]) }}" method="POST" style="display: inline-block">
+                                        @method('DELETE')
+                                        @csrf
+                                        <input type="submit" class="btn btn-danger" value="حذف">                                
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
                         
                     </tbody>
                 </table>

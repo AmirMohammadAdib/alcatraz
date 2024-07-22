@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Shop;
 
 use App\Http\Controllers\Controller;
+use App\Models\CP;
 use Illuminate\Http\Request;
 
 class CPController extends Controller
@@ -12,7 +13,8 @@ class CPController extends Controller
      */
     public function index()
     {
-        return view('admin.shop.cp.index');
+        $cps = CP::orderBy('created_at', 'desc')->get();
+        return view('admin.shop.cp.index', compact('cps'));
     }
 
     /**
