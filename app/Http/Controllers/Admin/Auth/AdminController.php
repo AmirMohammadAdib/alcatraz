@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Auth\AdminRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -29,9 +30,17 @@ class AdminController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AdminRequest $request)
     {
-        //
+        $inputs = $request->all();
+        $inputs['role'] = '1';
+
+        //roles create ...
+
+        User::create($inputs);
+        return redirect()->route('admin.index')->with('alert-success', 'ادمین جدید با موفقیت ساخته شد');
+
+
     }
 
     /**

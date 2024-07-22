@@ -2,7 +2,6 @@
 
 @section('head-tag')
     <title>فهرست بازیکنان سایت - آلکاتراز</title>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 @endsection
 
@@ -103,16 +102,4 @@
         </div><!-- /.portlet-body -->
     </div><!-- /.portlet -->
 </div><!-- /.col-lg-12 -->                  
-@endsection
-
-@section('script')
-    @if(session()->has('alert-success'))
-        <script>
-            Swal.fire({
-                title: "پیام موفقیت آمیز!",
-                text: "{{ session('alert-success') }}",
-                icon: "success"
-            }); 
-        </script>
-    @endif
 @endsection

@@ -26,14 +26,14 @@ class AdminRequest extends FormRequest
                 'phone' => 'required|string|max:11|min:11|unique:users,phone',
                 'username' => 'required|string|max:255||unique:users,username',
                 'status' => 'required|string',
-                'roles' => 'required|array',
+                'roles' => 'nullable|array',
             ];
         }else{
             return [
                 'phone' => 'required|string|max:11|min:11|unique:users,phone,' . $this->player->id,
                 'username' => 'required|string|max:255||unique:users,username,' . $this->player->id,
                 'status' => 'required|string',
-                'roles' => 'required|array',
+                'roles' => 'nullable|array',
             ];    
         }
     }

@@ -32,12 +32,12 @@
             </div><!-- /.buttons-box -->
         </div><!-- /.portlet-heading -->
         <div class="portlet-body">
-            <form role="form" method="POST" accept="{{ route('admin.store') }}">
+            <form role="form" method="POST" action="{{ route('admin.store') }}">
                 @csrf
 
                 <div class="form-body">
                     <div class="form-group">
-                        <label>نام کاربری (اختیاری)</label>
+                        <label>نام کاربری</label>
                         <div class="input-group @error('username') has-error @enderror">
                             <span class="input-group-addon">
                                 <i class="icon-user"></i>
@@ -50,6 +50,7 @@
 
                         </div><!-- /.input-group -->
                     </div><!-- /.form-group -->
+
 
 
                     <div class="form-group">
