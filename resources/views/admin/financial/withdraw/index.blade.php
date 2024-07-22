@@ -4,6 +4,13 @@
     <title>فهرست برداشتی های سایت - آلکاتراز</title>
 
     <style>
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
+
+
         .waiting{
             animation: blinker .8s linear infinite;
             font-weight: 900;
@@ -58,9 +65,9 @@
                             <tr>
                                 <td>{{ $key += 1 }}</td>
                                 <td>{{ $withdraw->user->username }}</td>
-                                @if ($withdraw == '0')
+                                @if ($withdraw->status == 0)
                                     <td class="waiting">درحالت انتظار</td>
-                                @elseif($withdraw == '1')
+                                @elseif($withdraw->status == 1)
                                     <td>پایان یافته</td>
                                 @else
                                     <td>کنسل شده</td>
