@@ -51,22 +51,33 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($admins as $key => $admin)
                         <tr>
-                            <td>1</td>
-                            <td>userX</td>
-                            <td>09904978193</td>
+                            <td>{{ $key += 1 }}</td>
+                            <td>{{ $admin->username }}</td>
+                            <td>{{ $admin->phone }}</td>
+
                             <td>
-                                <span class="alert-success">فعال</span>
+                                @if($admin->status == '1')
+                                    <span class="alert-success">فعال</span>
+                                @else
+                                    <span class="alert-danger">غیرفعال</span>
+                                @endif
                             </td>
-                            <td>مدیر فروشگاه cp</td>
-                            <td>{{ verta(time())->format('Y-m-d') }}</td>
+                            <td>-</td>
+                            <td>{{ verta($admin->created_at)->format('Y-m-d') }}</td>
                             <td>
-                                <a href="#" class="btn btn-warning">اعطای مجوز</a>
-                                <a href="#" class="btn btn-info">ویرایش</a>
-                                <a href="#" class="btn btn-danger">حذف</a>
+                                <a href="{{ route('admin.edit', [$admin]) }}" class="btn btn-warning">اعطای مجوز</a>
+                                <a href="{{ route('admin.edit', [$admin]) }}" class="btn btn-info">ویرایش</a>
+                                <form action="{{ route('admin.destroy', [$admin]) }}" method="POST" style="display: inline-block">
+                                    @method('DELETE')
+                                    @csrf
+                                    <input type="submit" class="btn btn-danger" value="حذف">                                
+                                </form>
                             </td>
                         </tr>
-                        
+                    @endforeach
+        
                     </tbody>
                 </table>
             </div><!-- /.table-responsive -->
