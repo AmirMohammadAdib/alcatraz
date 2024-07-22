@@ -60,7 +60,7 @@
                                 <td>{{ $cp->title }}</td>
                                 <td>{{ number_format($cp->amount) }} عدد</td>
                                 <td>
-                                    <img src="{{ asset('images/cp/' . $cp->cover) }}" width="50">
+                                    <img src="{{ asset('images/cp/cover/' . $cp->cover) }}" width="50">
                                 </td>
                                 <td>{{ number_format($cp->price) . ' تومان ' }}</td>
                                 <td>{{ number_format($cp->super_price) . ' تومان ' }}</td>

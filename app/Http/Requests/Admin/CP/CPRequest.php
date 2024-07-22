@@ -16,8 +16,8 @@ class CPRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'amount' => 'required|numeric',
-            'img' => 'required|string|max:255',
-            'cover' => 'nullable|string|max:255',
+            'img' => 'required|file|max:2048|mimes:png,jpg,jpeg,gif,webp',
+            'cover' => 'required|file|max:2048|mimes:png,jpg,jpeg,gif,webp',
             'price' => 'required|numeric',
             'super_price' => 'required|numeric',
             'status' => 'required|integer'

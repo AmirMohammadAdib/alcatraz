@@ -314,6 +314,8 @@ return [
         'year' => 'سال',
         'pluck' => 'پلاک',
         'transaction_code' => 'کد واریزی',
-        'receipt' => 'فیش'
+        'receipt' => 'فیش',
+        'img' => 'عکس',
+        'super_price' => 'قیمت فوری'
     ],
 ];

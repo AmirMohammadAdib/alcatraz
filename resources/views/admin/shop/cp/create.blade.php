@@ -32,7 +32,7 @@
             </div><!-- /.buttons-box -->
         </div><!-- /.portlet-heading -->
         <div class="portlet-body">
-            <form role="form" method="POST" accept="{{ route('cp.store') }}">
+            <form role="form" method="POST" action="{{ route('cp.store') }}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="form-body">
@@ -89,6 +89,26 @@
                         
                     </div>
 
+                    <div class="form-group relative">
+                        <input type="file" class="form-control" name="cover">  
+                        <label>کاور محصول</label>
+                        <div class="input-group round @error('cover') has-error @enderror"> 
+                            <input type="text" class="form-control file-input" placeholder="برای آپلود کلیک کنید"> 
+                            <span class="input-group-btn"> 
+                                <button type="button" class="btn btn-success"> 
+                                    <i class="icon-picture"></i>
+                                    آپلود عکس
+                                <div class="paper-ripple"><div class="paper-ripple__background"></div><div class="paper-ripple__waves"></div></div></button>
+                            </span> 
+
+                            @error('cover')
+                            <span class="alert-danger">{{ $message }}</span>
+                        @enderror
+                        </div><!-- /.input-group -->
+                        <div class="help-block"></div>
+                        
+                    </div>
+
                     <div class="form-group">
                         <label>وضعیت</label>
                         <div class="input-group @error('status') has-error @enderror">
@@ -109,14 +129,29 @@
 
 
                     <div class="form-group">
-                        <label>قیمت</label>
+                        <label>قیمت فوری</label>
                         <div class="input-group @error('price') has-error @enderror">
                             <span class="input-group-addon">
                                 <i class="icon-user"></i>
                             </span>
-                            <input type="number" class="form-control" placeholder="قیمت" value="{{ old('price') }}" name="price">
+                            <input type="number" class="form-control" placeholder="قیمت فوری" value="{{ old('price') }}" name="price">
 
                             @error('price')
+                                <span class="alert-danger">{{ $message }}</span>
+                            @enderror
+
+                        </div><!-- /.input-group -->
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group">
+                        <label>قیمت سوپر فوری</label>
+                        <div class="input-group @error('super_price') has-error @enderror">
+                            <span class="input-group-addon">
+                                <i class="icon-user"></i>
+                            </span>
+                            <input type="number" class="form-control" placeholder="قیمت سوپر فوری" value="{{ old('super_price') }}" name="super_price">
+
+                            @error('super_price')
                                 <span class="alert-danger">{{ $message }}</span>
                             @enderror
 
