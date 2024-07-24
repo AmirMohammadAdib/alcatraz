@@ -72,7 +72,7 @@ input[type=number] {
                     پایان یافته
                 </a>
             </div><!-- /.top-buttons-box -->
-
+            
             <div class="table-responsive">
                 <table class="table table-bordered table-hover table-striped" id="data-table">
                     <thead>
@@ -89,101 +89,86 @@ input[type=number] {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>09338744117</td>
-                            <td>amiradib</td>
-                            <td>
-                                {{ number_format(210000) . ' تومان ' }}
-                            </td>      
-                            <td>سلام و درود این اکانت رو من ...</td>
-                            <td>
-                                <span class="alert-warning">برسی نشده</span>
-                            </td>
-                            <td>
-                                <input type="number" inputmode="numeric" class="form-control" id="priceInput" placeholder="قیمت مدنظر خود را وارد کنید">
-                            </td>
-                            <td>{{ verta(time())->format('Y-m-d') }}</td>
-                            <td>
-                                <form action="" class="d-inline">
-                                    <button type="submit" class="btn btn-info">ادامه معامله</button>
-                                    <input type="hidden" name="price" id="price" >
-                                </form>
-                                <a href="#" class="btn btn-danger">کنسل کردن</a>
-                                
-                            </td>
-                        </tr>
+                        @foreach ($requests as $key => $request)
+                            <tr>
+                                <td>{{ $key += 1 }}</td>
+                                <td>{{ $request->user->phone }}</td>
+                                <td>{{ $request->game_uid }}</td>
+                                <td>
+                                    {{ number_format($request->saler_price) . ' تومان ' }}
+                                </td>      
+                                <td>{{ $request->description == null ? '-' : $request->description }}</td>
+                                <td>
+                                    @if($request->status == '0')
+                                        <span class="alert-warning">برسی نشده</span>
+                                    @elseif($request->status == '1')
+                                        <span class="alert-info">در انتظار تایید کاربر</span>
+                                    @elseif($request->status == '2')
+                                        <span class="alert-success">آماده انتقال</span>
+                                    @elseif($request->status == '3')
+                                        <span class="alert-danger">در انتظار پرداخت</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($request->status == '0')
+                                        <input type="number" inputmode="numeric" class="form-control" id="priceInput-{{ $key }}" placeholder="قیمت مدنظر خود را وارد کنید">
+                                    @else
+                                        {{ $request->site_price }}                                    
+                                    @endif
+                                </td>
+                                <td>{{ verta($request->created_at)->format('Y-m-d') }}</td>
+                                <td>
+                                    @if ($request->status == '0')
+                                        <form action="{{ route('request.store') }}" class="d-inline" method="POST">
+                                            @csrf
+                                            <button type="submit" class="btn btn-info">ادامه معامله</button>
+                                            <input type="hidden" name="price" id="price-{{ $key }}" >
+                                            <input type="hidden" name="request_id" value="{{ $request->id }}">
+                                           
+                                        </form>
+                                    @endif
+                                    
+                                    @if ($request->status == '2')
+                                        <a href="{{ route('request.edit', $request) }}" class="btn btn-info">مشاهده</a>
+                                    @endif
 
-                        <tr>
-                            <td>2</td>
-                            <td>09338744117</td>
-                            <td>amiradib</td>
-                            <td>
-                                {{ number_format(210000) . ' تومان ' }}
-                            </td>      
-                            <td>سلام و درود این اکانت رو من ...</td>
-                            <td>
-                                <span class="alert-info">در انتظار تایید کاربر</span>
-                            </td>
-                            <td>
-                                {{ number_format(200000) . ' تومان ' }}
-                            </td>
-                            <td>{{ verta(time())->format('Y-m-d') }}</td>
-                            <td>
-                                <a href="#" class="btn btn-danger">کنسل کردن</a>
-                                
-                            </td>
-                        </tr>
+                                    @if ($request->status == '3')
+                                        <a href="{{ route('request.show', $request) }}" class="btn btn-info">پرداخت</a>
+                                    @endif
 
-                        <tr>
-                            <td>3</td>
-                            <td>09338744117</td>
-                            <td>amiradib</td>
-                            <td>
-                                {{ number_format(210000) . ' تومان ' }}
-                            </td>      
-                            <td>سلام و درود این اکانت رو من ...</td>
-                            <td>
-                                <span class="alert-success">آماده انتقال</span>
-                            </td>
-                            <td>
-                                {{ number_format(200000) . ' تومان ' }}
-                            </td>
-                            <td>{{ verta(time())->format('Y-m-d') }}</td>
-                            <td>
-                                <a href="{{ route('request.edit', 1) }}" class="btn btn-info">مشاهده</a>
-                                <a href="#" class="btn btn-danger">کنسل کردن</a>
-                                
-                            </td>
-                        </tr>
-                        
-
-                        <tr>
-                            <td>4</td>
-                            <td>09338744117</td>
-                            <td>amiradib</td>
-                            <td>
-                                {{ number_format(210000) . ' تومان ' }}
-                            </td>      
-                            <td>سلام و درود این اکانت رو من ...</td>
-                            <td>
-                                <span class="alert-danger">در انتظار پرداخت</span>
-                            </td>
-                            <td>
-                                {{ number_format(200000) . ' تومان ' }}
-                            </td>
-                            <td>{{ verta(time())->format('Y-m-d') }}</td>
-                            <td>
-                                <a href="{{ route('request.show', 1) }}" class="btn btn-info">پرداخت</a>
-                                <a href="#" class="btn btn-danger">کنسل کردن</a>
-                                
-                            </td>
-                        </tr>
+                                    <a href="#" class="btn btn-danger">کنسل کردن</a>
+                                    
+                                </td>
+                            </tr>  
+                            
+                            @if ($request->status == '0')
+                                <script>
+                                    document.querySelector('#priceInput-{{ $key }}').addEventListener('input', (e) => {
+                                        document.querySelector('#price-{{ $key }}').value = e.target.value
+                                    });
+                                </script>
+                            @endif
+                        @endforeach
                         
                     </tbody>
                 </table>
             </div><!-- /.table-responsive -->
         </div><!-- /.portlet-body -->
     </div><!-- /.portlet -->
-</div><!-- /.col-lg-12 -->                  
+</div><!-- /.col-lg-12 -->   
+
+@endsection
+
+@section('script')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@error('price')
+<script>
+    Swal.fire({
+        title: "پیام عملیات ناموفق!",
+        text: "{{ $message }}",
+        icon: "error"
+    }); 
+</script>
+@enderror
 @endsection

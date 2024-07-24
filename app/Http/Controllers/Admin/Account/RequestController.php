@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Account;
 
 use App\Http\Controllers\Controller;
+use App\Models\BuyAccount;
 use Illuminate\Http\Request;
 
 class RequestController extends Controller
@@ -12,7 +13,25 @@ class RequestController extends Controller
      */
     public function index()
     {
-        return view('admin.account.request.index');
+        $requests = BuyAccount::where('created_at', '!=', null);
+
+        if(isset($_GET['sort'])){
+            if($_GET['sort'] == 'waiting'){
+                $requests->where('status', '1');
+            }elseif($_GET['sort'] == 'not-check'){
+                $requests->where('status', '0');
+            }elseif($_GET['sort'] == 'transfer'){
+                $requests->where('status', '2');
+            }elseif($_GET['sort'] == 'paying'){
+                $requests->where('status', '3');
+            }elseif($_GET['sort'] == 'finished'){
+                $requests->where('status', '4');
+            }
+        }
+
+        $requests = $requests->orderBy('created_at', 'desc')->get();
+
+        return view('admin.account.request.index', compact('requests'));
     }
 
     /**
@@ -28,7 +47,16 @@ class RequestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $inputs = $request->validate([
+            'price' => 'required|numeric|min:1000',
+            'request_id' => 'required|numeric|exists:buy_accounts,id'
+        ]);
+        $requestModel = BuyAccount::find($inputs['request_id']);
+        $requestModel->status = 1;
+        $requestModel->site_price = $inputs['price'];
+        $requestModel->save();
+
+        return back()->with('alert-success', 'درخواست با شماره ' . $requestModel->id . ' در لیست انتظار کاربر قرار گرفت');
     }
 
     /**
