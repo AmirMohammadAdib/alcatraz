@@ -32,8 +32,9 @@
             </div><!-- /.buttons-box -->
         </div><!-- /.portlet-heading -->
         <div class="portlet-body">
-            <form role="form" method="POST" accept="{{ route('request.store') }}">
+            <form role="form" method="POST" action="{{ route('request.update', [$request]) }}">
                 @csrf
+                @method('PUT')
 
                 <div class="form-body">
                     <div class="form-group">
@@ -42,7 +43,7 @@
                             <span class="input-group-addon">
                                 <i class="icon-user"></i>
                             </span>
-                            <input type="text" class="form-control" style="pointer-events:none;" placeholder="ایمیل حساب کاربر" value="test@gmail.com">
+                            <input type="text" class="form-control" style="pointer-events:none;" placeholder="ایمیل حساب کاربر" value="{{ $request->email }}">
 
                             @error('email')
                                 <span class="alert-danger">{{ $message }}</span>
@@ -57,7 +58,7 @@
                             <span class="input-group-addon">
                                 <i class="icon-user"></i>
                             </span>
-                            <input type="text" class="form-control" style="pointer-events:none;" placeholder="رمز عبور حساب کاربر" value="ewdE2ds">
+                            <input type="text" class="form-control" style="pointer-events:none;" placeholder="رمز عبور حساب کاربر" value="{{ $request->password }}">
 
                             @error('password')
                                 <span class="alert-danger">{{ $message }}</span>

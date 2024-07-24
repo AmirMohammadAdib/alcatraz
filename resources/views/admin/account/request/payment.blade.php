@@ -32,8 +32,9 @@
             </div><!-- /.buttons-box -->
         </div><!-- /.portlet-heading -->
         <div class="portlet-body">
-            <form role="form" method="POST" accept="{{ route('request.store') }}">
+            <form role="form" method="POST" action="{{ route('request.update', [$request, 'payment']) }}">
                 @csrf
+                @method('PUT')
 
                 <div class="form-body">
                     <div class="form-group">
@@ -42,7 +43,7 @@
                             <span class="input-group-addon">
                                 <i class="icon-user"></i>
                             </span>
-                            <input type="text" class="form-control" style="pointer-events:none;" placeholder="شماره کارت کاربر" value="11111111111111111">
+                            <input type="text" class="form-control" style="pointer-events:none;" placeholder="شماره کارت کاربر" value="{{ $request->user->cart_number }}">
 
                             @error('cart_number')
                                 <span class="alert-danger">{{ $message }}</span>
@@ -58,7 +59,7 @@
                                 <span class="input-group-addon">
                                     <i class="icon-user"></i>
                                 </span>
-                                <input type="text" class="form-control" style="pointer-events:none;" placeholder="مبلغ" value="۱۳۰،۰۰۰ تومان">
+                                <input type="text" class="form-control" style="pointer-events:none;" placeholder="مبلغ" value="{{ number_format($request->site_price) }} تومان">
     
                                 @error('price')
                                     <span class="alert-danger">{{ $message }}</span>

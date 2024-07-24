@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Account;
 
 use App\Http\Controllers\Controller;
 use App\Models\BuyAccount;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 
 class RequestController extends Controller
@@ -62,33 +63,46 @@ class RequestController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(BuyAccount $request)
     {
-        return view('admin.account.request.payment');
+        return view('admin.account.request.payment', compact('request'));
 
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(BuyAccount $request)
     {
-        return view('admin.account.request.edit');
+        return view('admin.account.request.edit', compact('request'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $requestData, BuyAccount $request)
     {
-        //
+        if(isset($_GET['payment'])){
+            $inputs = $requestData->validate([
+                'transaction_id' => 'required|numeric',
+            ]);
+            $inputs['status'] = 4;
+
+            $request->update($inputs);
+            return redirect()->route('request.index')->with('alert-success', 'معامله به پایان رسید');
+        }else{
+            $request->update(['status' => 3]);
+            return redirect()->route('request.index')->with('alert-success', 'در انتظار تایید لینک از جانب کاربر');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(BuyAccount $request)
     {
-        //
+        $request->delete();
+        return back()->with('alert-success', 'درخواست با شماره ' . $request->id . ' با موفقیت لغو شد');
+
     }
 }

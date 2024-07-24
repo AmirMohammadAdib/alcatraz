@@ -107,13 +107,15 @@ input[type=number] {
                                         <span class="alert-success">آماده انتقال</span>
                                     @elseif($request->status == '3')
                                         <span class="alert-danger">در انتظار پرداخت</span>
+                                    @elseif($request->status == '4')
+                                        <span class="alert-primary">پایان یافته</span>
                                     @endif
                                 </td>
                                 <td>
                                     @if ($request->status == '0')
                                         <input type="number" inputmode="numeric" class="form-control" id="priceInput-{{ $key }}" placeholder="قیمت مدنظر خود را وارد کنید">
                                     @else
-                                        {{ $request->site_price }}                                    
+                                    {{ number_format($request->site_price) . ' تومان ' }}
                                     @endif
                                 </td>
                                 <td>{{ verta($request->created_at)->format('Y-m-d') }}</td>
@@ -136,8 +138,18 @@ input[type=number] {
                                         <a href="{{ route('request.show', $request) }}" class="btn btn-info">پرداخت</a>
                                     @endif
 
-                                    <a href="#" class="btn btn-danger">کنسل کردن</a>
-                                    
+                                    @if ($request->status != '4')
+                                        <form action="{{ route('request.destroy', [$request]) }}" method="POST" style="display: inline-block">
+                                            @method('DELETE')
+                                            @csrf
+                                            <input type="submit" class="btn btn-danger" value="کنسل کردن">                                
+                                        </form>
+                                    @endif
+
+                                    @if ($request->status == '4')
+                                        <a href="{{ route('player.show', $request->user->id) }}" class="btn btn-info">مشاهده اطلاعات کاربر</a>
+                                    @endif
+
                                 </td>
                             </tr>  
                             

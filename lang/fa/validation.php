@@ -316,6 +316,7 @@ return [
         'transaction_code' => 'کد واریزی',
         'receipt' => 'فیش',
         'img' => 'عکس',
-        'super_price' => 'قیمت فوری'
+        'super_price' => 'قیمت فوری',
+        'transaction_id' => 'کد رهگیری',
     ],
 ];
