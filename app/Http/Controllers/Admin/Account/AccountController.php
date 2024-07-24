@@ -54,17 +54,26 @@ class AccountController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Account $account)
     {
-        //
+        return view('admin.account.account.edit', compact('account'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(AccountRequest $request, Account $account)
     {
-        //
+        $inputs = $request->all();
+
+        if($request->file('img')){
+            $secondName = time() . '.' . $request->file('img')->getClientOriginalExtension();
+            $request->img->move(public_path('images/account/'), $secondName);
+            $inputs['img'] = $secondName;
+        }
+
+        $account->update($inputs);
+        return redirect()->route('account.index')->with('alert-success', 'محصول با شناسه ' . $account->id . ' با موفقیت ویرایش شد');
     }
 
     /**

@@ -13,11 +13,20 @@ class AccountRequest extends FormRequest
 
     public function rules()
     {
-        return [
-            'title' => 'required|string|max:255',
-            'img' => 'required|file|max:2048|mimes:png,jpg,jpeg,webp',
-            'price' => 'required|numeric',
-            'description' => 'nullable|string'
-        ];
+        if($this->isMethod('POST')){
+            return [
+                'title' => 'required|string|max:255',
+                'img' => 'required|file|max:2048|mimes:png,jpg,jpeg,webp',
+                'price' => 'required|numeric',
+                'description' => 'nullable|string'
+            ];
+        }else{
+            return [
+                'title' => 'required|string|max:255',
+                'img' => 'nullable|file|max:2048|mimes:png,jpg,jpeg,webp',
+                'price' => 'required|numeric',
+                'description' => 'nullable|string'
+            ];
+        }
     }
 }
