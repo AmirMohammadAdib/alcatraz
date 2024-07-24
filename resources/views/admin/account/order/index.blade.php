@@ -55,12 +55,12 @@
                             <td>{{ $order->password }}</td>
                             <td>{{ verta($order->created_at)->format('Y-m-d') }}</td>
                             <td>
-                                <form action="{{ route('order.destroy', [$order]) }}" method="POST" style="display: inline-block">
+                                <form action="{{ route('account-order.destroy', [$order->id]) }}" method="POST" style="display: inline-block">
                                     @method('DELETE')
                                     @csrf
                                     <input type="submit" class="btn btn-danger" value="کنسل کردن">                                
                                 </form>
-                                <a href="{{ route('order.edit', [$order]) }}" class="btn btn-success">اعلام پایان کار</a>
+                                <a href="{{ route('account-order.edit', [$order]) }}" class="btn btn-success">اعلام پایان کار</a>
                             </td>
                         </tr>
                         @endforeach
