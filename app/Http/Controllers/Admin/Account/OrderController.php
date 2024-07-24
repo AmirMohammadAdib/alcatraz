@@ -14,7 +14,8 @@ class OrderController extends Controller
     public function index()
     {
         if(isset($_GET['history'])){
-            return view('admin.account.history.index');
+            $orders = AccountOrder::where('status', 3)->orderBy('created_at', 'desc')->get();
+            return view('admin.account.history.index', compact('orders'));
         }else{
             $orders = AccountOrder::where('status', '!=', 3)->orderBy('created_at', 'desc')->get();
             return view('admin.account.order.index', compact('orders'));
