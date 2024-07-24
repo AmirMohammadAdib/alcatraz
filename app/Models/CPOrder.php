@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class CPOrder extends Model
 {
     use HasFactory, SoftDeletes;
+    protected $table = 'cp_orders';
 
     protected $fillable = [
         'user_id', 'cp_id', 'payment_id', 'status', 'type', 'expire_time', 'email', 'password'

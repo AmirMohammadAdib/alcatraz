@@ -16,6 +16,8 @@
             text-shadow: 0 5px 20px rgba(208, 30, 30, 0.8)
         }
     </style>
+
+
 @endsection
 
 @section('breadcrumb')
@@ -53,7 +55,6 @@
                             <th>محصول</th>
                             <th>نوع</th>
                             <th>کد رهگیری</th>
-                            <th>وضعیت پرداختی</th>
                             <th>ایمیل</th>
                             <th>رمز عبور</th>
                             <th>تاریخ</th>
@@ -61,43 +62,76 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>09338744117</td>
-                            <td>سی پی دبل (۸۰ عدد)</td>
-                            <td>
-                                <p class="super">سوپر فوری (<span class="timer">2:31</span>)</p>
-                            </td>
-                            <td>۹۹۱۰۲۱</td>
-                            <td>
-                                <span class="alert-success">پرداخت شده</span>
-                            </td>
-                            <td>test@gmail.com</td>
-                            <td>dD@13qa</td>
-                            <td>{{ verta(time())->format('Y-m-d') }}</td>
-                            <td>
-                                <a href="#" class="btn btn-danger">کنسل کردن</a>
-                                <a href="#" class="btn btn-success">اعلام پایان کار</a>
-                            </td>
-                        </tr>
+                        
+                        @foreach ($orders as $key => $order)
+                            <tr>
+                                <td>{{ $key += 1 }}</td>
+                                <td>{{ $order->user->phone }}</td>
+                                <td>{{ $order->cp->title }}</td>
+                                <td>
+                                    @if ($order->type == '0')
+                                        فوری
+                                    @else
+                                        <p class="super">سوپر فوری (<span id="timer-{{ $key }}">2:31</span>)</p>
+                                    @endif
+                                </td>
+                                <td>{{ $order->payment_id == null ? ' - ' : $order->payment->transaction_id  }}</td>
+                                <td>{{ $order->email }}</td>
+                                <td>{{ $order->password }}</td>
+                                <td>{{ verta($order->created_at)->format('Y-m-d') }}</td>
+                                <td>
+                                    <form action="{{ route('order.destroy', [$order]) }}" method="POST" style="display: inline-block">
+                                        @method('DELETE')
+                                        @csrf
+                                        <input type="submit" class="btn btn-danger" value="کنسل کردن">                                
+                                    </form>
+                                    <a href="{{ route('order.edit', [$order]) }}" class="btn btn-success">اعلام پایان کار</a>
+                                </td>
+                            </tr>
 
-                        <tr>
-                            <td>2</td>
-                            <td>09338744117</td>
-                            <td>سی پی دبل (160 عدد)</td>
-                            <td>فوری</td>
-                            <td>-</td>
-                            <td>
-                                <span class="alert-warning">پرداخت نشده</span>
-                            </td>
-                            <td>test@gmail.com</td>
-                            <td>dD@13qa</td>
-                            <td>{{ verta(time())->format('Y-m-d') }}</td>
-                            <td>
-                                <a href="#" class="btn btn-danger">کنسل کردن</a>
-                                <a href="#" class="btn btn-success">پرداخت دستی</a>
-                            </td>
-                        </tr>
+                            @if ($order->type == '1')
+                                <script>
+                                    // زمان‌های شروع و پایان را مشخص کنید (مثلاً زمان پایان 1 دقیقه بعد از زمان شروع)
+                                    let startTime = new Date();
+                                    let targetTime = new Date('{{ $order->expire_time }}'); // 60,000 میلی‌ثانیه برابر 1 دقیقه
+
+                                    // عنصر span که زمان باقی‌مانده را نمایش می‌دهد را انتخاب کنید
+                                    let timerSpan = document.getElementById('timer-{{ $key }}');
+
+                                    function updateTimer() {
+                                        // زمان فعلی را بدست آورید
+                                        let now = new Date();
+
+                                        // تفاوت بین زمان هدف و زمان فعلی را حساب کنید
+                                        let timeDifference = targetTime - now;
+
+                                        if (timeDifference <= 0) {
+                                            // اگر زمان به پایان رسید
+                                            timerSpan.textContent = "پایان یافته";
+                                            clearInterval(timerInterval);
+                                        } else {
+                                            // تبدیل میلی‌ثانیه به ثانیه
+                                            let seconds = Math.floor((timeDifference / 1000) % 60);
+                                            let minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
+                                            let hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
+
+                                            if(hours == 0){
+                                                timerSpan.textContent = `${minutes}:${seconds}`;
+                                            }else{
+                                                timerSpan.textContent = `${hours}:${minutes}:${seconds}`;
+                                            }
+                                        }
+                                    }
+
+                                    // به‌روزرسانی تایمر هر ثانیه
+                                    let timerInterval = setInterval(updateTimer, 1000);
+
+                                    // اولین به‌روزرسانی تایمر بلافاصله بعد از بارگذاری صفحه
+                                    updateTimer(timerSpan);
+
+                                </script>
+                            @endif
+                        @endforeach
                         
                     </tbody>
                 </table>
@@ -108,8 +142,5 @@
 @endsection
 
 @section('scripts')
-    <script>
 
-
-    </script>
 @endsection

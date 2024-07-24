@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Shop;
 
 use App\Http\Controllers\Controller;
+use App\Models\CPOrder;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -15,7 +16,8 @@ class OrderController extends Controller
         if(isset($_GET['history'])){
             return view('admin.shop.history.index');
         }else{
-            return view('admin.shop.order.index');
+            $orders = CPOrder::where('status', '!=', 2)->orderBy('created_at', 'desc')->orderBy('type', 'desc')->get();
+            return view('admin.shop.order.index', compact('orders'));
         }
     }
 
