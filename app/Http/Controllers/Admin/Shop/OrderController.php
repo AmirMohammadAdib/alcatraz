@@ -49,9 +49,12 @@ class OrderController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(CPOrder $order)
     {
-        //
+        $order->status = '2';
+        $order->save();
+        return redirect()->route('order.index')->with('alert-success', 'سفارش با شناسه ' . $order->id . ' با موفقیت پایان یافت');
+
     }
 
     /**
@@ -65,8 +68,9 @@ class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(CPOrder $order)
     {
-        //
+        $order->delete();
+        return redirect()->route('order.index')->with('alert-success', 'سفارش با شناسه ' . $order->id . ' با موفقیت کنسل شد');
     }
 }
