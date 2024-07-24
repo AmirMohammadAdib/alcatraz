@@ -15,7 +15,7 @@ class AccountRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:255',
-            'img' => 'required|string|max:255',
+            'img' => 'required|file|max:2048|mimes:png,jpg,jpeg,webp',
             'price' => 'required|numeric',
             'description' => 'nullable|string'
         ];

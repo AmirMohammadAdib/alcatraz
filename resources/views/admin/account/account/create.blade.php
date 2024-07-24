@@ -32,7 +32,7 @@
             </div><!-- /.buttons-box -->
         </div><!-- /.portlet-heading -->
         <div class="portlet-body">
-            <form role="form" method="POST" accept="{{ route('account.store') }}">
+            <form role="form" method="POST" action="{{ route('account.store') }}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="form-body">

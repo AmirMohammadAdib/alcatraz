@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Account;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Account\AccountRequest;
 use App\Models\Account;
 use Illuminate\Http\Request;
 
@@ -28,9 +29,18 @@ class AccountController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AccountRequest $request)
     {
-        //
+        $inputs = $request->all();
+
+        if($request->file('img')){
+            $secondName = time() . '.' . $request->file('img')->getClientOriginalExtension();
+            $request->img->move(public_path('images/account/'), $secondName);
+            $inputs['img'] = $secondName;
+        }
+
+        Account::create($inputs);
+        return redirect()->route('account.index')->with('alert-success', 'محصول جدید با موفقیت ایجاد شد');
     }
 
     /**

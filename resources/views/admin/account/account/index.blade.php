@@ -56,7 +56,7 @@
                                 <td>{{ $key += 1 }}</td>
                                 <td>{{ $account->title }}</td>
                                 <td>
-                                    <img src="{{ asset('images/account/' . $account->image) }}" width="200">
+                                    <img src="{{ asset('images/account/' . $account->img) }}" width="200">
                                 </td>
                                 <td>
                                     {{ number_format($account->price) . ' تومان ' }}
