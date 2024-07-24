@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Account;
 
 use App\Http\Controllers\Controller;
+use App\Models\Account;
 use Illuminate\Http\Request;
 
 class AccountController extends Controller
@@ -12,7 +13,8 @@ class AccountController extends Controller
      */
     public function index()
     {
-        return view('admin.account.account.index');
+        $accounts = Account::orderBy('created_at', 'desc')->get();
+        return view('admin.account.account.index', compact('accounts'));
     }
 
     /**

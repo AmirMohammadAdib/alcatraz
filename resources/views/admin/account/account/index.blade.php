@@ -51,22 +51,28 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>اکانت کال اف دیوتی لول ۱۰۰</td>
-                            <td>
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZKv2d2AStx2_uzoDQVYzIBrqgQAeRI7w5sg&s" width="200">
-                            </td>
-                            <td>
-                                {{ number_format(400000) . ' تومان ' }}
-                            </td>
-                            <td>اکانت لول بالا و دارای ... </td>
-                            <td>{{ verta(time())->format('Y-m-d') }}</td>
-                            <td>
-                                <a href="#" class="btn btn-info">ویرایش</a>
-                                <a href="#" class="btn btn-danger">حذف</a>
-                            </td>
-                        </tr>
+                        @foreach ($accounts as $key => $account)
+                            <tr>
+                                <td>{{ $key += 1 }}</td>
+                                <td>{{ $account->title }}</td>
+                                <td>
+                                    <img src="{{ asset('images/account/' . $account->image) }}" width="200">
+                                </td>
+                                <td>
+                                    {{ number_format($account->price) . ' تومان ' }}
+                                </td>
+                                <td>{{ $account->description }}</td>
+                                <td>{{ verta($account->created_at)->format('Y-m-d') }}</td>
+                                <td>
+                                    <a href="{{ route('account.edit', [$account]) }}" class="btn btn-info">ویرایش</a>
+                                    <form action="{{ route('account.destroy', [$account]) }}" method="POST" style="display: inline-block">
+                                        @method('DELETE')
+                                        @csrf
+                                        <input type="submit" class="btn btn-danger" value="حدف">                                
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
                         
                     </tbody>
                 </table>
