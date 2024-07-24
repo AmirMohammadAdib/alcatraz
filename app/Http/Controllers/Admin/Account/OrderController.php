@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Account;
 
 use App\Http\Controllers\Controller;
+use App\Models\AccountOrder;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -15,7 +16,8 @@ class OrderController extends Controller
         if(isset($_GET['history'])){
             return view('admin.account.history.index');
         }else{
-            return view('admin.account.order.index');
+            $orders = AccountOrder::where('status', '!=', 3)->orderBy('created_at', 'desc')->get();
+            return view('admin.account.order.index', compact('orders'));
         }
     }
 

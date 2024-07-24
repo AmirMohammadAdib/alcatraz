@@ -38,7 +38,6 @@
                             <th>خریدار</th>
                             <th>اکانت</th>
                             <th>کد رهگیری</th>
-                            <th>وضعیت پرداختی</th>
                             <th>ایمیل</th>
                             <th>رمز عبور</th>
                             <th>تاریخ</th>
@@ -46,40 +45,25 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($orders as $key => $order)
                         <tr>
-                            <td>1</td>
-                            <td>09338744117</td>
-                            <td>اکانت کال اف دیوتی لول ۱۰۰ - ۲</td>
-                            <td>۹۹۱۰۲۱</td>
+                            <td>{{ $key += 1 }}</td>
+                            <td>{{ $order->user->phone }}</td>
+                            <td>{{ $order->account->title }}</td>
+                            <td>{{ $order->payment_id == null ? ' - ' : $order->payment->transaction_id  }}</td>
+                            <td>{{ $order->email }}</td>
+                            <td>{{ $order->password }}</td>
+                            <td>{{ verta($order->created_at)->format('Y-m-d') }}</td>
                             <td>
-                                <span class="alert-success">پرداخت شده</span>
-                            </td>
-                            <td>test@gmail.com</td>
-                            <td>dD@13qa</td>
-                            <td>{{ verta(time())->format('Y-m-d') }}</td>
-                            <td>
-                                <a href="#" class="btn btn-danger">کنسل کردن</a>
-                                <a href="#" class="btn btn-success">اعلام پایان کار</a>
+                                <form action="{{ route('order.destroy', [$order]) }}" method="POST" style="display: inline-block">
+                                    @method('DELETE')
+                                    @csrf
+                                    <input type="submit" class="btn btn-danger" value="کنسل کردن">                                
+                                </form>
+                                <a href="{{ route('order.edit', [$order]) }}" class="btn btn-success">اعلام پایان کار</a>
                             </td>
                         </tr>
-
-                        <tr>
-                            <td>2</td>
-                            <td>09338744117</td>
-                            <td>اکانت کال اف دیوتی لول ۱۰۰ - ۲</td>
-                            <td>-</td>
-                            <td>
-                                <span class="alert-warning">پرداخت نشده</span>
-                            </td>
-                            <td>test@gmail.com</td>
-                            <td>dD@13qa</td>
-                            <td>{{ verta(time())->format('Y-m-d') }}</td>
-                            <td>
-                                <a href="#" class="btn btn-danger">کنسل کردن</a>
-                                <a href="#" class="btn btn-success">پرداخت دستی</a>
-                            </td>
-                        </tr>
-                        
+                        @endforeach
                     </tbody>
                 </table>
             </div><!-- /.table-responsive -->
