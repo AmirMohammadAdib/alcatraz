@@ -50,18 +50,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>09338744117</td>
-                            <td>سی پی دبل (۸۰ عدد)</td>
-                            <td>۹۹۱۰۲۱</td>
-                            <td>test@gmail.com</td>
-                            <td>******</td>
-                            <td>{{ verta(time())->format('Y-m-d') }}</td>
-                            <td>
-                                <a href="#" class="btn btn-info">تاریخچه مالی کاربر</a>
-                            </td>
-                        </tr>
+                        @foreach ($orders as $key => $order)
+                            <tr>
+                                <td>{{ $key += 1 }}</td>
+                                <td>{{ $order->user->phone }}</td>
+                                <td>{{ $order->cp->title }}</td>
+                                <td>{{ $order->payment_id == null ? ' - ' : $order->payment->transaction_id  }}</td>
+                                <td>{{ $order->email }}</td>
+                                <td>******</td>
+                                <td>{{ verta($order->created_at)->format('Y-m-d') }}</td>
+                                <td>
+                                    <a href="{{ route('player.show', $order->user->id) }}" class="btn btn-info">تاریخچه مالی کاربر</a>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div><!-- /.table-responsive -->
