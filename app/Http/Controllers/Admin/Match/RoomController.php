@@ -69,8 +69,10 @@ class RoomController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Room $room)
     {
-        //
+        $room->delete();
+        return redirect()->route('room.index')->with('alert-success', 'روم با شناسه ' . $room->id . ' با موفقیت حذف شد');
+
     }
 }

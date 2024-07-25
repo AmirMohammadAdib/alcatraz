@@ -115,7 +115,7 @@
                             <select name="status" class="form-select">
                                 <option value="0" {{ old('status', $room->status) == 0 ? 'selected' : '' }}>در انتظار شروع</option>
                                 <option value="1" {{ old('status', $room->status) == 1 ? 'selected' : '' }}>درحال اجرا</option>
-                                <option value="1" {{ old('status', $room->status) == 2 ? 'selected' : '' }}>پایان یافته</option>
+                                <option value="2" {{ old('status', $room->status) == 2 ? 'selected' : '' }}>پایان یافته</option>
                             </select>
 
                             @error('status')
