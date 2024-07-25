@@ -47,25 +47,45 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>
-                                <a href="#">click to redirect</a>
-                            </td>
-                            <td>
-                                {{ number_format(19000) . ' تومان '  }}
-                            </td>
-                            <td>
-                                {{ number_format(1000000) . ' تومان '  }}
-                            </td>
-                            <td>نفر اول</td>
-                            <td>100</td>
-                            <td>amiradib</td>
-                            <td>{{ verta(time())->format('Y-m-d') }}</td>
-                            <td>
-                                <a href="{{ route('room-player.index') }}" class="btn btn-warning">بازیکنان</a>
-                            </td>
-                        </tr>
+                        @foreach ($rooms as $key => $room)
+                            <tr>
+                                <td>{{ $key += 1 }}</td>
+                                <td>
+                                    <a href="{{ $room->link }}">click to redirect</a>
+                                </td>
+                                <td>
+                                    {{ $room->fee == 0 ? 'رایگان' : number_format($room->fee) . ' تومان '  }}
+                                </td>
+                                <td>
+                                    {{ number_format($room->award) . ' تومان '  }}
+                                </td>
+                                <td>
+                                    @if($room->award_type == 0)
+                                        نفر اول
+                                    @elseif ($room->award_type == 2)
+                                        دو نفر اول
+                                    @elseif ($room->award_type == 3)
+                                        سه نفر اول
+                                    @elseif ($room->award_type == 4)
+                                        بیشترین کیل
+                                    @endif
+                                </td>
+                                <td>{{ $room->capacity }}</td>
+                                <td>
+                                    @php
+                                        $winners = \App\Models\Player::where('room_id', $room->id)->where('status', '1')->get()->pluck('user_id')->toArray();
+                                        if(!empty($winners)){
+                                            $winners = \App\Models\User::whereIn('id', $winners)->get()->pluck('username')->toArray();
+                                        }
+                                    @endphp    
+                                    {{ join(',', $winners) }}
+                                </td>
+                                <td>{{ verta($room->created_at)->format('Y-m-d H:i') }}</td>
+                                <td>
+                                    <a href="{{ route('room-player.index', ['room_id' => $room->id]) }}" class="btn btn-warning">بازیکنان</a>
+                                </td>
+                            </tr>
+                            @endforeach
 
                         
                     </tbody>

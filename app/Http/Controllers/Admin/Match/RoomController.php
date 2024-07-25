@@ -18,7 +18,8 @@ class RoomController extends Controller
             $rooms = Room::whereIn('status', [0,1])->orderBy('created_at', 'desc')->get();
             return view('admin.match.room.index', compact('rooms'));
         }else{
-            return view('admin.match.history.index');
+            $rooms = Room::where('status', 2)->orderBy('created_at', 'desc')->get();
+            return view('admin.match.history.index', compact('rooms'));
         }
     }
 
