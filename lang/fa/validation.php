@@ -318,5 +318,7 @@ return [
         'img' => 'عکس',
         'super_price' => 'قیمت فوری',
         'transaction_id' => 'کد رهگیری',
+        'award' => 'جایزه',
+        'capacity' => 'ظرفیت'
     ],
 ];

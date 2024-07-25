@@ -63,7 +63,7 @@
                                     <a href="{{ $room->link }}">click to redirect</a>
                                 </td>
                                 <td>
-                                    {{ number_format($room->fee) . ' تومان '  }}
+                                    {{ $room->fee == 0 ? 'رایگان' : number_format($room->fee) . ' تومان '  }}
                                 </td>
                                 <td>
                                     {{ number_format($room->award) . ' تومان '  }}

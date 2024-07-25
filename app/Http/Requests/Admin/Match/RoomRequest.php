@@ -23,12 +23,11 @@ class RoomRequest extends FormRequest
     {
         return [
             'link' => 'required|string|max:255',
-            'fee' => 'required|numeric',
+            'fee' => 'nullable|numeric',
             'award' => 'required|string|max:255',
             'award_type' => 'required|string|max:255',
             'type' => 'required|string|max:255',
             'capacity' => 'required|integer',
-            'players' => 'required|integer',
             'status' => 'required|integer'
         ];
     }

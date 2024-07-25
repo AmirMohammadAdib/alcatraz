@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Match;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Match\RoomRequest;
 use App\Models\Room;
 use Illuminate\Http\Request;
 
@@ -32,9 +33,11 @@ class RoomController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(RoomRequest $request)
     {
-        //
+        $inputs = $request->all();
+        Room::create($inputs);
+        return redirect()->route('room.index')->with('alert-success', 'روم جدید با موفقیت ساخته شد');
     }
 
     /**

@@ -32,7 +32,7 @@
             </div><!-- /.buttons-box -->
         </div><!-- /.portlet-heading -->
         <div class="portlet-body">
-            <form role="form" method="POST" accept="{{ route('room.store') }}">
+            <form role="form" method="POST" action="{{ route('room.store') }}">
                 @csrf
 
                 <div class="form-body">
@@ -42,7 +42,7 @@
                             <span class="input-group-addon">
                                 <i class="icon-user"></i>
                             </span>
-                            <input type="text" class="form-control" placeholder="لنک روم" value="{{ old('link') }}" name="link">
+                            <input type="text" class="form-control" placeholder="لینک روم" value="{{ old('link') }}" name="link">
 
                             @error('link')
                                 <span class="alert-danger">{{ $message }}</span>
@@ -132,7 +132,6 @@
                             <select name="status" class="form-select">
                                 <option value="0">در انتظار شروع</option>
                                 <option value="1">درحال اجرا</option>
-                                <option value="2">پایان یافته</option>
                             </select>
 
                             @error('status')
