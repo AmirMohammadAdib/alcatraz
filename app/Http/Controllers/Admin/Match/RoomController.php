@@ -51,17 +51,19 @@ class RoomController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Room $room)
     {
-        //
+        return view('admin.match.room.edit', compact('room'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(RoomRequest $request, Room $room)
     {
-        //
+        $inputs = $request->all();
+        $room->update($inputs);
+        return redirect()->route('room.index')->with('alert-success', 'روم با شناسه ' . $room->id . ' با موفقیت ویرایش شد');
     }
 
     /**

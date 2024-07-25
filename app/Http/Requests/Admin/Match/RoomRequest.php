@@ -26,7 +26,7 @@ class RoomRequest extends FormRequest
             'fee' => 'nullable|numeric',
             'award' => 'required|string|max:255',
             'award_type' => 'required|string|max:255',
-            'type' => 'required|string|max:255',
+            'type' => 'nullable|string|max:255',
             'capacity' => 'required|integer',
             'status' => 'required|integer'
         ];

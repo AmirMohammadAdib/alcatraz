@@ -91,31 +91,13 @@
                                 <i class="icon-user"></i>
                             </span>
                             <select name="award_type" class="form-select">
-                                <option value="0">نفر اول</option>
-                                <option value="1" selected>دو نفر اول</option>
-                                <option value="2" selected>سه نفر اول</option>
-                                <option value="3" selected>بیشترین کیل</option>
+                                <option value="0" {{ old('award_type') == 0 ? 'selected' : '' }}>نفر اول</option>
+                                <option value="1" {{ old('award_type') == 1 ? 'selected' : '' }}>دو نفر اول</option>
+                                <option value="2" {{ old('award_type') == 2 ? 'selected' : '' }}>سه نفر اول</option>
+                                <option value="3" {{ old('award_type') == 3 ? 'selected' : '' }}>بیشترین کیل</option>
                             </select>
 
                             @error('award_type')
-                                <span class="alert-danger">{{ $message }}</span>
-                            @enderror
-
-                        </div><!-- /.input-group -->
-                    </div><!-- /.form-group -->
-
-                    <div class="form-group">
-                        <label>نوع بازی</label>
-                        <div class="input-group @error('type') has-error @enderror">
-                            <span class="input-group-addon">
-                                <i class="icon-user"></i>
-                            </span>
-                            <select name="type" class="form-select">
-                                <option value="0">دو به دو</option>
-                                <option value="1">دو به دو</option>
-                            </select>
-
-                            @error('type')
                                 <span class="alert-danger">{{ $message }}</span>
                             @enderror
 
@@ -130,8 +112,8 @@
                                 <i class="icon-user"></i>
                             </span>
                             <select name="status" class="form-select">
-                                <option value="0">در انتظار شروع</option>
-                                <option value="1">درحال اجرا</option>
+                                <option value="0" {{ old('status', $room->status) == 0 ? 'selected' : '' }}>در انتظار شروع</option>
+                                <option value="1" {{ old('status', $room->status) == 1 ? 'selected' : '' }}>درحال اجرا</option>
                             </select>
 
                             @error('status')
