@@ -61,17 +61,7 @@
                                 <td>{{ $key += 1 }}</td>
                                 <td>{{ $player->username }}</td>
                                 <td>{{ $player->phone }}</td>
-                                <td>
-                                    @if($player->level == '0')
-                                        نوب
-                                    @elseif($player->level == '1')
-                                        پلیر
-                                    @elseif($player->level == '2')
-                                        پرو پلیر
-                                    @else
-                                        اولترا پلیر
-                                    @endif
-                                </td>
+                                <td>{{ $player->level() }}</td>
                                 <td>
                                     @if($player->status == '1')
                                         <span class="alert-success">فعال</span>

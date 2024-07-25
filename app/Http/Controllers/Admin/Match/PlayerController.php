@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Match;
 
 use App\Http\Controllers\Controller;
+use App\Models\Player;
 use Illuminate\Http\Request;
 
 class PlayerController extends Controller
@@ -12,7 +13,12 @@ class PlayerController extends Controller
      */
     public function index()
     {
-        return view('admin.match.player.index');
+        if(isset($_GET['room_id'])){
+            $players = Player::where('room_id', $_GET['room_id'])->orderBy('created_at', 'desc')->get();
+            return view('admin.match.player.index', compact('players'));
+        }else{
+            return back()->with('alert-danger', 'وارد کردن شناسه روم الزامیست');
+        }
     }
 
     /**
@@ -42,9 +48,18 @@ class PlayerController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Player $roomPlayer)
     {
-        //
+        if($roomPlayer->status == 0){
+            $roomPlayer->status = 1;
+            $msg = 'وضعیت کاربر ' . $roomPlayer->user->username . ' از بازنده به برنده تغییر یافت';
+        }else{
+            $roomPlayer->status = 0;
+            $msg = 'وضعیت کاربر ' . $roomPlayer->user->username . ' از برنده به بازنده تغییر یافت';
+        }
+
+        $roomPlayer->save();
+        return back()->with('alert-success', $msg);
     }
 
     /**

@@ -41,26 +41,32 @@
                             <th>شماره تماس</th>
                             <th>وضعیت</th>
                             <th>سطح</th>
-                            <th>کیف پول</th>
-                            <th>تاریخ ساخت</th>
+                            <th>تاریخ جوبن شدن</th>
                             <td>عملیات</td>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>userX</td>
-                            <td>09904978193</td>
-                            <td>
-                                <span class="alert-success">فعال</span>
-                            </td>
-                            <td>نوب</td>
-                            <td>۱۳۰،۰۰۰ تومان</td>
-                            <td>{{ verta(time())->format('Y-m-d') }}</td>
-                            <td>
-                                <a href="#" class="btn btn-warning">تاریخچه معاملات</a>
-                            </td>
-                        </tr>
+                        @foreach ($players as $key => $player)
+                            <tr>
+                                <td>{{ $key += 1 }}</td>
+                                <td>{{ $player->user->username }}</td>
+                                <td>{{ $player->user->phone }}</td>
+                                <td>
+                                    @if ($player->status == 0)
+                                        <span class="alert-danger">بازنده</span>                                
+                                    @else
+                                        <span class="alert-success">برنده</span>
+                                    @endif
+                                </td>
+                                <td>{{ $player->user->level() }}</td>
+                                <td>{{ verta($player->created_at)->format('Y-m-d') }}</td>
+                                <td>
+                                    <a href="{{ route('player.show', $player->user->id) }}" class="btn btn-warning">تاریخچه معاملات</a>
+
+                                    <a href="{{ route('room-player.edit', [$player->id]) }}" class="btn btn-info">تعیین به عنوان {{ $player->status == 0 ? 'برنده' : 'بازنده' }}</a>
+                                </td>
+                            </tr>
+                        @endforeach
                         
                     </tbody>
                 </table>

@@ -62,4 +62,17 @@ class User extends Authenticatable
     {
         return $this->hasMany(Ticket::class);
     }
+
+    public function level(){
+        $player = $this;
+        if($player->level == '0'){
+            return 'نوب';
+        }elseif($player->level == '1'){
+            return 'پلیر';
+        }elseif($player->level == '2'){
+            return 'پرو پلیر';
+        }else{
+            return 'اولترا پلیر';
+        }
+    }
 }
