@@ -112,8 +112,8 @@
                                 <i class="icon-user"></i>
                             </span>
                             <select name="status" class="form-select">
-                                <option value="0" {{ old('status', $room->status) == 0 ? 'selected' : '' }}>در انتظار شروع</option>
-                                <option value="1" {{ old('status', $room->status) == 1 ? 'selected' : '' }}>درحال اجرا</option>
+                                <option value="0" {{ old('status') == 0 ? 'selected' : '' }}>در انتظار شروع</option>
+                                <option value="1" {{ old('status') == 1 ? 'selected' : '' }}>درحال اجرا</option>
                             </select>
 
                             @error('status')
