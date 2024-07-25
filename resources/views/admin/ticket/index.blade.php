@@ -46,20 +46,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>amiradib</td>
-                            <td>واریز نشدن درخواست واریزی</td>
-                            <td>فوری</td>
-                            <td>admin 2</td>
-                            <td> - </td>
-                           
-                            <td>{{ verta(time())->format('Y-m-d') }}</td>
-                            <td>
-                                <a href="{{ route('admin.ticket.show', 1) }}" class="btn btn-info">مشاهده</a>
-                                <a href="{{ route('admin.ticket.change', 1) }}" class="btn btn-danger">بستن</a>
-                            </td>
-                        </tr>
+                        @foreach ($tickets as $key => $ticket)
+                            <tr>
+                                <td>{{ $key += 1 }}</td>
+                                <td>{{ $ticket->user->username }}</td>
+                                <td>{{ $ticket->subject }}</td>
+                                <td>{{ $ticket->periority == '0' ? 'نرمال' : 'فوری' }}</td>
+                                <td>{{ $ticket->admin_id != null ? $ticket->admin->username : ' - ' }}</td>
+                                <td>{{ $ticket->ticket_id != null ? $ticket->ticket->subject : ' - ' }}</td>
+                            
+                                <td>{{ verta($ticket->created_at)->format('Y-m-d') }}</td>
+                                <td>
+                                    <a href="{{ route('admin.ticket.show', $ticket) }}" class="btn btn-info">مشاهده</a>
+                                    <a href="{{ route('admin.ticket.change', $ticket) }}" class="btn btn-danger">بستن</a>
+                                </td>
+                            </tr>
+                        @endforeach
 
                         
                     </tbody>

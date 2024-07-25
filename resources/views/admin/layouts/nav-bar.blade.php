@@ -167,19 +167,19 @@
                 </a>
                 <ul>
                     <li>
-                        <a href="{{ route('admin.ticket.index', ['new']) }}" class="">
+                        <a href="{{ route('admin.ticket.index', ['status' => 'new']) }}" class="">
                             <i class=" fas fa-envelope-circle-check"></i>
                             <span>تیکت های جدید</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('admin.ticket.index', ['open']) }}" class="">
+                        <a href="{{ route('admin.ticket.index', ['status' => 'open']) }}" class="">
                             <i class=" far fa-envelope-open"></i>
                             <span>تیکت های باز</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('admin.ticket.index', ['close']) }}" class="">
+                        <a href="{{ route('admin.ticket.index', ['status' => 'close']) }}" class="">
                             <i class="far fa-envelope"></i>
                             <span>تیکت های بسته</span>
                         </a>
