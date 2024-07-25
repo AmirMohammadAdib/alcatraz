@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Match;
 
 use App\Http\Controllers\Controller;
+use App\Models\Room;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
@@ -13,7 +14,8 @@ class RoomController extends Controller
     public function index()
     {
         if(!isset($_GET['history'])){
-            return view('admin.match.room.index');
+            $rooms = Room::whereIn('status', [0,1])->orderBy('created_at', 'desc')->get();
+            return view('admin.match.room.index', compact('rooms'));
         }else{
             return view('admin.match.history.index');
         }

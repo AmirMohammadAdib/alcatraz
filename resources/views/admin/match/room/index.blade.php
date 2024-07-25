@@ -2,6 +2,8 @@
 
 @section('head-tag')
     <title>فهرست روم های سایت - آلکاتراز</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 @endsection
 
 @section('breadcrumb')
@@ -54,28 +56,58 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>
-                                <a href="#">click to redirect</a>
-                            </td>
-                            <td>
-                                {{ number_format(19000) . ' تومان '  }}
-                            </td>
-                            <td>
-                                {{ number_format(1000000) . ' تومان '  }}
-                            </td>
-                            <td>نفر اول</td>
-                            <td>100</td>
-                            <td>94</td>
-                            <td>در انتظار اجرا</td>
-                            <td>{{ verta(time())->format('Y-m-d') }}</td>
-                            <td>
-                                <a href="{{ route('room-player.index') }}" class="btn btn-warning">بازیکنان</a>
-                                <a href="#" class="btn btn-info">ویرایش</a>
-                                <a href="#" class="btn btn-danger">حذف</a>
-                            </td>
-                        </tr>
+                        @foreach ($rooms as $key => $room)
+                            <tr>
+                                <td>{{ $key += 1 }}</td>
+                                <td>
+                                    <a href="{{ $room->link }}">click to redirect</a>
+                                </td>
+                                <td>
+                                    {{ number_format($room->fee) . ' تومان '  }}
+                                </td>
+                                <td>
+                                    {{ number_format($room->award) . ' تومان '  }}
+                                </td>
+                                <td>
+                                    @if($room->award_type == 0)
+                                        نفر اول
+                                    @elseif ($room->award_type == 2)
+                                        دو نفر اول
+                                    @elseif ($room->award_type == 3)
+                                        سه نفر اول
+                                    @elseif ($room->award_type == 4)
+                                        بیشترین کیل
+                                    @endif
+                                </td>
+                                <td>{{ $room->capacity }}</td>
+                                <td id="count-{{ $key }}">{{ $room->players }}</td>
+                                <td>{{ $room->status == 0 ? 'در انتظار تکمیل ظرفیت' : 'درحال بازی' }}</td>
+                                <td>{{ verta($room->created_at)->format('Y-m-d H:i') }}</td>
+                                <td>
+                                    <a href="{{ route('room-player.index', ['room_id' => $room->id]) }}" class="btn btn-warning">بازیکنان</a>
+                                    <a href="{{ route('room.edit', [$room]) }}" class="btn btn-info">ویرایش</a>
+                                    <form action="{{ route('room.destroy', [$room]) }}" method="POST" style="display: inline-block">
+                                        @method('DELETE')
+                                        @csrf
+                                        <input type="submit" class="btn btn-danger" value="حدف">                                
+                                    </form>
+                                </td>
+                            </tr>
+
+                            @if ($room->status == 0)
+                                <script>
+                                    setInterval(() => {
+                                        $.ajax({
+                                            url: '/api/room/players-count/{{ $room->id }}',
+                                            success: function(res){
+                                                let count = res.result.count
+                                                document.querySelector('#count-{{ $key }}').innerHTML = count
+                                            }
+                                        })
+                                    }, 5000);
+                                </script>
+                            @endif
+                        @endforeach
 
                         
                     </tbody>
