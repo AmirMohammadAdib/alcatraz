@@ -4,11 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\AccountOrder;
+use App\Models\BuyAccount;
 use App\Models\CPOrder;
+use App\Models\Deposit;
+use App\Models\Player;
 use App\Models\Room;
 use App\Models\Setting;
 use App\Models\User;
+use App\Models\Withdraw;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -21,7 +26,7 @@ class DashboardController extends Controller
         $incomeFromCpShop = 0;
         foreach(CPOrder::all() as $order){
             if($order->payment_id != null){
-                $incomeFromCpShop == intval($order->payment->amount);
+                $incomeFromCpShop += intval($order->payment->amount);
             }
         }
 
@@ -29,19 +34,37 @@ class DashboardController extends Controller
         $incomeFromAccountShop = 0;
         foreach(AccountOrder::all() as $order){
             if($order->payment_id != null){
-                $incomeFromAccountShop == intval($order->payment->amount);
+                $incomeFromAccountShop += intval($order->payment->amount);
             }
         }
 
+
+        //calculate income thats from room Fee
+        $incomeFromRoom = 0;
+        foreach(Room::all() as $room){
+            $incomeFromRoom += intval($room->fee) * intval($room->players);
+        }
+        
         //get statistics data
         $statistic = [
             'view' => Setting::find(1)->view,
             'cpOrder' => CPOrder::all()->count(),
-            'userCount' => User::all()->count(),
-            'income' => intval(Room::all()->pluck('fee')->sum()) + $incomeFromCpShop + $incomeFromAccountShop,
+            'usersCount' => User::all()->count(),
+            'income' => $incomeFromRoom + $incomeFromCpShop + $incomeFromAccountShop,
         ];
 
-        return view('admin.dashboard', compact('statistic'));
+        $topUsers = Player::select('user_id', DB::raw('count(*) as total'))
+                          ->where('status', 1)
+                          ->groupBy('user_id')
+                          ->orderBy('total', 'desc')
+                          ->take(7)->get();
+
+        $requests = BuyAccount::where('status', 0)->orderBy('created_at', 'desc')->get()->take(6);
+        $currentRooms = Room::where('status', 1)->orderBy('created_at', 'desc')->get()->take(6);
+        $deposites = Deposit::where('status', 1)->orderBy('created_at', 'desc')->get()->take(6);
+        $withdraws = Withdraw::where('status', 1)->orderBy('created_at', 'desc')->get()->take(6);
+        
+        return view('admin.dashboard', compact('statistic', 'topUsers', 'requests', 'currentRooms', 'deposites', 'withdraws'));
     }
 
     /**

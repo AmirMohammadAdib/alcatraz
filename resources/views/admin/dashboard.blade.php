@@ -13,7 +13,7 @@
             <div class="stat-box use-cyan shadow">
                 <a href="#">                                
                     <div class="stat">
-                        <div class="counter-down" data-value="4096"></div>
+                        <div class="counter-down" data-value="{{ $statistic['view'] }}"></div>
                         <div class="h3">بازدیدکننده</div>
                     </div><!-- /.stat -->
                     <div class="visual">
@@ -26,8 +26,8 @@
             <div class="stat-box use-blue shadow">
                 <a href="#">                                
                     <div class="stat">
-                        <div class="counter-down" data-value="2048"></div>
-                        <div class="h3">فاکتور فروش</div>
+                        <div class="counter-down" data-value="{{ $statistic['cpOrder'] }}"></div>
+                        <div class="h3">فاکتور فروش سی پی</div>
                     </div><!-- /.stat -->
                     <div class="visual">
                         <i class="icon-calculator"></i>
@@ -39,7 +39,7 @@
             <div class="stat-box use-green shadow">
                 <a href="#">                                
                     <div class="stat">
-                        <div class="counter-down" data-value="1024"></div>
+                        <div class="counter-down" data-value="{{ $statistic['usersCount'] }}"></div>
                         <div class="h3">کاربر خشنود</div>
                     </div><!-- /.stat -->
                     <div class="visual">
@@ -52,8 +52,8 @@
             <div class="stat-box use-lime shadow">
                 <a href="#">                                
                     <div class="stat">
-                        <div class="counter-down" data-value="512"></div>
-                        <div class="h3">میلیون تومان درآمد</div>
+                        <div style="font-size: 20px">{{ number_format($statistic['income']) }}</div>
+                        <div class="h3">تومان درآمد</div>
                     </div><!-- /.stat -->
                     <div class="visual">
                         <i class="icon-wallet"></i>
@@ -119,18 +119,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @for ($i=1; $i < 7; $i++)
+                                @foreach ($topUsers as $key => $user)
                                 <tr>
-                                    <td>{{ $i }}</td>
-                                    <td>mairadib</td>
-                                    <td>20</td>
-                                    <td>1396/03/16</td>
+                                    <td>{{ $key += 1 }}</td>
+                                    <td>{{ \App\Models\User::find($user->user_id)->username }}</td>
+                                    <td>{{ $user->total }}</td>
+                                    <td>{{ verta(\App\Models\Player::where('user_id', $user->user_id)->orderBy('created_at', 'desc')->first()->created_at)->format('Y/m/d') }}</td>
                                 </tr>
-                                @endfor
+                                @endforeach
                             </tbody>
                         </table>
                     </div><!-- /.table-responsive -->
-                    <a href="#" class="btn btn-success btn-block">
+                    <a href="{{ route('player.index') }}" class="btn btn-success btn-block">
                         <i class="icon-list fa-flip-horizontal"></i>
                         مشاهده فهرست کامل بازیکنان
                     </a>
@@ -193,24 +193,24 @@
                                     <th>ردیف</th>
                                     <th>عنوان</th>
                                     <th>قیمت</th>
-                                    <th>عملیات</th>
+                                    <th>uID</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @for ($i=1; $i < 6; $i++)
+                                @foreach ($requests as $key => $request)
                                 <tr>
-                                    <td>{{ $i }}</td>
-                                    <td>اکانت کال اف ریوتی ... </td>
-                                    <td>{{ number_format(250000) . ' تومان ' }}</td>
+                                    <td>{{ $key += 1 }}</td>
+                                    <td>{{ substr($request->description , 0, 15) }} </td>
+                                    <td>{{ number_format($request->saler_price) . ' تومان ' }}</td>
                                     <td>
-                                        <a href="" class="btn btn-warning">مشاهده</a>
+                                        {{ $request->game_uid }}
                                     </td>
                                 </tr>
-                                @endfor
+                                @endforeach
                             </tbody>
                         </table>
                     </div><!-- /.table-responsive -->
-                    <a href="#" class="btn btn-success btn-block">
+                    <a href="{{ route('request.index') }}" class="btn btn-success btn-block">
                         <i class="icon-list fa-flip-horizontal"></i>
                         مشاهده فهرست کامل درخواست ها
                     </a>
@@ -269,28 +269,28 @@
                             <thead>
                                 <tr>
                                     <th>ردیف</th>
-                                    <th>عنوان</th>
+                                    <th>فی</th>
                                     <th>لینک</th>
                                     <th>عملیات</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @for ($i=1; $i < 6; $i++)
+                                @foreach ($currentRooms as $key => $room)
                                 <tr>
-                                    <td>{{ $i }}</td>
-                                    <td>مسابقه بتل ویژه</td>
+                                    <td>{{ $key += 1 }}</td>
+                                    <td>{{ $room->fee == null ? 'رایگان' : number_format($room->fee) . ' تومان ' }}</td>
                                     <td>
-                                        <a href="">click</a>
+                                        <a href="{{ $room->link }}">click</a>
                                     </td>
                                     <td>
-                                        <a href="" class="btn btn-warning">بازیکنان</a>
+                                        <a href="{{ route('room-player.index', ['room_id' => $room]) }}" class="btn btn-warning">بازیکنان</a>
                                     </td>
                                 </tr>
-                                @endfor
+                                @endforeach
                             </tbody>
                         </table>
                     </div><!-- /.table-responsive -->
-                    <a href="#" class="btn btn-success btn-block">
+                    <a href="{{ route('room.index') }}" class="btn btn-success btn-block">
                         <i class="icon-list fa-flip-horizontal"></i>
                         مشاهده فهرست کامل مسابقات ها
                     </a>
@@ -328,22 +328,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @for ($i=1; $i < 6; $i++)
+                                @foreach ($deposites as $key => $deposite)
                                 <tr>
-                                    <td>{{ $i }}</td>
-                                    <td>amiradib</td>
+                                    <td>{{ $key += 1 }}</td>
+                                    <td>{{ $deposite->user->username }}</td>
                                     <td>
-                                        {{ number_format(200000) . ' تومان ' }}
+                                        {{ number_format($deposite->amount) . ' تومان ' }}
                                     </td>
                                     <td>
-                                        1403/11/23
+                                        {{ verta($deposite->created_at)->format('Y/m/d') }}
                                     </td>
                                 </tr>
-                                @endfor
+                                @endforeach
                             </tbody>
                         </table>
                     </div><!-- /.table-responsive -->
-                    <a href="#" class="btn btn-success btn-block">
+                    <a href="{{ route('depoceit.index') }}" class="btn btn-success btn-block">
                         <i class="icon-list fa-flip-horizontal"></i>
                         مشاهده فهرست کامل واریزی ها
                     </a>
@@ -381,22 +381,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @for ($i=1; $i < 6; $i++)
+                                @foreach ($withdraws as $key => $withdraw)
                                 <tr>
-                                    <td>{{ $i }}</td>
-                                    <td>amiradib</td>
+                                    <td>{{ $key += 1 }}</td>
+                                    <td>{{ $withdraw->user->username }}</td>
                                     <td>
-                                        {{ number_format(200000) . ' تومان ' }}
+                                        {{ number_format($withdraw->amount) . ' تومان ' }}
                                     </td>
                                     <td>
-                                        1403/11/23
+                                        {{ verta($withdraw->created_at)->format('Y/m/d') }}
                                     </td>
                                 </tr>
-                                @endfor
+                                @endforeach
                             </tbody>
                         </table>
                     </div><!-- /.table-responsive -->
-                    <a href="#" class="btn btn-success btn-block">
+                    <a href="{{ route('withdraw.index') }}" class="btn btn-success btn-block">
                         <i class="icon-list fa-flip-horizontal"></i>
                         مشاهده فهرست کامل برداشتی ها
                     </a>
@@ -418,73 +418,101 @@
 const xValues = ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'];
 const yValues = [7,8,8,9,9,9,10,11,14,14,15,16];
 
-new Chart("cpShop", {
-    type: "line",
-    data: {
-        labels: xValues,
-        datasets: [{
-        backgroundColor:"rgba(0,0,255,0.3)",
-        borderColor: "rgba(0,0,255,0.1)",
-        data: yValues
-        }]
-    },
-    options:{
-        responsive: true,
-        legend: {
-            display: false
-        },
+$.ajax({
+    url: '/api/cp-order',
+    success: function(res){
+        new Chart("cpShop", {
+            type: "line",
+            data: {
+                labels: res.result.month,
+                datasets: [{
+                backgroundColor:"rgba(0,0,255,0.3)",
+                borderColor: "rgba(0,0,255,0.1)",
+                data: res.result.data
+                }]
+            },
+            options:{
+                responsive: true,
+                legend: {
+                    display: false
+                },
+            }
+        });
     }
-});
+})
 
-new Chart("accShop", {
-    type: "line",
-    data: {
-        labels: xValues,
-        datasets: [{
-        backgroundColor:"rgba(0,0,255,0.3)",
-        borderColor: "rgba(0,0,255,0.1)",
-        data: yValues
-        }]
-    },
-    options:{
-        responsive: true,
-        legend: {
-            display: false
-        },
+$.ajax({
+    url: '/api/account-order',
+    success: function (res){
+        new Chart("accShop", {
+            type: "line",
+            data: {
+                labels: res.result.month,
+                datasets: [{
+                backgroundColor:"rgba(0,0,255,0.3)",
+                borderColor: "rgba(0,0,255,0.1)",
+                data: res.result.data
+                }]
+            },
+            options:{
+                responsive: true,
+                legend: {
+                    display: false
+                },
+            }
+        });
+
     }
-});
+})
 
 
+$.ajax({
+    url: '/api/users',
+    success: function(res){
+        new Chart("usersSite", {
+        type: "line",
+            data: {
+                labels: res.result.month,
 
-new Chart("usersSite", {
-  type: "line",
-  data: {
-    labels: xValues,
-    datasets: [{
-      data: [860,1140,1060,1060,1070,1110,1330,2210,7830,2478, 3100, 3500],
-      borderColor: "red",
-      fill: false,
-      label: 'نوب'
+                datasets: [{
+                data: res.result.first,
+                borderColor: "orange",
+                fill: false,
+                label: 'تازه کار'
 
-    },{
-      data: [1600,1700,1700,1900,2000,2700,4000,5000,6000,7000, 5000, 5500],
-      borderColor: "green",
-      fill: false,
-      label: 'پلیر'
+                },{
+                data: res.result.nob,
+                borderColor: "red",
+                fill: false,
+                label: 'نوب'
 
-    },{
-      data: [300,700,2000,5000,6000,4000,2000,1000,200,100, 50, 75],
-      borderColor: "blue",
-      fill: false,
-      label: 'اولترا پلیر'
-    }]
-  },
-  options: {
-    responsive: true,
+                },{
+                data: res.result.player,
+                borderColor: "green",
+                fill: false,
+                label: 'پلیر'
 
-  }
-});
+                },{
+                data: res.result.proPlayer,
+                borderColor: "pink",
+                fill: false,
+                label: 'پروپلیر'
 
+                },{
+                data: res.result.ultraPlayer,
+                borderColor: "blue",
+                fill: false,
+                label: 'اولترا پلیر'
+                }]
+            },
+            options: {
+                responsive: true,
+
+            }
+        });
+
+    }
+})
 </script>
 
 @endsection
