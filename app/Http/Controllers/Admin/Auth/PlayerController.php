@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Auth\UserRequest;
+use App\Models\BuyAccount;
+use App\Models\Deposit;
+use App\Models\Player;
 use App\Models\User;
+use App\Models\Withdraw;
 use Illuminate\Http\Request;
 
 class PlayerController extends Controller
@@ -41,7 +45,12 @@ class PlayerController extends Controller
      */
     public function show(User $player)
     {
-        return view('admin.auth.player.show');
+        $winners = Player::where('user_id', $player->id)->where('status', 1)->get();
+        $deposites = Deposit::where('user_id', $player->id)->where('status', 1)->orderBy('created_at', 'desc')->get();
+        $withdraws = Withdraw::where('user_id', $player->id)->where('status', 1)->orderBy('created_at', 'desc')->get();
+        $requests = BuyAccount::where('user_id', $player->id)->orderBy('created_at', 'desc')->get();
+
+        return view('admin.auth.player.show', compact('player', 'winners', 'deposites', 'withdraws', 'requests'));
     }
 
     /**

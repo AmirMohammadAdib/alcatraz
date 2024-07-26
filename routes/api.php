@@ -2,6 +2,7 @@
 
 use App\Models\AccountOrder;
 use App\Models\CPOrder;
+use App\Models\Player;
 use App\Models\Room;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -140,6 +141,39 @@ Route::get('/users', function(){
             'player' => array_reverse($player),
             'proPlayer' => array_reverse($proPlayer),
             'ultraPlayer' => array_reverse($ultraPlayer),
+            'month' => array_reverse($month)
+        ],
+    ]);
+});
+
+
+
+
+
+Route::get('/games/{player}', function(User $player){
+    $data = [];
+    $month = [];
+
+    for ($i = 0; $i < 12; $i++) {
+        // محاسبه تاریخ شروع و پایان ماه
+        $games = Player::where('user_id', $player->id)->where('created_at','!=', null);
+
+        $startDate = date('Y-m-01 00:00:00', strtotime('-' . $i . ' months'));
+        $endDate = date('Y-m-t 23:59:59', strtotime('-' . $i . ' months'));
+
+        $totalGame = $games->whereBetween('created_at', [$startDate, $endDate])->get()->count();
+
+
+        // // اضافه کردن نتایج به آرایه
+        array_push($data, intval($totalGame));
+
+        array_push($month, verta($startDate)->format('F'));
+    }
+
+    return response()->json([
+        'httpCode' => 200,
+        'result' => [
+            'data' => array_reverse($data),
             'month' => array_reverse($month)
         ],
     ]);

@@ -66,18 +66,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @for ($i=1; $i < 6; $i++)
+                                @foreach ($winners as $key => $winner)
                                 <tr>
-                                    <td>{{ $i }}</td>
-                                    <td><a href="">click</a></td>
+                                    <td>{{ $key += 1 }}</td>
+                                    <td><a href="{{ $winner->room->link }}">click</a></td>
                                     <td>
-                                        {{ number_format(200000) . ' تومان ' }}
+                                        {{ number_format($winner->room->award) . ' تومان ' }}
                                     </td>
                                     <td>
-                                        1403/11/23
+                                        {{ verta($winner->created_at)->format('Y/m/d') }}
                                     </td>
                                 </tr>
-                                @endfor
+                                @endforeach
                             </tbody>
                         </table>
                     </div><!-- /.table-responsive -->
@@ -85,7 +85,8 @@
             </div><!-- /.portlet -->
         </div>
 
-        <h1>کیف پول:‌ {{ number_format(2000000) . ' تومان '  }}</h1>
+        <h1>کیف پول:‌ {{ number_format($player->wallet) . ' تومان '  }}</h1>
+        <h1>کیف پول جایزه:‌ {{ number_format($player->award_wallet) . ' تومان '  }}</h1>
 
 
         <div class="row mt-3">
@@ -119,18 +120,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @for ($i=1; $i < 6; $i++)
+                                    @foreach ($deposites as $key => $deposite)
                                     <tr>
-                                        <td>{{ $i }}</td>
-                                        <td>amiradib</td>
+                                        <td>{{ $key += 1 }}</td>
+                                        <td>{{ $deposite->user->username }}</td>
                                         <td>
-                                            {{ number_format(200000) . ' تومان ' }}
+                                            {{ number_format($deposite->amount) . ' تومان ' }}
                                         </td>
                                         <td>
-                                            1403/11/23
+                                            {{ verta($deposite->created_at)->format('Y/m/d') }}
                                         </td>
                                     </tr>
-                                    @endfor
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div><!-- /.table-responsive -->
@@ -168,18 +169,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @for ($i=1; $i < 6; $i++)
+                                    @foreach ($withdraws as $key => $withdraw)
                                     <tr>
-                                        <td>{{ $i }}</td>
-                                        <td>amiradib</td>
+                                        <td>{{ $key += 1 }}</td>
+                                        <td>{{ $withdraw->user->username }}</td>
                                         <td>
-                                            {{ number_format(200000) . ' تومان ' }}
+                                            {{ number_format($withdraw->amount) . ' تومان ' }}
                                         </td>
                                         <td>
-                                            1403/11/23
+                                            {{ verta($withdraw->created_at)->format('Y/m/d') }}
                                         </td>
                                     </tr>
-                                    @endfor
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div><!-- /.table-responsive -->
@@ -211,24 +212,22 @@
                                 <thead>
                                     <tr>
                                         <th>ردیف</th>
+                                        <th>عنوان</th>
+                                        <th>قیمت</th>
                                         <th>uID</th>
-                                        <th>قیت اعلامی</th>
-                                        <th>عملیات</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @for ($i=1; $i < 6; $i++)
+                                    @foreach ($requests as $key => $request)
                                     <tr>
-                                        <td>{{ $i }}</td>
-                                        <td>amiradib</td>
+                                        <td>{{ $key += 1 }}</td>
+                                        <td>{{ substr($request->description , 0, 15) }} </td>
+                                        <td>{{ number_format($request->saler_price) . ' تومان ' }}</td>
                                         <td>
-                                            {{ number_format(200000) . ' تومان ' }}
-                                        </td>
-                                        <td>
-                                            <a href="" class="btn btn-warning">مشاهده</a>
+                                            {{ $request->game_uid }}
                                         </td>
                                     </tr>
-                                    @endfor
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div><!-- /.table-responsive -->
@@ -246,26 +245,29 @@
     
 <script>
 
-const xValues = ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'];
-const yValues = [7,8,8,9,9,9,10,11,14,14,15,16];
 
-new Chart("game", {
-    type: "line",
-    data: {
-        labels: xValues,
-        datasets: [{
-        backgroundColor:"rgba(0,0,255,0.3)",
-        borderColor: "rgba(0,0,255,0.1)",
-        data: yValues
-        }]
-    },
-    options:{
-        responsive: true,
-        legend: {
-            display: false
-        },
+$.ajax({
+    url: '/api/games/{{ $player->id }}',
+    success: function(res){
+        new Chart("game", {
+            type: "line",
+            data: {
+                labels: res.result.month,
+                datasets: [{
+                backgroundColor:"rgba(0,0,255,0.3)",
+                borderColor: "rgba(0,0,255,0.1)",
+                data: res.result.data
+                }]
+            },
+            options:{
+                responsive: true,
+                legend: {
+                    display: false
+                },
+            }
+        });
     }
-});
+})
 
 
 </script>
