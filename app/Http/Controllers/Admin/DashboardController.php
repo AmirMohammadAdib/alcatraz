@@ -3,6 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\AccountOrder;
+use App\Models\CPOrder;
+use App\Models\Room;
+use App\Models\Setting;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -12,7 +17,31 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard');
+        //calculate income thats from sale CP
+        $incomeFromCpShop = 0;
+        foreach(CPOrder::all() as $order){
+            if($order->payment_id != null){
+                $incomeFromCpShop == intval($order->payment->amount);
+            }
+        }
+
+        //calculate income thats from sale Account
+        $incomeFromAccountShop = 0;
+        foreach(AccountOrder::all() as $order){
+            if($order->payment_id != null){
+                $incomeFromAccountShop == intval($order->payment->amount);
+            }
+        }
+
+        //get statistics data
+        $statistic = [
+            'view' => Setting::find(1)->view,
+            'cpOrder' => CPOrder::all()->count(),
+            'userCount' => User::all()->count(),
+            'income' => intval(Room::all()->pluck('fee')->sum()) + $incomeFromCpShop + $incomeFromAccountShop,
+        ];
+
+        return view('admin.dashboard', compact('statistic'));
     }
 
     /**
