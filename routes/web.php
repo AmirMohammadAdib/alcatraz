@@ -86,9 +86,9 @@ Route::group(['prefix' => 'admin'], function(){
     Route::group(['prefix' => 'ticket'], function(){
         // Define resource routes for '/' which will map to TicketController
         Route::get('/', [TicketController::class, 'index'])->name('admin.ticket.index');
-        Route::get('/show/{id}', [TicketController::class, 'show'])->name('admin.ticket.show');
-        Route::post('/answer/{id}', [TicketController::class, 'answer'])->name('admin.ticket.answer');
-        Route::get('/change/{id}', [TicketController::class, 'change'])->name('admin.ticket.change');
+        Route::get('/show/{ticket}', [TicketController::class, 'show'])->name('admin.ticket.show');
+        Route::post('/answer/{ticket}', [TicketController::class, 'answer'])->name('admin.ticket.answer');
+        Route::get('/change/{ticket}', [TicketController::class, 'change'])->name('admin.ticket.change');
     });
 });
 

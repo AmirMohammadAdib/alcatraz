@@ -48,30 +48,33 @@
                 <a href="{{ route('admin.ticket.index') }}" class="btn btn-info btn-sm">بازگشت</a>
             </section>
 
-            <section class="card mb-3">
-                <section class="card-header bg-custom-pink">amiradib - 3</section>
+             <section class="card mb-3">
+                <section class="card-header bg-custom-pink">{{ $ticket->user->username }} - {{ $ticket->user->id }}</section>
                 <section class="card-header bg-custom-pink">
-                    <h5>موضوع : تست</h5>
-                    <p>تست</p>
+                    <h5>موضوع : {{ $ticket->subject }}</h5>
+                    <p>{{ $ticket->description }}</p>
                 </section>
             </section>
 
             <div class="border my-2">
-                <section class="card m-4">
-                    <section class="card-header d-flex justify-content-between">
-                        <div> adib - پاسخ دهنده :
-                            amir adib</div>
-                        <small>۱۱۱۱/۱۱/۱۱</small>
-                    </section>
-                    <section class="card-header bg-custom-pink">
-                        <p>تست</p>
-                    </section>
+                @foreach ($ticket->children as $child)
+                    <section class="card m-4">
+                        <section class="card-header d-flex justify-content-between">
+                            <div> {{ $child->user->username }} - پاسخ دهنده :
+                                {{ $child->admin ? $child->admin->username : 'نامشخص' }}</div>
+                            <small>>{{ verta($child->created_at)->format('H:i:s Y/m/d') }}<</small>
+                        </section>
+                        <section class="card-header bg-custom-pink">
+                            <p>{{ $child->description }}</p>
+                        </section>
 
-                </section>
-                        </div>
+                    </section>
+                @endforeach
+            </div>
 
             <section>
-                <form action="{{ route('admin.ticket.answer', 1) }}" method="post">
+                @if ($ticket->status == 0)
+                <form action="{{ route('admin.ticket.answer', $ticket) }}" method="post">
                     @csrf
                     <section class="row">
                         <section class="col-12">
@@ -92,6 +95,7 @@
                         </section>
                     </section>
                 </form>
+                @endif
             </section>
 
         </section>

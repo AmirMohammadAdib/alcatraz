@@ -39,7 +39,7 @@
                             <th>نویسنده تیکت</th>
                             <th>عنوان تیکت</th>
                             <th>اولویت تیکت</th>
-                            <th>ارجاع شده به</th>
+                            <th>پاسخ دهنده</th>
                             <th>تیکت مرجع</th>
                             <th>تاریخ</th>
                             <td>عملیات</td>
@@ -57,7 +57,7 @@
                             
                                 <td>{{ verta($ticket->created_at)->format('Y-m-d') }}</td>
                                 <td>
-                                    <a href="{{ route('admin.ticket.show', $ticket) }}" class="btn btn-info">مشاهده</a>
+                                    <a href="{{ $ticket->ticket_id == null ? route('admin.ticket.show', $ticket) : route('admin.ticket.show', $ticket->ticket_id) }}" class="btn btn-info">مشاهده</a>
                                     <a href="{{ route('admin.ticket.change', $ticket) }}" class="btn btn-danger">بستن</a>
                                 </td>
                             </tr>

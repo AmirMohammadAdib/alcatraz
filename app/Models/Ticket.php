@@ -36,4 +36,8 @@ class Ticket extends Model
     public function ticket(){
         return $this->belongsTo(Ticket::class);
     }
+
+    public function children(){
+        return $this->hasMany($this, 'ticket_id')->with('children');
+    }
 }

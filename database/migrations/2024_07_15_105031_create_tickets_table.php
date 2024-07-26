@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('subject');
             $table->text('description');
-            $table->string('file');
+            $table->string('file')->nullable();
             $table->tinyInteger('periority')->default(0);
             $table->tinyInteger("seen")->default(0)->comment("0 => UnSeen, 1 => Seen");
             $table->foreignId("user_id")->constrained("users")->onUpdate("cascade")->onDelete("cascade");
