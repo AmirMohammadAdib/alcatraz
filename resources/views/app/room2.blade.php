@@ -13,36 +13,34 @@
         <div class="item-head">
           <h3>تیم اول</h3>
         </div>
-        <div class="row">
-          <div class="item-users d-flex">
-            <div class="user">
-              <img
-                src="{{ asset('asset/src/test/آفر-دوبل-سی-پی-mobile.jpg 1.png') }}"
-                alt=""
-              />
-              <span>AmirAdib</span>
-            </div>
-            <div class="user">
-              <img
-                src="{{ asset('asset/src/test/آفر-دوبل-سی-پی-mobile.jpg 1.png') }}"
-                alt=""
-              />
-              <span>AmirAdib</span>
-            </div>
-            <div class="user">
-              <img
-                src="{{ asset('asset/src/test/آفر-دوبل-سی-پی-mobile.jpg 1.png') }}"
-                alt=""
-              />
-              <span>AmirAdib</span>
-            </div>
-            <div class="user">
-              <img
-                src="{{ asset('asset/src/test/آفر-دوبل-سی-پی-mobile.jpg 1.png') }}"
-                alt=""
-              />
-              <span>AmirAdib</span>
-            </div>
+        <div class="item-users d-flex">
+          <div class="user">
+            <img
+              src="{{ asset('asset/src/test/آفر-دوبل-سی-پی-mobile.jpg 1.png') }}"
+              alt=""
+            />
+            <span>AmirAdib</span>
+          </div>
+          <div class="user">
+            <img
+              src="{{ asset('asset/src/test/آفر-دوبل-سی-پی-mobile.jpg 1.png') }}"
+              alt=""
+            />
+            <span>AmirAdib</span>
+          </div>
+          <div class="user">
+            <img
+              src="{{ asset('asset/src/test/آفر-دوبل-سی-پی-mobile.jpg 1.png') }}"
+              alt=""
+            />
+            <span>AmirAdib</span>
+          </div>
+          <div class="user">
+            <img
+              src="{{ asset('asset/src/test/آفر-دوبل-سی-پی-mobile.jpg 1.png') }}"
+              alt=""
+            />
+            <span>AmirAdib</span>
           </div>
         </div>
       </div>

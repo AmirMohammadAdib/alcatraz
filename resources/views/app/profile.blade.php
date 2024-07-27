@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-
 <section class="container mt-50">
     <div class="user-profile row gap-5 d-flex justify-content-center align-items-start">
         <div class="col-md-6 col-11">
@@ -116,7 +115,7 @@
                             </form>
                         </ul>
                   </div>
-
+                 
 
                </div>
 

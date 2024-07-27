@@ -3,7 +3,17 @@
   --txt-gray:hsl(0, 0%, 69%);
   --mini-bg-1:#f03d3d;
   --mini-bg-2:#2C57C5;
+  --mini-bg-3:#333;
   --bg-dark:#333;
+
+
+  --glass-bg:rgba(255, 255, 255, 0.288);
+
+  --white-color:#fff;
+
+  --hading-color:#fff;
+
+
   --bg-mini-dark:#606465;
   --txt-p-h: #fff;
   --box-bg-1: #509BFC;
@@ -11,13 +21,37 @@
   --box-bg-2: white;
 }
 
-h1, h2, h3, h4, h5, h6, span, a {
-  color: var(--txt-white);
+body.dark {
+  --txt-white:rgb(0, 0, 0);
+  --txt-gray:hsl(0, 0%, 33%);
+  --mini-bg-1:#f03d3d;
+  --mini-bg-2:#94b2ff;
+  --mini-bg-3:#646464;
+
+  --hading-color:#333;
+  --white-color:#fff;
+
+
+  --glass-bg:rgba(189, 189, 189, 0.288);
+
+
+  --bg-dark:#030303;
+  --bg-mini-dark:#000000;
+  --txt-p-h: #0c0c0c;
+  --box-bg-1: #509BFC;
+  --txt-color-1:#509BFC;
+  --box-bg-2: rgb(0, 0, 0);
+  background: rgb(255, 255, 255);
+  background-size: cover;
+
+
+
+} /* #9b59b6 */
+
+h1, h2, h3, h4, h5, h6,p{
+  color: var(--hading-color) !important;
 }
 
-p {
-  color: var(--txt-gray);
-}
 
 * {
   margin: 0;
@@ -29,23 +63,27 @@ p {
 body {
   padding-bottom: 150px;
   width: 100%;
+  height: 100vh;
   height: -moz-max-content;
   height: max-content;
   font-family: "payda-Regular" !important;
-  background: url("../src/background/bg-2.png") no-repeat;
+  background: url("../src/background/dark-and-red-bg-body.png") no-repeat;
   background-size: cover;
 }
 
 *::-webkit-scrollbar {
   width: 3px;
+  height: 1px;
 }
 
 .glass-white-bg {
-  background: rgba(255, 255, 255, 0.288);
+  background: var(--glass-bg);
   -webkit-backdrop-filter: blur(5px);
           backdrop-filter: blur(5px);
 }
-
+.glass-white-bg span{
+  color: var(--hading-color) !important;
+}
 .tip {
   cursor: pointer;
 }
@@ -99,7 +137,7 @@ body {
 }
 
 .border-r-4p {
-  border-right: 4px solid #509bfc;
+  border-right: 4px solid red;
   padding-right: 15px;
 }
 
@@ -127,7 +165,7 @@ body {
 }
 
 .bg-danger {
-  background-color: rgba(var(--bs-danger-rgb), var(--bs-bg-opacity)) !important;
+  background-color: #fc4a4a !important;
 }
 
 .bg-light {
@@ -647,7 +685,7 @@ body {
 }
 
 .text-dark {
-  color: #333;
+  color: #333 !important;
 }
 
 .fixed-top {
@@ -655,7 +693,7 @@ body {
 }
 
 .fixed-bottom {
-  bottom: 0;
+  bottom: 10px;
 }
 
 .sticky-top {

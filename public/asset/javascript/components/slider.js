@@ -1,23 +1,28 @@
 "use strict";
+
 let startX;
 let scrollLeft;
 let isDown;
 
 let smoothTimer = null;
+
 function mouseIsDown(e, elem) {
     isDown = true;
     startX = e.pageX - elem.offsetLeft;
     scrollLeft = elem.scrollLeft;
     elem.style.cursor = "grabbing";
 }
+
 function mouseUp(e, elem) {
     isDown = false;
     elem.style.cursor = "default";
 }
+
 function mouseLeave(e, elem) {
     isDown = false;
     elem.style.cursor = "default";
 }
+
 function mouseMove(e, elem) {
     if (isDown) {
         e.preventDefault();
@@ -25,6 +30,7 @@ function mouseMove(e, elem) {
         elem.scrollLeft = scrollLeft - (x - startX);
     }
 }
+
 function scrollToLeft(parentClass, childClass) {
     const parent = document.querySelector(parentClass);
     const child = document.querySelector(childClass);
@@ -46,6 +52,7 @@ function scrollToLeft(parentClass, childClass) {
         parent.style.scrollBehavior = "unset";
     }, 300);
 }
+
 function scrollToRight(parentClass, childClass) {
     const parent = document.querySelector(parentClass);
     const child = document.querySelector(childClass);
@@ -68,6 +75,7 @@ function scrollToRight(parentClass, childClass) {
     }, 300);
 }
 
-setTimeout(() => {
-  scrollToRight("productList","productItem")
-}, 1000);
+// تابعی برای حرکت اتوماتیک هر دو ثانیه یک بار به سمت راست
+setInterval(() => {
+    scrollToLeft(".productList", ".productItem");
+}, 4000);

@@ -30,12 +30,12 @@
 
           <span class="d-block mt-50">اطلاعات خود را وارد نمایید</span>
           <div class="input_field mt-10 d-flex align-items-center gap-3">
-              <input type="text" class="w-100 text-left font-bold " placeholder="uID حساب بازی خود را وارد کنید">
+              <input type="text" class="w-100 text-left font-bold " placeholder="Enter a Number Mobile">
           </div>
 
-          <span class="d-block mt-50"></span>
+          <span class="d-block mt-50">متن تستی جهت وارد کردن</span>
           <div class="input_field mt-10 d-flex align-items-center gap-3">
-              <input type="text" class="w-100 text-left font-bold " placeholder="قیمت مد نظر برای حساب بازی">
+              <input type="text" class="w-100 text-left font-bold " placeholder="Enter a Number Mobile">
           </div>
 
           <div class="mt-20 text-center">

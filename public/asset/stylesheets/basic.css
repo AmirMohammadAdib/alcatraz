@@ -1,8 +1,9 @@
 @charset "UTF-8";
+
 .navbar {
   margin-top: 15px;
   padding-bottom: 10px;
-  border-bottom: 0.1px solid rgba(255, 255, 255, 0.562);
+  border-bottom: 0.1px solid var(--mini-bg-3);
 }
 .navbar .box-bell .bell {
   position: relative;
@@ -84,14 +85,36 @@
 }
 
 .mobile-sticky .sticky {
+  position: relative;
   margin-left: auto;
   margin-right: auto;
-  padding: 14px;
-  width: 100%;
-  padding-bottom: 10px;
+  padding: 10px;
+  width: 90%;
   bottom: 0 !important;
-  border-radius: 40px 40px 0 0 ;
-  background: var(--bg-dark);
+  border-radius: 100px;
+  background: #3333338e;
+  backdrop-filter: blur(10px);
+  border-right: 3px solid red;
+  border-left: 3px solid blue;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.233) !important;
+}
+.mobile-sticky .sticky::before,.mobile-sticky .sticky::after{
+  position: absolute;
+  content: '';
+  width: 200px;
+  height: 1px ;
+}
+.mobile-sticky .sticky::after{
+  background: blue;
+  top: 0px;
+  left: 0px;
+}
+
+.mobile-sticky .sticky::before{
+  background: red;
+  bottom: 0;
+  right: 0px;
 }
 .mobile-sticky .sticky a{
   padding: 10px;
@@ -312,245 +335,6 @@ div[team-id=bg_7] .item-users {
 }
 
 
-.dashboard .main-banner {
-  text-align: center;
-  height: 300px;
-  border-radius: 15px;
-  background: url("../src/background/bg-dark-2.png") no-repeat;
-  background-size: cover;
-}
-.dashboard .main-banner .banner-text {
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 10px;
-  background: rgba(26, 26, 26, 0.7176470588);
-  padding: 15px;
-}
-.dashboard .feature-banner {
-  background-color: #222222;
-  padding: 20px 20px;
-  text-align: center;
-  border-radius: 10px;
-  margin-bottom: 40px;
-}
-.dashboard .feature-banner img {
-  max-width: 100%;
-  border-radius: 23px;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
-}
-.dashboard .feature-banner .thumb {
-  position: relative;
-  overflow: hidden;
-  border-radius: 23px;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
-}
-.dashboard .feature-banner .thumb img {
-  width: 100%;
-  height: auto;
-  border-radius: 23px;
-  transition: transform 0.4s ease;
-}
-.dashboard .feature-banner .thumb:hover img {
-  transform: scale(1.1);
-}
-.dashboard .feature-banner .thumb a {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #ffffff;
-  font-size: 64px;
-}
-.dashboard .feature-banner .thumb a:hover {
-  text-decoration: none;
-  color: #42a5f5;
-}
-.dashboard .game-details h2 {
-  color: #42a5f5;
-  font-size: 36px;
-  font-weight: bold;
-  margin-bottom: 30px;
-}
-.dashboard .game-details .content {
-  margin-top: 30px;
-  margin-bottom: 40px;
-}
-.dashboard .game-details .left-info {
-  margin-bottom: 30px;
-}
-.dashboard .game-details .left-info .left {
-  margin-bottom: 15px;
-}
-.dashboard .game-details .left-info .left h4 {
-  color: #ffffff;
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-.dashboard .game-details .left-info .left span {
-  color: #cccccc;
-}
-.dashboard .game-details .right-info ul {
-  list-style-type: none;
-  padding: 0;
-}
-.dashboard .game-details .right-info ul li {
-  margin-bottom: 10px;
-}
-.dashboard .game-details .right-info ul li i {
-  color: #42a5f5;
-  margin-right: 5px;
-}
-.dashboard .game-details p {
-  color: #cccccc;
-  line-height: 1.8;
-}
-.dashboard .other-games {
-  margin-bottom: 40px;
-}
-.dashboard .other-games .item {
-  background-color: #333333;
-  padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  text-align: center;
-}
-.dashboard .other-games .item img {
-  width: 100%;
-  border-radius: 10px;
-  margin-bottom: 10px;
-}
-.dashboard .other-games .item h4 {
-  color: #ffffff;
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-.dashboard .other-games .item span {
-  color: #cccccc;
-}
-.dashboard .other-games .item ul {
-  list-style-type: none;
-  padding: 0;
-  margin-top: 10px;
-}
-.dashboard .other-games .item ul li {
-  margin-bottom: 5px;
-}
-.dashboard .other-games .item ul li i {
-  color: #42a5f5;
-  margin-right: 5px;
-}
-.dashboard body {
-  background-color: #1a1a1a;
-  color: #ffffff;
-  font-family: "Arial", sans-serif;
-}
-.dashboard .container {
-  padding: 30px;
-}
-.dashboard .main-banner {
-  margin-bottom: 30px;
-}
-.dashboard .header-text h6 {
-  color: #42a5f5;
-}
-.dashboard .header-text h4 {
-  font-size: 36px;
-  font-weight: bold;
-}
-.dashboard .most-popular {
-  margin-bottom: 30px;
-}
-.dashboard .most-popular .item .price {
-  width: -moz-max-content;
-  width: max-content;
-  padding: 5px;
-  border-radius: 5px;
-  color: white;
-  background: rgba(255, 0, 0, 0.568);
-}
-.dashboard .heading-section h4 {
-  color: #42a5f5;
-  margin-bottom: 20px;
-}
-.dashboard .item {
-  background-color: #333333;
-  padding: 20px;
-  border-radius: 5px;
-  margin-bottom: 20px;
-}
-.dashboard .item img {
-  width: 100%;
-  border-radius: 5px;
-}
-.dashboard .item h4 {
-  font-size: 24px;
-  font-weight: bold;
-  margin-top: 10px;
-}
-.dashboard .item span {
-  color: #cccccc;
-}
-.dashboard .item ul {
-  list-style-type: none;
-  padding: 0;
-  margin-top: 15px;
-}
-.dashboard .item ul li {
-  color: wheat;
-  margin-bottom: 5px;
-}
-.dashboard .item ul li i {
-  color: #42a5f5;
-  margin-right: 5px;
-}
-.dashboard .gaming-library {
-  background-color: #1f1f1f;
-  color: #ffffff;
-  padding: 20px;
-  border-radius: 8px;
-  margin: 20px 0;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-.dashboard .gaming-library .heading-section h4 {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-.dashboard .gaming-library .item {
-  margin-bottom: 20px;
-}
-.dashboard .gaming-library .item ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-.dashboard .gaming-library .item ul li img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
-.dashboard .gaming-library .item ul li h4 {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-.dashboard .gaming-library .item ul li span {
-  color: #bbbbbb;
-  font-size: 16px;
-}
-@media (max-width: 768px) {
-  .dashboard .gaming-library .item ul {
-    flex-direction: column;
-    text-align: center;
-  }
-  .dashboard .gaming-library .item ul li {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-}
-
 @media only screen and (max-width: 800px) {
   .my-wallet .my-wallet-info > img {
     height: 250px;
@@ -568,6 +352,9 @@ div[team-id=bg_7] .item-users {
   left: 0;
   right: 0;
   width: 100%;
+}
+.my-wallet h3,h2,h1,span{
+   color: #333 !important;
 }
 .my-wallet .withdrawal-deposit .btn-item {
   padding: 10px;
@@ -632,23 +419,14 @@ div[team-id=bg_7] .item-users {
   background: var(--mini-bg-1);
 }
 
-.shop .shop-item‌ {
+.shop .shop-item{
   transition: all 0.2s;
 }
-.shop .shop-item‌ .item-img {
-  height: 130px;
-}
-.shop .shop-item‌ .item-img img {
-  height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-.shop .shop-item‌:hover {
-  transform: translateY(-10px);
-  background: white;
+
+.shop .shop-item:hover {
   cursor: pointer;
 }
-.shop .shop-item‌:hover .item-title * {
+.shop .shop-item:hover .item-title * {
   color: #333;
 }
 
@@ -669,10 +447,10 @@ div[team-id=bg_7] .item-users {
 }
 .single-product .product-content, .single-product .product-price {
   padding-bottom: 10px;
-  border-bottom: 1px solid white;
 }
 .single-product .product-content p, .single-product .product-price p {
   line-height: 30px;
+  color: white;
 }
 
 .user-profile .profile-content .head-prof .info-nickname h4,
@@ -752,3 +530,83 @@ div[team-id=bg_7] .item-users {
 .update-profile input::placeholder {
   color: rgb(182, 182, 182);
 }/*# sourceMappingURL=basic.css.map */
+
+
+.productList{
+  overflow-y: scroll;
+}
+.productList h4,h2,h3,span,img{
+  pointer-events: none;
+}
+
+.productItem{
+  padding: 10px;
+  background: var(--mini-bg-3) ;
+}
+.productItem h4,span{
+  color: var(--white-color) !important;
+}
+.productItem .product-head .product-img{
+   width: 300px;
+   height: 200px;
+}
+.productItem .product-head .product-img img{
+  height: 100%;
+  object-fit: cover;
+}
+.productItem .product-body{
+  padding: 10px;
+  border-radius: 10px;
+  border-bottom: 1px solid rgb(177, 177, 177);
+}
+.story{
+  display: none;
+}
+@media only screen and (max-width:780px){
+.story{
+  display: block !important;
+  display: flex !important;
+  justify-content: space-around;
+}
+.story span{
+  color: var(--hading-color) !important;
+}
+.home-head,p{
+  text-align: center !important;
+}
+.home-head h1,h2.h3{
+ border: none;;
+}
+}
+.story .story-item{
+  display: block;
+  width: 59px;
+  flex: none;
+  margin-top: 20px;
+}
+.story .story-item span{
+  display: block;
+  white-space: nowrap;
+  font-size: 12px;
+}
+.background_text{
+   width: 100%;
+   height: 300px;
+   background: url("../../asset/src/background/bg-dark-2.png") no-repeat;
+   background-size: cover;
+   border-radius: 20px;
+}
+.background_text .text_box{
+  max-width: 400px;
+  height: 240px;
+  background: #333333a9;
+  backdrop-filter: blur(5px);
+  margin: 0 auto;
+  position: relative;
+  top: 30px;
+  border-radius: 20px;
+  text-align: center;
+}
+.background_text .text_box h2{
+  color: white !important;
+}

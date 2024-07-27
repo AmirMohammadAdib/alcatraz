@@ -10,4 +10,16 @@ class AccountController extends Controller
     public function accountRequestView(){
         return view('app.account-request');
     }
+
+
+    public function shopView(){
+        return view('app.accounts');
+    }
+
+
+    public function accountView(){
+        return view('app.account');
+    }
+
+
 }

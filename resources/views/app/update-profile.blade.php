@@ -7,6 +7,7 @@
 @section('content')
 
 
+
 <section class="container mt-50">
     <div class="row gap-5 d-flex justify-content-center align-items-start">
          <div class="glass-white-bg  radius-15 col-md-6 col-11">
@@ -31,8 +32,8 @@
                     <input type="text" class="w-100 mt-10 font-bold" placeholder="شماره موبایل خود را وارد کنید">
                 </div>
                 <div class="input-feild">
-                    <label for="" class="font-bold text-white">شماره کارت</label>
-                    <input type="text" class="w-100 mt-10 font-bold" placeholder="شماره کارت">
+                    <label for="" class="font-bold text-white">نام کاربری</label>
+                    <input type="text" class="w-100 mt-10 font-bold" placeholder="شماره حساب">
                 </div>
 
                 <div class="text-left p-10">

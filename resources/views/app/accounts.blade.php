@@ -6,7 +6,7 @@
 
 <section class="container mt-50">
    <div class="row shop gap-3 justify-content-center">
-       <h1 class="font-bold text-center">فروشگاه سی پی</h1>
+       <h1 class="font-bold text-center">فروشگاه اکانت</h1>
                <!-- تک محصول -->
                <div class="shop-item col-10 col-md-4 col-lg-3 radius-10">
                    <div class="item-img" data-tilt>
