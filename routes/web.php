@@ -106,6 +106,7 @@ Route::get('/stars', [IndexController::class, 'stars'])->name('app.stars');
 
 // Profile pages that run on ProfileController
 Route::get('/profile', [ProfileController::class, 'profileView'])->name('profile.view');
+Route::post('/set-email-pass/{account}', [ProfileController::class, 'setEmailPass'])->name('set-email-pass');
 Route::get('/update-profile', [ProfileController::class, 'profileUpdateView'])->name('profile.update.view');
 
 
@@ -115,7 +116,7 @@ Route::get('/wallet', [WalletController::class, 'walletView'])->name('wallet.vie
 // Room pages that run on MainRoomController
 Route::get('/rooms', [MainRoomController::class, 'roomsView'])->name('rooms.view');
 Route::get('/room/{id}', [MainRoomController::class, 'roomView'])->name('room.view');
-
+ 
 
 // ShopCP pages that run on MainCPController
 Route::get('/shop/cp', [MainCPController::class, 'shopView'])->name('shop.shop.view');

@@ -19,3 +19,15 @@
     }); 
 </script>
 @endif
+
+@if(session('error'))
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    Swal.fire({
+        title: "پیام موفقیت آمیز!",
+        text: "{{ session('error') }}",
+        icon: "error"
+    }); 
+</script>
+@endif

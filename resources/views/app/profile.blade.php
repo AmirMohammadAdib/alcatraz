@@ -2,6 +2,16 @@
 
 @section('head-tag')
     <title>آلکاتراز</title>
+
+    <style>
+
+.err{
+            font-size: .8rem;
+            padding: .2rem .5rem;
+            background-color: #b31515;
+            border-radius: 0 00 .5rem .5rem;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -21,9 +31,8 @@
                            </svg>
                            <input type="checkbox" id="dropdown-toggle" class="dropdown-toggle">
                            <ul class="dropdown-menu">
-                             <li>گزینه ۱</li>
-                             <li>گزینه ۲</li>
-                             <li>گزینه ۳</li>
+                             <li>ویرایش پروفایل</li>
+                             <li>خروج</li>
                            </ul>
                          </div>
                          
@@ -34,12 +43,22 @@
 
                        <!-- اطلاعات کاربر -->
                        <div class="prof-info d-flex align-items-center flex-column ">
-                           <h3>Amir Adib</h3>
+                           <h3>{{ auth()->user()->username }}</h3>
                            <div class="info-nickname d-flex align-items-center gap-2">
                                <svg width="21" height="21">
                                    <image href="asset/src/svg/shield.svg"></image>
                                </svg>
-                               <h4>تازه وارد</h4>
+                               @if(auth()->user()->level == 0)
+                                   <h4>تازه کار</h4>
+                               @elseif(auth()->user()->level == 1)
+                                    <h4>نوب</h4>
+                               @elseif(auth()->user()->level == 2)
+                                   <h4>پلیر</h4>
+                                @elseif(auth()->user()->level == 3)
+                                   <h4>پرو پلیر</h4>
+                               @elseif(auth()->user()->level == 4)
+                                   <h4>اولترا پلیر</h4>
+                               @endif
                            </div>
                        </div>
 
@@ -55,11 +74,11 @@
                 <div class="content-body position-relative mt-20">
                    <div class="progress p-10">
                        <div class="progress-box radius-100 position-relative">
-                           <div data-width="50" class="box radius-100 position-absolute left-0" >
+                           <div data-width="{{ intval($winGames) / intval($totalGames) * 100 }}" class="box radius-100 position-absolute left-0" >
 
                            </div>
                            <div class="box-count radius-100 text-center position-relative">
-                               <span>3</span>
+                               <span>{{ $totalGames }}</span>
                            </div>
                        </div>
                        <div class="d-flex justify-content-between mt-20">
@@ -68,7 +87,7 @@
                               <p>پلیر</p>
                            </ul>
                            <ul class="d-flex gap-2">
-                             <p>0/2</p>
+                             <p>{{ $winGames }}/{{ $totalGames }}</p>
                              <span>برد </span>
                            </ul>
                        </div>
@@ -78,12 +97,12 @@
                        <div class="a col-5 col-md-5">
                            <img src="asset/src/background/rec-red.png" alt="">
                            <h3>برد من</h3>
-                           <span>0</span>
+                           <span>{{ $winGames }}</span>
                        </div>
                        <div class="b col-5 col-md-5">
                            <img src="asset/src/background/rec-yellow.png" alt="">
-                           <h3>کاستوم</h3>
-                           <span>0</span>
+                           <h3>باخت من</h3>
+                           <span>{{ $loseGames }}</span>
                        </div>
 
                        
@@ -98,23 +117,64 @@
             <div class="mt-100 glass-white-bg p-10 radius-15">
                <h3 class="font-bold text-center mt-20">لیست اکانت های من</h3>
                <div class="row gap-3 mt-20 p-20">
-                  <div class="col-lg-12  radius-15 border p-10">
-                        <h4 class="font-bold text-light-1">اکانت شماره یک</h4>
-                            
-                        <ul class="d-flex gap-3" style="flex-direction: column;">
-                            <span class="font-bold ">قیمت : ۳۵۰ تومان</span>            
-                            <span class="font-bold ">وضعیت : در انتظار تایید شما</span>            
+                  @foreach ($myAccounts as $account)
+                        <div class="col-lg-12  radius-15 border p-10">
+                            <h4 class="font-bold text-light-1">{{ substr($account->description, 0, 20) }}</h4>
+                                
+                            <ul class="d-flex gap-3" style="flex-direction: column;">
+                                <form action="{{ route('set-email-pass', $account) }}" method="POST">
+                                    @csrf
+                                @if($account->status <= 2)
+                                    <span class="font-bold ">قیمت : در انتظار برسی</span>
+                                @else
+                                    <span class="font-bold ">قیمت : {{ number_format($account->site_price) }} تومان</span>
+                                @endif
+                                <br>
+                                <span class="font-bold ">وضعیت : 
+                                    @if($account->status == 0)
+                                        برسی نشده
+                                    @elseif($account->status == 1)
+                                        در انتظار تایید شما
+                                    @elseif($account->status == 2)
+                                    در انتظار تایید ادمین
+                                    @elseif($account->status == 3)
+                                        درانتظار پرداخت
+                                    @elseif($account->status == 4)
+                                        پایان یافته
+                                    @endif
+                                </span>            
 
-                                <label style="color: #fff">ایمیل اکانت بازی</label>
-                                <input type="text" placeholder="لطفا ایمیل خود را وارد کنید" class="form-control" style="width: 100%;font-family: 'payda-Regular';
-                                color: #fff;">
-                                <label style="color: #fff">رمز عبور اکانت بازی</label>
-                                <input type="text" placeholder="لطفا رمز عبور خود را وارد کنید" class="form-control" style="width: 100%;font-family: 'payda-Regular';
-                                color: #fff;">
-                                <input type="submit" value="تایید" class="btn btn-warning">
-                            </form>
-                        </ul>
-                  </div>
+                                @if ($account->status == 4)
+                                    <br>
+                                    <span class="font-bold ">کد رهگیری‌: {{ $account->transaction_id }}</span>
+                                    
+                                @endif
+
+                                @if($account->status == 1)
+                                    <div class="form-group" style="margin-top: 1rem">
+                                        <label style="color: #a4a6b6">ایمیل اکانت بازی</label>
+                                        <input type="text" placeholder="لطفا ایمیل خود را وارد کنید" name="email" class="form-control" style="width: 100%;font-family: 'payda-Regular';
+                                        color: #808291;">
+                                        @error('email')
+                                            <span class="err">{{ $message }}</span>
+                                        @enderror
+                                    </div><br>
+                                    
+                                    <div class="form-group">
+                                        <label style="color: #a4a6b6">رمز عبور اکانت بازی</label>
+                                        <input type="text" placeholder="لطفا رمز عبور خود را وارد کنید" class="form-control" style="width: 100%;font-family: 'payda-Regular';
+                                        color: #6d6f7e;" name="password">
+                                        @error('password')
+                                            <span class="err">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <br>
+                                    <input type="submit" value="تایید" class="btn btn-warning" style="font-family: payda-Regular">
+                                @endif 
+                                </form>
+                            </ul>
+                        </div>
+                  @endforeach
                  
 
                </div>
