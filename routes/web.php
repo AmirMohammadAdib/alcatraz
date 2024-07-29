@@ -23,6 +23,8 @@ use App\Http\Controllers\Main\WalletController;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 
+auth()->loginUsingId(1);
+
 // Group routes under the 'admin' prefix
 Route::group(['prefix' => 'admin'], function(){
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');

@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Main;
 use App\Http\Controllers\Controller;
 use App\Models\CP;
 use App\Models\FAQ;
+use App\Models\Notification;
+use App\Models\Player;
 use App\Models\Room;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class IndexController extends Controller
 {
@@ -47,10 +50,18 @@ class IndexController extends Controller
     }
 
     public function notification(){
-        return view('app.notification');
+        $notifications = Notification::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        return view('app.notification', compact('notifications'));
     }
 
     public function stars(){
-        return view('app.stars');
+        $topPlayer = Player::select('user_id', DB::raw('count(*) as total'))
+        ->where('status', 1)
+        ->groupBy('user_id')
+        ->orderBy('total', 'desc')
+        ->take(8)->get();
+
+
+        return view('app.stars', compact('topPlayer'));
     }
 }

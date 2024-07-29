@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notofications', function (Blueprint $table) {
+        Schema::create('notifications', function (Blueprint $table) {
             $table->id();
             $table->foreignId('message_id')->constrained('messages')->onUpdate("cascade")->onDelete("cascade");
             $table->foreignId('user_id')->constrained('users')->onUpdate("cascade")->onDelete("cascade");
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('notofications');
+        Schema::dropIfExists('notifications');
     }
 };
