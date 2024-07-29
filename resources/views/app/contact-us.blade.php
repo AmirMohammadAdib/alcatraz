@@ -1,18 +1,95 @@
 @extends('app.layouts.master')
 
+@section('head-tag')
+    <style>
+        .inputForm{
+            font-family: "payda-Regular" !important;
+            width: 100%;
+            background-color: transparent;
+    border: 1px solid #7f878e;
+    color: #7f878e !important
+
+        }
+        button{
+            font-family: "payda-Regular" !important;
+            margin-bottom: 1rem;
+
+        }
+
+        label{
+            color: #7f878e !important;
+            margin-top: 2rem
+        }
+
+        select{
+            width: 100%;
+    padding: .5rem;
+    font-family: "payda-Regular" !important;
+    background-color: transparent;
+    color: #7f878e;
+
+        }
+
+        .err{
+            font-size: .8rem;
+            padding: .2rem .5rem;
+            background-color: #b31515;
+            border-radius: 0 00 .5rem .5rem;
+        }
+    </style>
+@endsection
 
 @section('content')
 
 <div class="container mt-100">
     <div class="row gap-4 justify-content-center">
-        <div class="col-11 col-md-6">
+        <form action="{{ route('app.contact-us.store') }}" method="POST" class="col-11 col-md-6" enctype="multipart/form-data">
+            @csrf
             <h1 class="font-30 font-bold p-20">ارسال پیام متنی</h1>
-            <textarea class="w-100" required></textarea>
-            <a href="" class="btn btn-success" type="submit">ارسال</a>
+
+            <div class="form-group">
+                <label for="">موضوع</label>
+                <input type="text" name="subject" placeholder="لطفا موضوع خود را وارد کنید" class="inputForm" value="{{ old('subject') }}">
+                @error('subject')
+                    <span class="err">{{ $message }}</span><br>
+                @enderror
+            </div><br>
+
+
+            <div class="form-group">
+                <label for="">اهمیت</label>
+                <select name="periority" id="" class="form-control">
+                    <option value="0"  {{ old('periority') == '0' ? 'selected' : '' }}>کم اهمیت</option>
+                    <option value="1"  {{ old('periority') == '1' ? 'selected' : '' }}>متوسط</option>
+                    <option value="2"  {{ old('periority') == '2' ? 'selected' : '' }}>فوری</option>
+                </select>
+                @error('periority')
+                    <span class="err">{{ $message }}</span><br>
+                @enderror
+            </div><br>
+            
+            <div class="form-group">
+                <label for="">توضیحات تکمیلی</label>
+
+                <textarea class="w-100" name="description">{{ old('description') }}</textarea>
+                @error('description')
+                    <span class="err">{{ $message }}</span><br>
+                @enderror
+            </div><br>
+
+            <div class="form-group">
+                <label for="">فایل ضمیمه (اختیاری)</label>
+                <input type="file" name="file" class="inputForm">
+                @error('file')
+                    <span class="err">{{ $message }}</span><br>
+                @enderror
+            </div><br>
+    
+            <button type="submit" class="btn btn-success" type="submit">ارسال</button>
         </div>
         <aside class="col-11 col-md-7 col-lg-5 d-flex flex-column gap-4">
             <!-- دسترسی سریع به صفحات -->
-             <a href="" class="aside-item d-flex justify-content-between align-items-center radius-15 glass-white-bg p-10 d-block">
+             <a href="{{ route('app.contact-us') }}" class="aside-item d-flex justify-content-between align-items-center radius-15 glass-white-bg p-10 d-block">
                  <div class="item-text d-flex align-items-center gap-2">
                      <svg width="50" height="50">
                         <image href="asset/src/svg/services.svg"></image>
@@ -26,7 +103,7 @@
                     <image href="asset/src/svg/angle-left.svg"></image>
                  </svg>
              </a>
-             <a href="" class="aside-item d-flex justify-content-between align-items-center radius-15 glass-white-bg p-10 d-block">
+             <a href="{{ route('app.question') }}" class="aside-item d-flex justify-content-between align-items-center radius-15 glass-white-bg p-10 d-block">
                 <div class="item-text d-flex align-items-center gap-2">
                     <svg width="50" height="50">
                        <image href="asset/src/svg/question.svg"></image>
@@ -40,7 +117,7 @@
                    <image href="asset/src/svg/angle-left.svg"></image>
                 </svg>
             </a>
-            <a href="" class="aside-item d-flex justify-content-between align-items-center radius-15 glass-white-bg p-10 d-block">
+            <a href="{{ route('app.index') }}" class="aside-item d-flex justify-content-between align-items-center radius-15 glass-white-bg p-10 d-block">
                 <div class="item-text d-flex align-items-center gap-2">
                     <svg width="50" height="50">
                        <image href="asset/src/svg/about-us.svg"></image>

@@ -96,6 +96,8 @@ Route::group(['prefix' => 'admin'], function(){
 // Index or Main pages that run on IndexController
 Route::get('/', [IndexController::class, 'index'])->name('app.index');
 Route::get('/contact-us', [IndexController::class, 'contactUs'])->name('app.contact-us');
+Route::post('/contact-us', [IndexController::class, 'contactUsStore'])->name('app.contact-us.store');
+
 Route::get('/question', [IndexController::class, 'question'])->name('app.question');
 Route::get('/notification', [IndexController::class, 'notification'])->name('app.notification');
 Route::get('/stars', [IndexController::class, 'stars'])->name('app.stars');
