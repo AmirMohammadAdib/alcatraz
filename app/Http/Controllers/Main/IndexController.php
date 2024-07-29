@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
 use App\Models\CP;
+use App\Models\FAQ;
 use App\Models\Room;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
@@ -41,7 +42,8 @@ class IndexController extends Controller
     }
 
     public function question(){
-        return view('app.question');
+        $faqs = FAQ::orderBy('created_at', 'desc')->get();
+        return view('app.question', compact('faqs'));
     }
 
     public function notification(){
