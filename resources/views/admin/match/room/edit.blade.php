@@ -32,7 +32,7 @@
             </div><!-- /.buttons-box -->
         </div><!-- /.portlet-heading -->
         <div class="portlet-body">
-            <form role="form" method="POST" action="{{ route('room.update', $room) }}">
+            <form role="form" method="POST" action="{{ route('room.update', $room) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 

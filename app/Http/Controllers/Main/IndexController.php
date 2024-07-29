@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
+use App\Models\CP;
 use App\Models\Room;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,8 @@ class IndexController extends Controller
 {
     public function index(){
         $currentRooms = Room::where('status', '!=' , 2)->orderBy('created_at', 'desc')->get();
-        return view('app.app', compact('currentRooms'));
+        $products = CP::orderBy('created_at', 'desc')->get();
+        return view('app.app', compact('currentRooms', 'products'));
     }
 
     public function contactUs(){

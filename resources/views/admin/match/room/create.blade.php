@@ -32,7 +32,7 @@
             </div><!-- /.buttons-box -->
         </div><!-- /.portlet-heading -->
         <div class="portlet-body">
-            <form role="form" method="POST" action="{{ route('room.store') }}">
+            <form role="form" method="POST" action="{{ route('room.store') }}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="form-group">

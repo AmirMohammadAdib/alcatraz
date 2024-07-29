@@ -44,6 +44,7 @@
                     <thead>
                         <tr>
                             <th>ردیف</th>
+                            <th>عنوان</th>
                             <th>لینک اتاق</th>
                             <th>فی</th>
                             <th>جایزه</th>
@@ -59,6 +60,7 @@
                         @foreach ($rooms as $key => $room)
                             <tr>
                                 <td>{{ $key += 1 }}</td>
+                                <td>{{ $room->title }}</td>
                                 <td>
                                     <a href="{{ $room->link }}">click to redirect</a>
                                 </td>
