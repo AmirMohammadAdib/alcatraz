@@ -108,6 +108,7 @@ Route::get('/stars', [IndexController::class, 'stars'])->name('app.stars');
 Route::get('/profile', [ProfileController::class, 'profileView'])->name('profile.view');
 Route::post('/set-email-pass/{account}', [ProfileController::class, 'setEmailPass'])->name('set-email-pass');
 Route::get('/update-profile', [ProfileController::class, 'profileUpdateView'])->name('profile.update.view');
+Route::put('/update-profile', [ProfileController::class, 'profileUpdateUpdate'])->name('profile.update.update');
 
 
 // Wallet pages that run on WalletController
