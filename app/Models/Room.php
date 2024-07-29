@@ -10,7 +10,7 @@ class Room extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = [
-        'link', 'fee', 'award', 'award_type', 'type', 'capacity', 'players', 'status'
+        'link', 'fee', 'award', 'award_type', 'type', 'capacity', 'players', 'status', 'title', 'img'
     ];
 
     public function players()

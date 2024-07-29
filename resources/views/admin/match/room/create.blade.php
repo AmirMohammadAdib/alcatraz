@@ -35,6 +35,21 @@
             <form role="form" method="POST" action="{{ route('room.store') }}">
                 @csrf
 
+                <div class="form-group">
+                    <label>عنوان محصول</label>
+                    <div class="input-group @error('title') has-error @enderror">
+                        <span class="input-group-addon">
+                            <i class="icon-user"></i>
+                        </span>
+                        <input type="text" class="form-control" placeholder="عنوان محصول" value="{{ old('title') }}" name="title">
+
+                        @error('title')
+                            <span class="alert-danger">{{ $message }}</span>
+                        @enderror
+
+                    </div><!-- /.input-group -->
+                </div><!-- /.form-group -->
+
                 <div class="form-body">
                     <div class="form-group">
                         <label>لینک روم</label>
@@ -123,6 +138,25 @@
                         </div><!-- /.input-group -->
                     </div><!-- /.form-group -->
 
+                    <div class="form-group relative">
+                        <input type="file" class="form-control" name="img">  
+                        <label>تصویر نمایه روم</label>
+                        <div class="input-group round @error('img') has-error @enderror"> 
+                            <input type="text" class="form-control file-input" placeholder="برای آپلود کلیک کنید"> 
+                            <span class="input-group-btn"> 
+                                <button type="button" class="btn btn-success"> 
+                                    <i class="icon-picture"></i>
+                                    آپلود عکس
+                                <div class="paper-ripple"><div class="paper-ripple__background"></div><div class="paper-ripple__waves"></div></div></button>
+                            </span> 
+
+                            @error('img')
+                            <span class="alert-danger">{{ $message }}</span>
+                        @enderror
+                        </div><!-- /.input-group -->
+                        <div class="help-block"></div>
+                        
+                    </div>
 
                     <div class="form-group">
                         <label>ظرفیت</label>

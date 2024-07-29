@@ -9,24 +9,24 @@
         <div class="gap-3 story">
   
           
-          <a href="" class="story-item text-center" >
+          <a href="{{ route('app.question') }}" class="story-item text-center" >
            <img src="asset/src/icon/question-bg.png" class="w-100" alt="">
            <span>سوالات متداول</span>
           </a>
           
-          <a href="" class="story-item text-center" >
+          <a href="{{ route('app.contact-us') }}" class="story-item text-center" >
            <img src="asset/src/icon/services-bg.png" class="w-100" alt="">
            <span>تماس با ما</span>
           </a>
           
-          <a href="" class="story-item text-center" >
+          <a href="{{ route('shop.shop.view') }}" class="story-item text-center" >
            <img src="asset/src/icon/cp-shop.png" class="w-100" alt="">
            <span>خرید سی پی</span>
           </a>
   
-          <a href="" class="story-item text-center" >
+          <a href="{{ route('profile.view') }}" class="story-item text-center" >
            <img src="asset/src/icon/user-account-bg.png" class="w-100" alt="">
-           <span>جساب من</span>
+           <span>حساب من</span>
           </a>
   
         </div>
@@ -62,69 +62,26 @@
   
       <section class="container mt-50 product">
         <div class="text-center">
-          <h2 class="font-bold font-20">آتوریوایو ۴۰ نفره</h2>
+          <h2 class="font-bold font-20">روم های جاری</h2>
         </div>
         <div class="d-flex mt-50 gap-4 productList" onmousedown="mouseIsDown(event,this)" onmouseup="mouseUp(event,this)" onmouseleave="mouseLeave(event,this)"onmousemove="mouseMove(event,this)">
-          <div data-tilt class="productItem radius-10 position-relative">
-            <div class="product-head">
-              <div class="product-img text-center">
-                <img class="w-100" src="asset/src/background/bg-lg-banner (1).png" alt=""/>
+          @foreach ($currentRooms as $room)
+            <div data-tilt class="productItem radius-10 position-relative">
+              <div class="product-head">
+                <div class="product-img text-center">
+                  <img class="w-100" src="asset/src/background/bg-lg-banner (1).png" alt=""/>
+                </div>
+              </div>
+              <div class="product-body">
+                <h4 class="p-10 font-bold">ایزو ۴۰ نفره ۱۰ نفر</h4>
+                <span>0 نفر باقی مانده</span>
+              </div>
+              <div class="product-footer d-flex justify-content-between align-items-center mt-20">
+                <span>19,000 تومان</span>
+                <a href="" class="btn btn-danger">مشاهده</a>
               </div>
             </div>
-            <div class="product-body">
-              <h4 class="p-10 font-bold">ایزو ۴۰ نفره ۱۰ نفر</h4>
-              <span>0 نفر باقی مانده</span>
-            </div>
-            <div class="product-footer d-flex justify-content-between align-items-center mt-20">
-              <span>19,000 تومان</span>
-              <a href="" class="btn btn-danger">مشاهده</a>
-            </div>
-          </div>
-          <div data-tilt class="productItem radius-10 position-relative">
-            <div class="product-head">
-              <div class="product-img text-center">
-                <img class="w-100" src="asset/src/background/bg-lg-banner (2).png" alt=""/>
-              </div>
-            </div>
-            <div class="product-body">
-              <h4 class="p-10 font-bold">ایزو ۴۰ نفره ۱۰ نفر</h4>
-              <span>0 نفر باقی مانده</span>
-            </div>
-            <div class="product-footer d-flex justify-content-between align-items-center mt-20">
-              <span>19,000 تومان</span>
-              <a href="" class="btn btn-danger">مشاهده</a>
-            </div>
-          </div>
-          <div data-tilt class="productItem radius-10 position-relative">
-            <div class="product-head">
-              <div class="product-img text-center">
-                <img class="w-100" src="asset/src/background/bg-lg-banner (1).png" alt=""/>
-              </div>
-            </div>
-            <div class="product-body">
-              <h4 class="p-10 font-bold">ایزو ۴۰ نفره ۱۰ نفر</h4>
-              <span>0 نفر باقی مانده</span>
-            </div>
-            <div class="product-footer d-flex justify-content-between align-items-center mt-20">
-              <span>19,000 تومان</span>
-              <a href="" class="btn btn-danger">مشاهده</a>
-            </div>
-          </div>
-          <div data-tilt class="productItem radius-10 position-relative">
-            <div class="product-head">
-              <div class="product-img text-center">
-                <img class="w-100" src="asset/src/background/bg-lg-banner (1).png" alt=""/>
-              </div>
-            </div>
-            <div class="product-body">
-              <h4 class="p-10 font-bold">ایزو ۴۰ نفره ۱۰ نفر</h4>
-              <span>0 نفر باقی مانده</span>
-            </div>
-            <div class="product-footer d-flex justify-content-between align-items-center mt-20">
-              <span>19,000 تومان</span>
-              <a href="" class="btn btn-danger">مشاهده</a>
-            </div>
-          </div>
+          @endforeach
         </div>
       </section>
   

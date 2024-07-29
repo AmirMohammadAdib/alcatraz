@@ -28,7 +28,9 @@ class RoomRequest extends FormRequest
             'award_type' => 'required|string|max:255',
             'type' => 'nullable|string|max:255',
             'capacity' => 'required|integer',
-            'status' => 'required|integer'
+            'status' => 'required|integer',
+            'title' => 'required|min:3|max:255',
+            'img' => 'required|image|max:2048|mimes:png,jpg,jpeg,webp',
         ];
     }
 }

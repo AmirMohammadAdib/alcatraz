@@ -37,6 +37,11 @@ class RoomController extends Controller
     public function store(RoomRequest $request)
     {
         $inputs = $request->all();
+        if($request->file('img')){
+            $secondName = time() . '.' . $request->file('img')->getClientOriginalExtension();
+            $request->img->move(public_path('images/rooms/'), $secondName);
+            $inputs['img'] = $secondName;
+        }
         Room::create($inputs);
         return redirect()->route('room.index')->with('alert-success', 'روم جدید با موفقیت ساخته شد');
     }
@@ -63,6 +68,11 @@ class RoomController extends Controller
     public function update(RoomRequest $request, Room $room)
     {
         $inputs = $request->all();
+        if($request->file('img')){
+            $secondName = time() . '.' . $request->file('img')->getClientOriginalExtension();
+            $request->img->move(public_path('images/rooms/'), $secondName);
+            $inputs['img'] = $secondName;
+        }
         $room->update($inputs);
         return redirect()->route('room.index')->with('alert-success', 'روم با شناسه ' . $room->id . ' با موفقیت ویرایش شد');
     }
