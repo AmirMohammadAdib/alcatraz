@@ -65,7 +65,11 @@ class WalletController extends Controller
         $inputs = $request->validate([
             'amount' => 'required|numeric|min:1000',
         ]);
+        $user = auth()->user();
 
-        
+        $user->wallet = intval($user->wallet) + intval($inputs['amount']);
+        $user->award_wallet = intval($user->award_wallet) - intval($inputs['amount']);
+        $user->save();
+        return back()->with('success', 'درخواست انتقال با موفقیت انجام شد');
     }
 }
