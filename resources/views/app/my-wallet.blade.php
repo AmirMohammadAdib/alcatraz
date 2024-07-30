@@ -257,14 +257,12 @@
     <h2>افزایش موجودی</h2>
     <p>مبلغ مدنظر واریزی را وارد کنید</p>
 
-    <form action="" method="POST">
+    <form action="{{ route('wallet.deposite') }}" method="POST">
       @csrf
       <div class="form-group">
         <input type="number" name="amount" class="form-control">
         <span>تومان</span>
-        @error('amount')
-            <span class="err">{{ $message }}</span>
-        @enderror
+
       </div>
   
       <input type="submit" value="تایید و پرداخت">
@@ -275,14 +273,12 @@
     <h2>برداشت از حساب</h2>
     <p>مبلغ مدنظر برداشتی را وارد کنید</p>
 
-    <form action="" method="POST">
+    <form action="{{ route('wallet.withdraw') }}" method="POST">
       @csrf
       <div class="form-group">
         <input type="number" name="amount" class="form-control">
         <span>تومان</span>
-        @error('amount')
-            <span class="err">{{ $message }}</span>
-        @enderror
+
       </div>
   
       <input type="submit" value="تایید و برداشت">
@@ -293,14 +289,12 @@
     <h2>انتقال از حساب</h2>
     <p>مبلغ مدنظر انتقال از حساب جوایز به اصلی</p>
 
-    <form action="" method="POST">
+    <form action="{{ route('wallet.transport') }}" method="POST">
       @csrf
       <div class="form-group">
         <input type="number" name="amount" class="form-control">
         <span>تومان</span>
-        @error('amount')
-            <span class="err">{{ $message }}</span>
-        @enderror
+
       </div>
   
       <input type="submit" value="تایید و انتقال">
@@ -341,5 +335,20 @@
         })
       });
 
+
+
     </script>
+
+    @error('amount')
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <script>
+        Swal.fire({
+            title: "پیام موفقیت آمیز!",
+            text: "{{ $message }}",
+            icon: "error"
+        }); 
+    </script>
+
+  @enderror
 @endsection

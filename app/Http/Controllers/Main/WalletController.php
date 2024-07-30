@@ -24,4 +24,48 @@ class WalletController extends Controller
 
         return view('app.my-wallet', compact('user', 'transactions'));
     }
+
+
+    public function deposite(Request $request){
+        $inputs = $request->validate([
+            'amount' => 'required|numeric|min:1000',
+        ]);
+
+        //getway
+    }
+
+    public function withdraw(Request $request){
+        $inputs = $request->validate([
+            'amount' => 'required|numeric|min:1000',
+        ]);
+
+        //checking on wallet
+        $walletAmount = intval(auth()->user()->wallet);
+        if($inputs['amount'] <= $walletAmount){ 
+            if(auth()->user()->cart_number == null){
+                return back()->with('error', 'ابتدا اطلاعات مالی خود را تکمیل کنید');
+                exit;
+            }
+
+            $inputs['user_id'] = auth()->user()->id;
+            Withdraw::create($inputs);
+
+            $user = auth()->user();
+            $user->wallet = intval(auth()->user()->wallet) - intval($inputs['amount']);
+            $user->save();
+
+            return back()->with('success', 'درخواست برداشت با موفقیت ثبت شد');
+
+        }else{
+            return back()->with('error', 'مبلغ درخواستی شما بیشتر از حد کیف پول شماست');
+        }
+    }
+
+    public function transport(Request $request){
+        $inputs = $request->validate([
+            'amount' => 'required|numeric|min:1000',
+        ]);
+
+        
+    }
 }

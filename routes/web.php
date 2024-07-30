@@ -113,6 +113,10 @@ Route::put('/update-profile', [ProfileController::class, 'profileUpdateUpdate'])
 
 // Wallet pages that run on WalletController
 Route::get('/wallet', [WalletController::class, 'walletView'])->name('wallet.view');
+Route::post('/wallet/withdraw', [WalletController::class, 'withdraw'])->name('wallet.withdraw');
+Route::post('/wallet/deposite', [WalletController::class, 'deposite'])->name('wallet.deposite');
+Route::post('/wallet/transport', [WalletController::class, 'transport'])->name('wallet.transport');
+
 
 // Room pages that run on MainRoomController
 Route::get('/rooms', [MainRoomController::class, 'roomsView'])->name('rooms.view');
