@@ -14,9 +14,7 @@
       <!-- ----- -->
 
       <!-- اطاعات کیف پول -->
-      <div
-        class="info d-flex justify-content-between flex-column h-100 p-20 position-absolute"
-      >
+      <div class="info d-flex justify-content-between flex-column h-100 p-20 position-absolute">
         <div class="info-head d-flex gap-3 align-items-center">
           <!-- ایکون دلار -->
           <svg width="60" height="60">
@@ -33,17 +31,56 @@
         </div>
 
         <!-- مشخصات پول به تومان -->
-        <div class="info-body d-flex justify-content-between align-items-end"
-        >
+        <div class="info-body d-flex justify-content-between align-items-end">
           <div class="d-flex gap-2">
-            <h3 class="font-bold font-70 text-dark">1,000</h3>
+            <h3 class="font-bold font-70 text-dark">{{ number_format($user->wallet) }}</h3>
             <span class="font-30 text-dark">تومان</span>
           </div>
           <div class="number d-flex flex-column gap-2 p-10">
-            <span class="text-dark">6572</span>
-            <span class="text-dark">6572</span>
-            <span class="text-dark">6572</span>
-            <span class="text-dark">6572</span>
+            <span class="text-dark">{{ substr($user->cart_number, 0,4) }}</span>
+            <span class="text-dark">{{ substr($user->cart_number, 4,4) }}</span>
+            <span class="text-dark">{{ substr($user->cart_number, 8,4) }}</span>
+            <span class="text-dark">{{ substr($user->cart_number, 12,16) }}</span>
+          </div>
+        </div>
+        <!-- ---- -->
+      </div>
+
+
+    </div>
+
+    <div class="my-wallet-info col-11 col-md-6 position-relative">
+      <!-- بکگراند زرد کارت کیف پول -->
+      <img src="asset/src/background/yellow-bg.png" class="w-100" alt="" style="    filter: hue-rotate(168deg);" />
+      <!-- ----- -->
+      
+      <div class="info d-flex justify-content-between flex-column h-100 p-20 position-absolute">
+        <div class="info-head d-flex gap-3 align-items-center">
+          <!-- ایکون دلار -->
+          <svg width="60" height="60">
+            <image href="asset/src/svg/circle-dolar.svg"></image>
+          </svg>
+          <!-- --- -->
+
+          <!-- عنوان کیف پول -->
+          <div>
+            <h1 class="font-30 text-dark font-bold">کیف پول جایزه</h1>
+            <h4 class="font-15 text-dark">اعتبار بدست آمده از جوایز</h4>
+          </div>
+          <!-- ---- -->
+        </div>
+
+        <!-- مشخصات پول به تومان -->
+        <div class="info-body d-flex justify-content-between align-items-end">
+          <div class="d-flex gap-2">
+            <h3 class="font-bold font-70 text-dark">{{ number_format($user->award_wallet) }}</h3>
+            <span class="font-30 text-dark">تومان</span>
+          </div>
+          <div class="number d-flex flex-column gap-2 p-10">
+            <span class="text-dark">{{ substr($user->cart_number, 0,4) }}</span>
+            <span class="text-dark">{{ substr($user->cart_number, 4,4) }}</span>
+            <span class="text-dark">{{ substr($user->cart_number, 8,4) }}</span>
+            <span class="text-dark">{{ substr($user->cart_number, 12,16) }}</span>
           </div>
         </div>
         <!-- ---- -->
@@ -79,73 +116,45 @@
               <hr>
            </div>
            <div class="transaction-print mt-20">
-               <!-- تک تراکنش -->
-              <div class="print-item d-flex justify-content-between align-items-center">
-                 <div class="item d-flex gap-2 align-items-center">
-                     <div class="item-icon ">
-                        <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+             @foreach ($transactions as $transaction)
+                <div class="print-item d-flex justify-content-between align-items-center">
+                  <div class="item d-flex gap-2 align-items-center">
+                    @if ($transaction->type == 'deposit')
+                      <div class="item-icon deposit">
+                          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M-7.40504e-07 19C-4.87623e-07 19.5523 0.447715 20 0.999999 20L10 20C10.5523 20 11 19.5523 11 19C11 18.4477 10.5523 18 10 18L2 18L2 10C2 9.44772 1.55228 9 1 9C0.447715 9 -2.76888e-07 9.44772 6.02864e-08 10L-7.40504e-07 19ZM18.2929 0.292893L0.292893 18.2929L1.70711 19.7071L19.7071 1.70711L18.2929 0.292893Z" fill="white"/>
+                          </svg>
+                      </div>
+                      @elseif($transaction->type == 'withdraw')
+                        <div class="item-icon">
+                          <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M18 1.93878C18 1.3865 17.5523 0.93878 17 0.93878L8.00003 0.938781C7.44775 0.93878 7.00003 1.3865 7.00003 1.93878C7.00003 2.49107 7.44775 2.93878 8.00003 2.93878L16 2.93878L16 10.9388C16 11.4911 16.4477 11.9388 17 11.9388C17.5523 11.9388 18 11.4911 18 10.9388L18 1.93878ZM1.78877 18.5643L17.7071 2.64589L16.2929 1.23167L0.374558 17.15L1.78877 18.5643Z" fill="white"/>
-                        </svg>                                
-                     </div>
-                     <div class="item-content d-flex gap-2">
-                        <h4>۵,۰۰۰</h4>
+                          </svg>   
+                        </div>
+                      @endif
+                                                      
+                      <div class="item-content d-flex gap-2">
+                        <h4>{{ number_format($transaction->amount) }}</h4>
                         <span>تومان</span>
-                     </div>
-                 </div>
-                 <span class="print-level">در حال تسویه</span>
-              </div>
-              <!-- پایان -->
-
-              <!-- تک تراکنش -->
-              <div class="print-item d-flex justify-content-between align-items-center">
-                <div class="item d-flex gap-2 align-items-center">
-                    <div class="item-icon deposit">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M-7.40504e-07 19C-4.87623e-07 19.5523 0.447715 20 0.999999 20L10 20C10.5523 20 11 19.5523 11 19C11 18.4477 10.5523 18 10 18L2 18L2 10C2 9.44772 1.55228 9 1 9C0.447715 9 -2.76888e-07 9.44772 6.02864e-08 10L-7.40504e-07 19ZM18.2929 0.292893L0.292893 18.2929L1.70711 19.7071L19.7071 1.70711L18.2929 0.292893Z" fill="white"/>
-                        </svg>
-                                                    
-                    </div>
-                    <div class="item-content d-flex gap-2">
-                       <h4>۵,۰۰۰</h4>
-                       <span>تومان</span>
-                    </div>
+                      </div>
+                  </div>
+                  @if ($transaction->type == 'deposit')
+                    @if($transaction->status == 0)
+                      <span class="print-level deposit">واریز نشده</span>
+                    @else
+                      <span class="print-level deposit">واریز شده</span>
+                    @endif
+                  @elseif($transaction->type == 'withdraw')
+                    @if($transaction->status == 0)
+                      <span class="print-level ">درحال تسویه</span>
+                    @elseif($transaction->status == 1)
+                      <span class="print-level">تسویه شده</span>
+                    @else
+                      <span class="print-level ">لغو شده</span>
+                    @endif
+                  @endif
                 </div>
-                <span class="print-level deposit">واریز شده</span>
-             </div>
-             <!-- پایان -->
-
-             <!-- تک تراکنش -->
-             <div class="print-item d-flex justify-content-between align-items-center">
-                <div class="item d-flex gap-2 align-items-center">
-                    <div class="item-icon">
-                       <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                           <path d="M18 1.93878C18 1.3865 17.5523 0.93878 17 0.93878L8.00003 0.938781C7.44775 0.93878 7.00003 1.3865 7.00003 1.93878C7.00003 2.49107 7.44775 2.93878 8.00003 2.93878L16 2.93878L16 10.9388C16 11.4911 16.4477 11.9388 17 11.9388C17.5523 11.9388 18 11.4911 18 10.9388L18 1.93878ZM1.78877 18.5643L17.7071 2.64589L16.2929 1.23167L0.374558 17.15L1.78877 18.5643Z" fill="white"/>
-                       </svg>                                
-                    </div>
-                    <div class="item-content d-flex gap-2">
-                       <h4>۵,۰۰۰</h4>
-                       <span>تومان</span>
-                    </div>
-                </div>
-                <span class="print-level">در حال تسویه</span>
-             </div>
-             <!-- پایان -->
-
-             <!-- تک تراکنش -->
-             <div class="print-item d-flex justify-content-between align-items-center">
-                <div class="item d-flex gap-2 align-items-center">
-                    <div class="item-icon">
-                       <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                           <path d="M18 1.93878C18 1.3865 17.5523 0.93878 17 0.93878L8.00003 0.938781C7.44775 0.93878 7.00003 1.3865 7.00003 1.93878C7.00003 2.49107 7.44775 2.93878 8.00003 2.93878L16 2.93878L16 10.9388C16 11.4911 16.4477 11.9388 17 11.9388C17.5523 11.9388 18 11.4911 18 10.9388L18 1.93878ZM1.78877 18.5643L17.7071 2.64589L16.2929 1.23167L0.374558 17.15L1.78877 18.5643Z" fill="white"/>
-                       </svg>                                
-                    </div>
-                    <div class="item-content d-flex gap-2">
-                       <h4>۵,۰۰۰</h4>
-                       <span>تومان</span>
-                    </div>
-                </div>
-                <span class="print-level">در حال تسویه</span>
-             </div>
+             @endforeach
              <!-- پایان -->
            </div>
            <br>
