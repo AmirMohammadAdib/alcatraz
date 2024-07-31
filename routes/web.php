@@ -14,6 +14,9 @@ use App\Http\Controllers\Admin\Match\RoomController;
 use App\Http\Controllers\Admin\Shop\CPController;
 use App\Http\Controllers\Admin\Shop\OrderController;
 use App\Http\Controllers\Admin\Ticket\TicketController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\LoginOtpController;
+use App\Http\Controllers\Auth\LoginPassController;
 use App\Http\Controllers\Main\AccountController as MainAccountController;
 use App\Http\Controllers\Main\CPController as MainCPController;
 use App\Http\Controllers\Main\IndexController;
@@ -24,6 +27,7 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 
 auth()->loginUsingId(1);
+date_default_timezone_set('Iran');
 
 // Group routes under the 'admin' prefix
 Route::group(['prefix' => 'admin'], function(){
@@ -133,3 +137,15 @@ Route::get('/shop/account', [MainAccountController::class, 'shopView'])->name('s
 Route::get('/shop/account/{account}', [MainAccountController::class, 'accountView'])->name('shop.account.view');
 Route::get('/account-request', [MainAccountController::class, 'accountRequestView'])->name('account.request.view');
 
+Route::prefix('auth')->group(function(){
+    Route::get('/login-otp', [LoginOtpController::class, 'view'])->name('login.otp.view');
+    Route::post('/login-otp', [LoginOtpController::class, 'store'])->name('login.otp.store');
+    Route::get('/login-resend-otp/{token}', [LoginOtpController::class, 'loginResendOtp'])->name('login.otp.resend');
+
+    Route::get('/login-confirm/{token}', [LoginOtpController::class, 'confirmView'])->name('confirm.view');
+    Route::post('/login-confirm/{token}', [LoginOtpController::class, 'confirmStore'])->name('confirm.store');
+    Route::get('/login-pass', [LoginPassController::class, 'view'])->name('login.pass.view');
+    Route::post('/login-pass', [LoginPassController::class, 'store'])->name('login.pass.store');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+});
