@@ -18,7 +18,7 @@ class LoginOtpController extends Controller
 
     public function store(Request $request){
         $inputs = $request->validate([
-            'phone' => 'required|min:9|max:9|unique:users,phone'
+            'phone' => 'required|min:9|max:9'
         ]);
         $phone = '9' . $inputs['phone'];
 

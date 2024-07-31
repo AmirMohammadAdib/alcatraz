@@ -26,7 +26,9 @@ class User extends Authenticatable
         'award_wallet',
         'cart_number',
         'shabba_number',
+        'password'
     ];
+
 
     public function accountOrders()
     {
