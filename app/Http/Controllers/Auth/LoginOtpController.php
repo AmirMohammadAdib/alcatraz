@@ -48,8 +48,33 @@ class LoginOtpController extends Controller
 
     }
 
-    public function loginResendOtp(){
+    public function loginResendOtp($token){
+        $otp = Otp::where('token', $token)->first();
+
+        if(empty($otp))
+        {
+            return back()->with('error', 'آدرس وارد شده نامعتبر میباشد');
+        }
+
+
+
+
+        $user = $otp->user()->first();
+         //create otp code
+         $otpCode = rand(1000, 9999);
+         $token = Str::random(60);
+         $otpInputs = [
+             'token' => $token,
+             'user_id' => $user->id,
+             'otp_code' => $otpCode,
+             'login_id' => $otp->login_id,
+             'type' => $otp->type,
+         ]; 
+
+         Otp::create($otpInputs);
+         //send sms or email
         
+         return redirect()->route('confirm.view', $token);
     }
 
 
@@ -80,7 +105,7 @@ class LoginOtpController extends Controller
             }
         }
 
-        $otp = Otp::where('token', $token)->where('used', 0)->where('created_at', '>=', Carbon::now()->subMinute(5)->toDateTimeString())->first();
+        $otp = Otp::where('token', $token)->where('used', 0)->where('created_at', '>=', Carbon::now()->subMinute(1)->toDateTimeString())->first();
        if(empty($otp))
        {
         return back()->with('error', 'آدرس وارد شده نامعتبر میباشد');

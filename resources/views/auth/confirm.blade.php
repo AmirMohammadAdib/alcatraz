@@ -23,7 +23,7 @@
               <input type="text" class="text-center font-bold " id="input4" placeholder="4" name="otp[]">
           </div>
           <div class="mt-50 d-flex justify-content-between">
-              <span>ارسال مجدد کد</span>
+            <a href="{{ route('login.otp.resend', $token) }}"><span>ارسال مجدد کد</span></a>
               <a href="" class="text-white">00:00</a>
           </div>
 
