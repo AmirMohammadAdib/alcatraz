@@ -9,138 +9,34 @@
 
 <section class="container-xxl mt-50">
   <div class="archive-room row justify-content-center gap-5 radius-15">
-    <div class="room-item glass-white-bg p-10 radius-15 col-10 col-md-7 col-lg-4 col-xl-3">
-      <div class="item-head d-flex justify-content-between align-items-start">
-        <span class="font-12 font-bold radius-5">0 نفر باقی مانده</span>
-        <div class="d-flex flex-column gap-2 align-items-center">
+    @foreach ($rooms as $key => $room)
+      <div class="room-item glass-white-bg p-10 radius-15 col-10 col-md-7 col-lg-4 col-xl-3" style="text-align: center">
+        <div class="item-head d-flex justify-content-between align-items-start">
+          <span class="font-12 font-bold radius-5"><span id="count-{{ $key }}">{{ $room->capacity - $room->players }}</span> نفر باقی مانده</span>
+          
+          <span class="font-12 font-bold bg-red radius-5" style="background-color: red">{{ $room->status == 0 ? 'در انتظار اجرا' : 'درحال اجرا' }}</span>
+        </div>
+
+        <div class="d-flex flex-column gap-2 align-items-center" style="margin-top: 2rem">
           <div class="room-image border border-2">
-            <img src="asset/src/background/soldier.png" class="w-100-p"alt=""/>
+            <img src="{{ asset('images/rooms/' . $room->img) }}" class="w-100-p"alt=""/>
           </div>
-          <h3 class="font-20">ایزو 40 نفره 10</h3>
-          <h4 class="font-15">450 تومان جایزه نقدی</h4>
+          <h3 class="font-20">{{ $room->title }}</h3>
+          <h4 class="font-15">{{ number_format($room->award) }} تومان جایزه نقدی</h4>
 
         </div>
-        <span class="font-12 font-bold radius-5">فردا ساعت : ۱۹:۲۰</span>
-      </div>
-      <div class="item-footer mt-50 d-flex align-items-center justify-content-between">
-        <div>
-          <span>19,000 تومان</span>
-        </div>
-        <div>
-          <a href="" class="btn btn-primary font-bold">مشاهده</a>
-        </div>
-      </div>
-    </div>
-    <div class="room-item glass-white-bg p-10 radius-15 col-10 col-md-7 col-lg-4 col-xl-3">
-        <div class="item-head d-flex justify-content-between align-items-start">
-          <span class="font-12 font-bold radius-5">0 نفر باقی مانده</span>
-          <div class="d-flex flex-column gap-2 align-items-center">
-            <div class="room-image border border-2">
-              <img src="asset/src/background/soldier.png" class="w-100-p"alt=""/>
-            </div>
-            <h3 class="font-20">ایزو 40 نفره 10</h3>
-            <h4 class="font-15">450 تومان جایزه نقدی</h4>
-
-          </div>
-          <span class="font-12 font-bold radius-5">فردا ساعت : ۱۹:۲۰</span>
-        </div>
+        
         <div class="item-footer mt-50 d-flex align-items-center justify-content-between">
           <div>
-            <span>19,000 تومان</span>
+            <span>{{ $room->fee == null ? 'رایگان' : number_format($room->fee) . ' تومان ' }}</span>
           </div>
           <div>
-            <a href="" class="btn btn-primary font-bold">مشاهده</a>
+            <a href="{{ route('room.view', $room) }}" class="btn btn-primary font-bold">مشاهده</a>
           </div>
         </div>
       </div>
-      <div class="room-item glass-white-bg p-10 radius-15 col-10 col-md-7 col-lg-4 col-xl-3">
-        <div class="item-head d-flex justify-content-between align-items-start">
-          <span class="font-12 font-bold radius-5">0 نفر باقی مانده</span>
-          <div class="d-flex flex-column gap-2 align-items-center">
-            <div class="room-image border border-2">
-              <img src="asset/src/background/soldier.png" class="w-100-p"alt=""/>
-            </div>
-            <h3 class="font-20">ایزو 40 نفره 10</h3>
-            <h4 class="font-15">450 تومان جایزه نقدی</h4>
-
-          </div>
-          <span class="font-12 font-bold radius-5">فردا ساعت : ۱۹:۲۰</span>
-        </div>
-        <div class="item-footer mt-50 d-flex align-items-center justify-content-between">
-          <div>
-            <span>19,000 تومان</span>
-          </div>
-          <div>
-            <a href="" class="btn btn-primary font-bold">مشاهده</a>
-          </div>
-        </div>
-      </div>
-      <div class="room-item glass-white-bg p-10 radius-15 col-10 col-md-7 col-lg-4 col-xl-3">
-        <div class="item-head d-flex justify-content-between align-items-start">
-          <span class="font-12 font-bold radius-5">0 نفر باقی مانده</span>
-          <div class="d-flex flex-column gap-2 align-items-center">
-            <div class="room-image border border-2">
-              <img src="asset/src/background/soldier.png" class="w-100-p"alt=""/>
-            </div>
-            <h3 class="font-20">ایزو 40 نفره 10</h3>
-            <h4 class="font-15">450 تومان جایزه نقدی</h4>
-
-          </div>
-          <span class="font-12 font-bold radius-5">فردا ساعت : ۱۹:۲۰</span>
-        </div>
-        <div class="item-footer mt-50 d-flex align-items-center justify-content-between">
-          <div>
-            <span>19,000 تومان</span>
-          </div>
-          <div>
-            <a href="" class="btn btn-primary font-bold">مشاهده</a>
-          </div>
-        </div>
-      </div>
-      <div class="room-item glass-white-bg p-10 radius-15 col-10 col-md-7 col-lg-4 col-xl-3">
-        <div class="item-head d-flex justify-content-between align-items-start">
-          <span class="font-12 font-bold radius-5">0 نفر باقی مانده</span>
-          <div class="d-flex flex-column gap-2 align-items-center">
-            <div class="room-image border border-2">
-              <img src="asset/src/background/soldier.png" class="w-100-p"alt=""/>
-            </div>
-            <h3 class="font-20">ایزو 40 نفره 10</h3>
-            <h4 class="font-15">450 تومان جایزه نقدی</h4>
-
-          </div>
-          <span class="font-12 font-bold radius-5">فردا ساعت : ۱۹:۲۰</span>
-        </div>
-        <div class="item-footer mt-50 d-flex align-items-center justify-content-between">
-          <div>
-            <span>19,000 تومان</span>
-          </div>
-          <div>
-            <a href="" class="btn btn-primary font-bold">مشاهده</a>
-          </div>
-        </div>
-      </div>
-      <div class="room-item glass-white-bg p-10 radius-15 col-10 col-md-7 col-lg-4 col-xl-3">
-        <div class="item-head d-flex justify-content-between align-items-start">
-          <span class="font-12 font-bold radius-5">0 نفر باقی مانده</span>
-          <div class="d-flex flex-column gap-2 align-items-center">
-            <div class="room-image border border-2">
-              <img src="asset/src/background/soldier.png" class="w-100-p"alt=""/>
-            </div>
-            <h3 class="font-20">ایزو 40 نفره 10</h3>
-            <h4 class="font-15">450 تومان جایزه نقدی</h4>
-
-          </div>
-          <span class="font-12 font-bold radius-5">فردا ساعت : ۱۹:۲۰</span>
-        </div>
-        <div class="item-footer mt-50 d-flex align-items-center justify-content-between">
-          <div>
-            <span>19,000 تومان</span>
-          </div>
-          <div>
-            <a href="" class="btn btn-primary font-bold">مشاهده</a>
-          </div>
-        </div>
-      </div>
+    @endforeach
+    
   </div>
 </section>
 

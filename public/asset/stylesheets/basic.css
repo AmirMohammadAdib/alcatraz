@@ -26,14 +26,13 @@
   background: red;
 }
 .navbar .box-bell a {
-  color: white;
+  color: var(--hading-color);
 }
 .navbar .box-money {
   padding: 5px 10px;
   border-radius: 10px;
-  background: #2C57C5;
-  color: white;
-  box-shadow: 0 0 20px #2C57C5;
+  background: var(--mini-bg-2);
+  box-shadow: 0 0 20px var(--mini-bg-2);
 }
 
 .dropdown {
@@ -169,7 +168,7 @@
 .user-star .star-rank .rank:nth-child(2) {
   height: 200px;
   background: rgb(132, 106, 52);
-  background: linear-gradient(0deg, rgb(132, 106, 52) 0%, rgb(234, 188, 93) 57%);
+  background: linear-gradient(0deg, rgb(236, 191, 99) 0%, rgb(234, 188, 93) 57%);
   border-radius: 30px 30px 0 0;
 }
 .user-star .star-rank .rank:nth-child(2) img {
@@ -201,7 +200,7 @@
   height: 370px;
 }
 .more-user-star .my-account {
-  background: var(--bg-dark);
+  background: var(--mini-bg-4);
 }
 
 .archive-room {
@@ -235,22 +234,23 @@
 }
 .archive-room .room-item .item-head span {
   padding: 5px;
+  color: white !important;
 }
 .archive-room .room-item .item-head span:nth-child(1) {
   background: var(--box-bg-1);
 }
 .archive-room .room-item .item-head span:nth-child(3) {
   color: var(--txt-color-1);
-  background: var(--box-bg-2);
+  background: var(--mini-bg-1);
 }
 .archive-room .room-item .item-footer {
   padding: 10px;
   border-radius: 10px;
-  background: var(--bg-dark);
+  background: var(--mini-bg-3);
 }
 .archive-room .room-item .item-footer span {
-  background: rgba(235, 121, 121, 0.397);
   padding: 4px 10px;
+  color: white !important;
 }
 
 .team {
@@ -258,7 +258,7 @@
 }
 
 .team .team-item {
-  margin-top: 50px;
+  margin-top: 10px;
 }
 
 .team .team-item .item-head {
@@ -266,14 +266,15 @@
   margin-bottom: 7px;
 }
 
+
 .team .team-item .item-head h3,
 h2,
 h4 {
-  font-size: 15px;
+  font-size: 13px;
 }
 
 .team .team-item .item-users {
-  padding: 10px;
+  padding: 5px;
 }
 
 div[team-id=bg_1] .item-head,
@@ -318,14 +319,8 @@ div[team-id=bg_7] .item-users {
   background: linear-gradient(0deg, rgba(197, 154, 44, 0.5830707283) 0%, rgba(197, 159, 44, 0.2889530812) 57%);
 }
 
-.team .team-item .item-users .user {
-  text-align: center;
-  border-radius: 4px;
-  border: 3px solid rgba(255, 255, 255, 0.514);
-}
-
 .team .team-item .item-users {
-  gap: 10px;
+  gap: 5px;
 }
 
 .team .team-item .item-users .user img {
@@ -345,6 +340,9 @@ div[team-id=bg_7] .item-users {
   }
   .my-wallet .info .info-body .number span {
     font-size: 13px;
+  }
+  .team > div{
+    /* max-width: 150px; */
   }
 }
 .my-wallet .my-wallet-info .info {
@@ -487,12 +485,12 @@ div[team-id=bg_7] .item-users {
 .user-profile .content-body .progress-2 .a {
   right: 50px;
   background: rgb(255, 255, 255);
-  background: linear-gradient(163deg, rgb(255, 255, 255) 0%, rgb(225, 135, 135) 57%);
+  background: linear-gradient(163deg, rgb(255, 255, 255) 0%, rgb(247, 115, 115) 57%);
 }
 .user-profile .content-body .progress-2 .b {
   left: 50px;
   background: rgb(255, 255, 255);
-  background: linear-gradient(163deg, rgb(255, 255, 255) 0%, rgb(255, 224, 159) 57%);
+  background: linear-gradient(163deg, rgb(255, 255, 255) 0%, rgb(231, 183, 80) 57%);
 }
 .user-profile .content-body .progress-2 .a,
 .user-profile .content-body .progress-2 .b {
@@ -610,3 +608,89 @@ div[team-id=bg_7] .item-users {
 .background_text .text_box h2{
   color: white !important;
 }
+.ticket {
+  overflow: hidden;
+  margin-bottom: 20px;
+  padding: 15px;
+  background: var(--mini-bg-4);
+}
+
+.ticket .date {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 10px;
+  text-align: right;
+}
+
+.ticket .user {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.ticket .user img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.ticket .user .name {
+  font-weight: bold;
+  color: var(--hading-color) !important;
+  margin-right: 10px;
+}
+
+.ticket .user .type {
+  background-color: #007bff;
+  color: var(--hading-color) !important;
+  border-radius: 4px;
+  padding: 3px 8px;
+  font-size: 12px;
+}
+
+.ticket .message {
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+.ticket .message span {
+  margin: 0 0 10px 0;
+  color: var(--hading-color) !important;
+}
+
+.ticket .rating {
+  display: flex;
+  align-items: center;
+}
+
+.ticket .rating .star {
+  width: 20px;
+  height: 20px;
+  background-color: #f0f0f0;
+  border-radius: 50%;
+  margin-right: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: #f39c12;
+  cursor: pointer;
+}
+
+.ticket .rating .star:hover {
+  background-color: #f9e79f;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

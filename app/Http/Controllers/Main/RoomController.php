@@ -3,15 +3,19 @@
 namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
+use App\Models\Player;
+use App\Models\Room;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
 {
-    public function roomView(){
+    public function roomView(Room $room){
+        $players = Player::where('room_id', $room->id)->get();
         return view('app.room');
     }
 
     public function roomsView(){
-        return view('app.rooms');
+        $rooms = Room::where('status', '!=', 2)->orderBy('created_at', 'desc')->get();
+        return view('app.rooms', compact('rooms'));
     }
 }

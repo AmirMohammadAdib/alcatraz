@@ -1,7 +1,7 @@
 form .input_field {
   padding: 0 10px;
   border-radius: 20px;
-  background: #1D1D1E;
+  background: var(--input-bg);
   color: var(--txt-p-h);
   border: 0.2px solid rgba(238, 238, 238, 0.6980392157);
 }
@@ -10,7 +10,17 @@ form .input_field input {
   color: var(--txt-p-h);
   height: 70px;
 }
-
+.login-form a,span{
+  color: var(--hading-color) !important;
+}
+.account-registration span{
+   color: var(--hading-color) !important;
+}
+button[type="submit"]{
+  padding: 21px;
+  border-radius: 18px;
+  width: 150px !important;
+}
 .regester .input_field {
   width: 300px;
   margin-left: auto;
@@ -35,7 +45,7 @@ form .input_field input {
 }
 
 .accordion {
-  background: #2a3039;
+  background: var(--mini-bg-2);
   width: auto;
   border-radius: 12px;
   height: 80px;
@@ -121,7 +131,7 @@ form .input_field input {
 }
 
 .accordion__icon.accordion__icon--expand svg {
-  fill: #22edc8;
+  fill: var(--txt-white);
 }
 
 .accordion__icon.accordion__icon--close svg {
@@ -199,7 +209,7 @@ form .input_field input {
   border-radius: 11px;
 }
 .dropdown-wrapper span {
-  color: red;
+  color: red !important;
 }
 .dropdown-wrapper:after {
   content: "";

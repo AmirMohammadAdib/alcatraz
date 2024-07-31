@@ -4,7 +4,9 @@
   --mini-bg-1:#f03d3d;
   --mini-bg-2:#2C57C5;
   --mini-bg-3:#333;
+  --mini-bg-4:#333;;
   --bg-dark:#333;
+  --input-bg:#1D1D1E;
 
 
   --glass-bg:rgba(255, 255, 255, 0.288);
@@ -22,11 +24,13 @@
 }
 
 body.dark {
+  --input-bg:#ededf8;
   --txt-white:rgb(0, 0, 0);
   --txt-gray:hsl(0, 0%, 33%);
   --mini-bg-1:#f03d3d;
   --mini-bg-2:#94b2ff;
   --mini-bg-3:#646464;
+  --mini-bg-4:#fff;
 
   --hading-color:#333;
   --white-color:#fff;
@@ -63,12 +67,12 @@ h1, h2, h3, h4, h5, h6,p{
 body {
   padding-bottom: 150px;
   width: 100%;
-  height: 100vh;
-  height: -moz-max-content;
   height: max-content;
   font-family: "payda-Regular" !important;
-  background: url("../src/background/dark-and-red-bg-body.png") no-repeat;
+  background-image: url('../src/background/dark-and-red-bg-body.png');
+  background-attachment:fixed;
   background-size: cover;
+
 }
 
 *::-webkit-scrollbar {
