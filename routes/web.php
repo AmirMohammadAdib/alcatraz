@@ -125,11 +125,11 @@ Route::get('/room/{room}', [MainRoomController::class, 'roomView'])->name('room.
 
 // ShopCP pages that run on MainCPController
 Route::get('/shop/cp', [MainCPController::class, 'shopView'])->name('shop.shop.view');
-Route::get('/shop/cp/{id}', [MainCPController::class, 'cpView'])->name('shop.cp.view');
+Route::get('/shop/cp/{cp}', [MainCPController::class, 'cpView'])->name('shop.cp.view');
 
 
 // Shop account pages that run on MainAccountController
 Route::get('/shop/account', [MainAccountController::class, 'shopView'])->name('shop.accounts.view');
-Route::get('/shop/account/{id}', [MainAccountController::class, 'accountView'])->name('shop.account.view');
+Route::get('/shop/account/{account}', [MainAccountController::class, 'accountView'])->name('shop.account.view');
 Route::get('/account-request', [MainAccountController::class, 'accountRequestView'])->name('account.request.view');
 
