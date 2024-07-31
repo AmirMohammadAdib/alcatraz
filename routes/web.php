@@ -120,7 +120,7 @@ Route::post('/wallet/transport', [WalletController::class, 'transport'])->name('
 
 // Room pages that run on MainRoomController
 Route::get('/rooms', [MainRoomController::class, 'roomsView'])->name('rooms.view');
-Route::get('/room/{id}', [MainRoomController::class, 'roomView'])->name('room.view');
+Route::get('/room/{room}', [MainRoomController::class, 'roomView'])->name('room.view');
  
 
 // ShopCP pages that run on MainCPController

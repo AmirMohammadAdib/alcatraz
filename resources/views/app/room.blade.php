@@ -39,46 +39,38 @@
 
 <div class="container-xxl">
   <div class="team d-flex flex-wrap gap-2 justify-content-center mt-20">
-    <div team-id="bg_1" class="team-item col-md-4">
+
+    @php
+        $keyPlayer = 0;
+    @endphp
+
+    @for($i=0; $i < (count($players) / 4); $i ++)
+
+    <div team-id="bg_{{ $i + 1 }}" class="team-item col-md-4">
       <div class="item-head">
         <h3>بازیکنان</h3>
       </div>
       <div class="item-users d-flex">
-        <div class="user">
-          <img
-            src="{{ asset('asset/src/test/آفر-دوبل-سی-پی-mobile.jpg') }} 1.png"
-            alt=""
-          />
-          <p>amiradib</p>
-        </div>
-        <div class="user">
-          <img
-            src="{{ asset('asset/src/test/آفر-دوبل-سی-پی-mobile.jpg') }} 1.png"
-            alt=""
-          />
-          <p>amiradib</p>
+        @for ($j=0; $j<4; $j++)
 
-        </div>
-        <div class="user">
-          <img
-            src="{{ asset('asset/src/test/آفر-دوبل-سی-پی-mobile.jpg') }} 1.png"
-            alt=""
-          />
-          <p>amiradib</p>
 
-        </div>
-        <div class="user">
-          <img
-            src="{{ asset('asset/src/test/آفر-دوبل-سی-پی-mobile.jpg') }} 1.png"
-            alt=""
-          />
-          <p>amiradib</p>
+          <div class="user">
+            <img src="{{ asset('asset/src/test/آفر-دوبل-سی-پی-mobile.jpg') }} 1.png" alt=""/>
+            @if ($keyPlayer < count($players))
+              <p>{{ $players[$keyPlayer]->user->username }}</p>
+            @else
+              <p> - </p>  
+            @endif
 
-        </div>
+          </div>
+          
+          @php
+            $keyPlayer += 1;
+          @endphp
+        @endfor
       </div>
     </div>
-
-
+    @endfor
 
 
   </div>

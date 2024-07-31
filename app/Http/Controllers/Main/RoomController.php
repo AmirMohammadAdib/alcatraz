@@ -11,7 +11,7 @@ class RoomController extends Controller
 {
     public function roomView(Room $room){
         $players = Player::where('room_id', $room->id)->get();
-        return view('app.room');
+        return view('app.room', compact('players'));
     }
 
     public function roomsView(){
