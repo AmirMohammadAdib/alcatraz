@@ -342,7 +342,7 @@ div[team-id=bg_7] .item-users {
     font-size: 13px;
   }
   .team > div{
-    /* max-width: 150px; */
+    max-width: 150px;
   }
 }
 .my-wallet .my-wallet-info .info {
@@ -430,6 +430,53 @@ div[team-id=bg_7] .item-users {
 
 .single-product .product-box {
   height: 150px;
+}
+.single-product .product-gallery .gallery-item{
+   width: 30%;
+   height: 100px;
+   transition: all .3s;
+   cursor: pointer;
+}
+.single-product .product-gallery .gallery-item:hover{
+  transform: translateY(-7px);
+}
+.border-animation{
+  place-content: center;
+  color: white;
+  text-shadow: 0 1px 0 #000;
+  --main-bg: conic-gradient(
+      from var(--border-angle),
+      #213,
+      #112 5%,
+      #112 60%,
+      #213 95%
+    );
+  border: solid 5px transparent;
+  border-radius: 15px;
+  --gradient-border: conic-gradient(from var(--border-angle), transparent 25%, #08f, #f03 99%, transparent);
+  background: var(--main-bg) padding-box, var(--gradient-border) border-box, var(--main-bg) border-box;
+  background-position: center center;
+  animation: bg-spin 10s linear infinite;
+}
+@keyframes bg-spin {
+  to {
+    --border-angle: 1turn;
+  }
+}
+.box:hover {
+  animation-play-state: paused;
+}
+
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0turn;
+}
+
+
+
+.single-product .product-gallery .gallery-item img{
+  object-fit: cover;
 }
 .single-product .product-box .box-img {
   width: 150px;
@@ -533,7 +580,7 @@ div[team-id=bg_7] .item-users {
 .productList{
   overflow-y: scroll;
 }
-.productList h4,h2,h3,span,img{
+.productList h4,h2,h3,span{
   pointer-events: none;
 }
 
@@ -545,10 +592,18 @@ div[team-id=bg_7] .item-users {
   color: var(--white-color) !important;
 }
 .productItem .product-head .product-img{
-   width: 300px;
-   height: 200px;
+   width: 260px;
+   height: 180px;
+} 
+.account .productItem .product-head .product-img{
+  width: 100% !important;
+  height: 200px !important;
+}
+.account .productItem .product-head .product-img img{
+  height: 100% !important;
 }
 .productItem .product-head .product-img img{
+  border-radius: 10px;
   height: 100%;
   object-fit: cover;
 }
