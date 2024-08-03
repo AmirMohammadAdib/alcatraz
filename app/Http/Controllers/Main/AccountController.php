@@ -43,10 +43,8 @@ class AccountController extends Controller
     }
 
 
-    public function accountView(){
-
-
-        return view('app.accounts', compact('accounts'));
+    public function accountView(Account $account){
+                return view('app.account', compact('account'));
     }
 
 
