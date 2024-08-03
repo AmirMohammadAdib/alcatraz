@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('receipt')->nullable();
             $table->text('description')->nullable();
             $table->tinyInteger('status')->default('0')->comment('0 => unpayd, 1 => payd, 2 => waiting, 3 => finished');
-            $table->string('email');
-            $table->string('password');
+            $table->string('email')->nullable();
+            $table->string('password')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

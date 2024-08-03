@@ -251,16 +251,16 @@
   </div>
 
 
-  <div id="back"></div>
+  <div id="back"  @if(isset($_GET['deposit'])) style="display: block" @endif></div>
 
-  <div class="deposite-box" id="deposite">
+  <div class="deposite-box" id="deposite" @if(isset($_GET['deposit'])) style="display: block" @endif>
     <h2>افزایش موجودی</h2>
     <p>مبلغ مدنظر واریزی را وارد کنید</p>
 
     <form action="{{ route('wallet.deposite') }}" method="POST">
       @csrf
       <div class="form-group">
-        <input type="number" name="amount" class="form-control">
+        <input type="number" name="amount" class="form-control" @if(isset($_GET['deposit'])) value="{{ $_GET['deposit'] }}" @endif>
         <span>تومان</span>
 
       </div>

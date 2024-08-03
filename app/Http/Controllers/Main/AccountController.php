@@ -47,5 +47,22 @@ class AccountController extends Controller
                 return view('app.account', compact('account'));
     }
 
+    public function accountStore(Account $account){
+        if(!auth()->check()){
+            abort(403);
+        }
+
+        $user = auth()->user();
+
+        $walletSum = intval($user->wallet) + intval($user->award_wallet);
+        
+        if(intval($account->price) <= $walletSum){
+            
+        }else{
+            $leftOver = intval($account->price) - $walletSum;
+            return redirect()->route('wallet.view', ['deposit' => $leftOver]);
+        }
+    }
+
 
 }

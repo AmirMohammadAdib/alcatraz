@@ -119,10 +119,11 @@
         </div>
           
         <div class="mt-50 d-flex flex-column align-items-center justify-content-between">
-          <div class="d-flex gap-3 w-100">
+          <form action="{{ route('shop.account.store', $account) }}" class="d-flex gap-3 w-100" method="POST">
+            @csrf
             <button id="instantSaleButton" class="btn w-100 btn-success font-bold">خرید اکانت</button>
             {{-- <button id="superInstantSaleButton" class="btn w-100 btn-success font-bold" data-timer="180">فروش سوپر فوری</button> --}}
-          </div>
+          </form>
           <div id="timerContainer" class="mt-20"></div>
         </div>
         <hr>

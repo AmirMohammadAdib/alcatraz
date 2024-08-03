@@ -145,6 +145,7 @@ Route::get('/shop/cp/{cp}', [MainCPController::class, 'cpView'])->name('shop.cp.
 // Shop account pages that run on MainAccountController
 Route::get('/shop/account', [MainAccountController::class, 'shopView'])->name('shop.accounts.view');
 Route::get('/shop/account/{account}', [MainAccountController::class, 'accountView'])->name('shop.account.view');
+Route::post('/shop/account/{account}', [MainAccountController::class, 'accountStore'])->name('shop.account.store');
 Route::get('/account-request', [MainAccountController::class, 'accountRequestView'])->name('account.request.view');
 
 
