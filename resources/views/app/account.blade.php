@@ -67,31 +67,28 @@
   <div class="row single-product justify-content-center gap-3 align-items-start">
     <div class="box-img  col-11 col-lg-5" >
       <div class="box-single border-animation" data-tilt>
-        <img src="{{ asset('asset/src/background/single-product-image.jpg') }}" data-modal="true" class="w-100 radius-10 border"alt=""/>
+        <img src="{{ asset('images/account/' . $account->img) }}" data-modal="true" class="w-100 radius-10 border"alt=""/>
       </div>
 
       <div class="product-gallery w-100 d-flex justify-content-between mt-10" >
-          <div class="gallery-item">
-            <img src="{{ asset('asset/src/test/product-test (1).jpg') }}" class="radius-10 w-100 h-100 border" alt="" data-modal="true">
-          </div>
 
-          <div class="gallery-item">
-            <img src="{{ asset('asset/src/test/product-test (2).jpg') }}" class="radius-10 w-100 h-100 border" alt="" data-modal="true">
-          </div>
 
-          <div class="gallery-item">
-            <img src="{{ asset('asset/src/test/product-test (3).jpg') }}" class="radius-10 w-100 h-100 border" alt="" data-modal="true">
-          </div>
+          @foreach ($account->galleries as $gallery)
+            <div class="gallery-item">
+              <img src="{{ asset('images/gallery/' . $gallery->img) }}" class="radius-10 w-100 h-100 border" alt="" data-modal="true">
+            </div>
+          @endforeach
       </div>
+
       <div class="box-info mt-20 border p-10 radius-15">
-        <h3 class="font-bold">50 تا لجند و 10 تا میتیک</h3>
+        <h3 class="font-bold">{{ $account->title }}</h3>
         <div class="d-flex gap-2 justify-content-end mt-20">
-          <h3 class="font-20"> 25,000,000</h3>
+          <h3 class="font-20">{{ number_format($account->price) }}</h3>
           <span>تومان</span>
         </div>
       </div>
       <div class="uid d-flex gap-2 mt-20 justify-content-between align-items-center">
-        <input type="text" id="uidText" class="w-100" value="123456789" readonly>
+        <input type="text" id="uidText" class="w-100" value="{{ $account->uid }}" readonly>
         <button class="btn btn-success w-100-p font-bold" id="copyButton" onclick="copyText()">کپی UID</button>
        </div>
     </div>
@@ -131,16 +128,7 @@
         <hr>
 
         <div class="text-justify mt-20">
-          <p>
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-            استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله
-            در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی
-          </p>
-          <p>
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-            استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله
-            در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی
-          </p>
+        {{ $account->description }}
         </div>
       </div>
     </div>

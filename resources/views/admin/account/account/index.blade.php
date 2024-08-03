@@ -64,6 +64,7 @@
                                 <td>{{ $account->description }}</td>
                                 <td>{{ verta($account->created_at)->format('Y-m-d') }}</td>
                                 <td>
+                                    <a href="{{ route('gallery.index', ['account' => $account]) }}" class="btn btn-warning">گالری</a>
                                     <a href="{{ route('account.edit', [$account]) }}" class="btn btn-info">ویرایش</a>
                                     <form action="{{ route('account.destroy', [$account]) }}" method="POST" style="display: inline-block">
                                         @method('DELETE')
