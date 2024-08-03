@@ -55,7 +55,28 @@
          }
       }
 
+      input[type=email]{
+        width: 100%;
+    border: none;
+    border-radius: .3rem;
+    text-align: left;
+    font-family: 'payda-Regular';
+      }
 
+      .err{
+        background-color: red;
+    border-radius: 0 0 .5rem .5rem;
+    padding: 0 .5rem;
+      }
+      
+      input[type=password]{
+        width: 100%;
+    border: none;
+    border-radius: .3rem;
+    text-align: left;
+
+    font-family: 'payda-Regular';
+      }
     </style>
 
 @endsection
@@ -119,11 +140,38 @@
         </div>
           
         <div class="mt-50 d-flex flex-column align-items-center justify-content-between">
+          @if ($account->status == 1)
+              
+          <form action="{{ route('shop.account.store', $account) }}" class=" gap-3 w-100" method="POST">
+            @csrf
+            <div class="form-group">
+              <label for="">ایمیل</label>
+              <input type="email" name="email" placeholder="ایمیل حساب کاربری خود را وارد کنید" id="" class="form-control">
+              @error('email')
+                  <span class="err">{{ $message }}</span>
+              @enderror
+            </div><br>
+            <div class="form-group">
+              <label for="">رمز عبور</label>
+              <input type="password" name="password" placeholder="رمز عبور حساب کاربری خود را وارد کنید" id="" class="form-control">
+              @error('password')
+                  <span class="err">{{ $message }}</span>
+              @enderror
+            </div><br>
+            <button id="instantSaleButton" class="btn w-100 btn-success font-bold">ثبت اطلاعات</button>
+            {{-- <button id="superInstantSaleButton" class="btn w-100 btn-success font-bold" data-timer="180">فروش سوپر فوری</button> --}}
+          </form>
+
+          @else
+
           <form action="{{ route('shop.account.store', $account) }}" class="d-flex gap-3 w-100" method="POST">
             @csrf
             <button id="instantSaleButton" class="btn w-100 btn-success font-bold">خرید اکانت</button>
             {{-- <button id="superInstantSaleButton" class="btn w-100 btn-success font-bold" data-timer="180">فروش سوپر فوری</button> --}}
           </form>
+
+          @endif
+
           <div id="timerContainer" class="mt-20"></div>
         </div>
         <hr>

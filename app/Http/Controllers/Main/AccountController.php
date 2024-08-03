@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Main;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\AccountGun;
+use App\Models\AccountOrder;
 use App\Models\Gun;
 use Illuminate\Http\Request;
 
@@ -44,23 +45,53 @@ class AccountController extends Controller
 
 
     public function accountView(Account $account){
-                return view('app.account', compact('account'));
+        if($account->status == 1){
+            if(auth()->check()){
+                $orderCheck = AccountOrder::where('user_id', auth()->user()->id)->where('account_id', $account->id)->where('status', 1)->first();
+                if($orderCheck == null){
+                    abort(404);
+                }else{
+                    return view('app.account', compact('account'));
+                }
+            }else{
+                abort(404);
+            }
+        }
+        return view('app.account', compact('account'));
     }
 
-    public function accountStore(Account $account){
+    public function accountStore(Request $request, Account $account){
         if(!auth()->check()){
             abort(403);
         }
-
         $user = auth()->user();
 
-        $walletSum = intval($user->wallet) + intval($user->award_wallet);
-        
-        if(intval($account->price) <= $walletSum){
-            
+        if($account->status == 1){
+            $inputs = $request->validate([
+                'email' => 'required|email',
+                'password' => 'required',
+            ]);
+
+            AccountOrder::where('account_id', $account->id)->first()->update($inputs);
+            return redirect()->route('app.index')->with('success', 'درخواست شما با موفقیت ثبت شد');
         }else{
-            $leftOver = intval($account->price) - $walletSum;
-            return redirect()->route('wallet.view', ['deposit' => $leftOver]);
+            $walletSum = intval($user->wallet);
+            
+            if(intval($account->price) <= $walletSum){
+                AccountOrder::create([
+                    'user_id' => $user->id,
+                    'account_id' => $account->id,
+                    'status' => 1,
+                ]); 
+    
+                $account->update(['status' => 1]);
+                $user->update(['wallet' => $walletSum - intval($account->price)]);
+    
+                return redirect()->route('shop.account.view', $account)->with('success', 'خرید حساب با موفقیت انجام شد، اطلاعات خود را بصورت صحیح وارد کنید');
+            }else{
+                $leftOver = intval($account->price) - $walletSum;
+                return redirect()->route('wallet.view', ['deposit' => $leftOver])->with('success', 'لطفا برای پرداخت اقدام کنید');
+            }
         }
     }
 
