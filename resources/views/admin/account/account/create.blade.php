@@ -2,6 +2,9 @@
 
 @section('head-tag')
     <title>فهرست اکانت سایت - آلکاتراز</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
 
 @section('breadcrumb')
@@ -102,6 +105,24 @@
 
                         </div><!-- /.input-group -->
                     </div><!-- /.form-group -->
+
+                    <div class="form-group">
+                        <label>انتخاب گان برای این اکانت</label>
+                        <div class="input-group @error('guns') has-error @enderror">
+
+                            <select name="guns[]" id="guns" class="form-control guns" multiple="multiple">
+                                @foreach ($guns as $gun)
+                                    @dd(in_array($gun->id, $selectedGun))
+                                    <option value="{{ $gun->id }}">{{ $gun->name }}</option>
+                                @endforeach
+                            </select>
+
+                            @error('guns')
+                                <span class="alert-danger">{{ $message }}</span>
+                            @enderror
+
+                        </div><!-- /.input-group -->
+                    </div><!-- /.form-group -->
                     
                 </div><!-- /.form-body -->
 
@@ -120,5 +141,17 @@
     </div><!-- /.portlet -->
 
 </div><!-- /.col-12 -->
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
+<script>
+    var select_roles = $('#guns');
+    select_roles.select2({
+        placeholder: 'لطفا نقش ها را وارد نمایید',
+        multiple: true,
+        tags : true
+    })
+</script>
 
 @endsection

@@ -10,4 +10,8 @@ class Gun extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = ['name', 'img'];
+
+    public function accounts(){
+        return $this->hasMany(Account::class);
+    }
 }

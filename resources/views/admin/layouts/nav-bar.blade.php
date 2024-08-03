@@ -115,6 +115,13 @@
                             <span>اکانت ها</span>
                         </a>
                     </li>
+
+                    <li>
+                        <a href="{{ route('gun.index') }}" class="">
+                            <i class="  fas fa-gun"></i>
+                            <span>گان ها</span>
+                        </a>
+                    </li>
                     <li>
                         <a href="{{ route('account-order.index') }}" class="">
                             <i class=" fas fa-cart-shopping"></i>

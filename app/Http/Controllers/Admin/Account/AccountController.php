@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin\Account;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Account\AccountRequest;
 use App\Models\Account;
+use App\Models\AccountGun;
+use App\Models\Gun;
 use Illuminate\Http\Request;
 
 class AccountController extends Controller
@@ -23,7 +25,8 @@ class AccountController extends Controller
      */
     public function create()
     {
-        return view('admin.account.account.create');
+        $guns = Gun::all();
+        return view('admin.account.account.create', compact('guns'));
     }
 
     /**
@@ -39,7 +42,14 @@ class AccountController extends Controller
             $inputs['img'] = $secondName;
         }
 
-        Account::create($inputs);
+        $account = Account::create($inputs);
+        foreach($inputs['guns'] as $gun){
+            AccountGun::create([
+                'account_id' => $account->id,
+                'gun_id' => $gun,
+            ]);
+        }
+
         return redirect()->route('account.index')->with('alert-success', 'محصول جدید با موفقیت ایجاد شد');
     }
 
@@ -56,7 +66,9 @@ class AccountController extends Controller
      */
     public function edit(Account $account)
     {
-        return view('admin.account.account.edit', compact('account'));
+        $guns = Gun::all();
+        $selectedGun = AccountGun::where('account_id', $account->id)->pluck('gun_id')->toArray();
+        return view('admin.account.account.edit', compact('account', 'guns', 'selectedGun'));
     }
 
     /**
@@ -72,6 +84,17 @@ class AccountController extends Controller
             $inputs['img'] = $secondName;
         }
 
+        $currentGuns = AccountGun::where('account_id', $account->id)->get();
+        foreach($currentGuns as $gun){
+            $gun->delete();
+        }
+
+        foreach($inputs['guns'] as $gun){
+            AccountGun::create([
+                'account_id' => $account->id,
+                'gun_id' => $gun,
+            ]);
+        }
         $account->update($inputs);
         return redirect()->route('account.index')->with('alert-success', 'محصول با شناسه ' . $account->id . ' با موفقیت ویرایش شد');
     }

@@ -18,4 +18,8 @@ class Account extends Model
     {
         return $this->hasMany(CpOrder::class);
     }
+
+    public function guns(){
+        return $this->hasMany(Gun::class);
+    }
 }

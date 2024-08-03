@@ -18,14 +18,16 @@ class AccountRequest extends FormRequest
                 'title' => 'required|string|max:255',
                 'img' => 'required|file|max:2048|mimes:png,jpg,jpeg,webp',
                 'price' => 'required|numeric',
-                'description' => 'nullable|string'
+                'description' => 'nullable|string',
+                'guns' => 'required|array',
             ];
         }else{
             return [
                 'title' => 'required|string|max:255',
                 'img' => 'nullable|file|max:2048|mimes:png,jpg,jpeg,webp',
                 'price' => 'required|numeric',
-                'description' => 'nullable|string'
+                'description' => 'nullable|string',
+                'guns' => 'required|array',
             ];
         }
     }
