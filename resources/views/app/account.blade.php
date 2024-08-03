@@ -102,11 +102,9 @@
         </h1>
         <div class="d-flex align-items-center gap-2 p-10">
           <svg width="30" height="30">
-            <image href="asset/src/svg/warning.svg"></image>
+            <image href="{{ asset('asset/src/svg/warning.svg') }}"></image>
           </svg>
-          <span class="font-15" style="text-wrap: nowrap"
-            >لطفا اطلاعات اکانت اکتیویشن خود را به دقت وارد نمائید .
-          </span>
+          <span class="font-15" style="">لطفا اطلاعات اکانت اکتیویشن خود را به دقت وارد نمائید .</span>
         </div>
         
         <div class="row guns">

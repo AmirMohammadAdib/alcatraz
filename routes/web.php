@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Account\AccountController;
+use App\Http\Controllers\Admin\Account\GalleryController;
 use App\Http\Controllers\Admin\Account\GunController;
 use App\Http\Controllers\Admin\Account\OrderController as AccountOrderController;
 use App\Http\Controllers\Admin\Account\RequestController;
@@ -81,6 +82,10 @@ Route::group(['prefix' => 'admin'], function(){
 
         // Define resource routes for 'gun' which will map to GunController
         Route::resource('gun', GunController::class);
+
+
+        // Define resource routes for 'gallery' which will map to GalleryController
+        Route::resource('gallery', GalleryController::class);
     });
 
     // Group routes under the 'admin/match' prefix

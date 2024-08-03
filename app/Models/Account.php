@@ -10,7 +10,7 @@ class Account extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = [
-        'title', 'img', 'price', 'description', 'status', 'gun_id'
+        'title', 'img', 'price', 'description', 'status', 'gun_id', 'uid'
     ];
 
 
@@ -21,5 +21,9 @@ class Account extends Model
 
     public function guns(){
         return $this->belongsToMany(Gun::class);
+    }
+
+    public function galleries(){
+        return $this->belongsToMany(Gallery::class);
     }
 }
