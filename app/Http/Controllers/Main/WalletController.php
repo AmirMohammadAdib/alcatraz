@@ -40,7 +40,7 @@ class WalletController extends Controller
         ]);
 
         //checking on wallet
-        $walletAmount = intval(auth()->user()->wallet);
+        $walletAmount = intval(auth()->user()->award_wallet);
         if($inputs['amount'] <= $walletAmount){ 
             if(auth()->user()->cart_number == null){
                 return back()->with('error', 'ابتدا اطلاعات مالی خود را تکمیل کنید');
@@ -51,7 +51,7 @@ class WalletController extends Controller
             Withdraw::create($inputs);
 
             $user = auth()->user();
-            $user->wallet = intval(auth()->user()->wallet) - intval($inputs['amount']);
+            $user->award_wallet = intval(auth()->user()->award_wallet) - intval($inputs['amount']);
             $user->save();
 
             return back()->with('success', 'درخواست برداشت با موفقیت ثبت شد');
