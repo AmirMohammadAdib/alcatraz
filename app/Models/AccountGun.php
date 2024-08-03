@@ -10,4 +10,6 @@ class AccountGun extends Model
     use HasFactory;
     protected $table = 'account_gun';
     protected $fillable = ['account_id', 'gun_id'];
+
+    
 }
