@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Account\AccountController;
+use App\Http\Controllers\Admin\Account\GunController;
 use App\Http\Controllers\Admin\Account\OrderController as AccountOrderController;
 use App\Http\Controllers\Admin\Account\RequestController;
 use App\Http\Controllers\Admin\Auth\AdminController;
@@ -76,6 +77,10 @@ Route::group(['prefix' => 'admin'], function(){
 
         // Define resource routes for 'account' which will map to AccountController
         Route::resource('account', AccountController::class);
+
+
+        // Define resource routes for 'gun' which will map to GunController
+        Route::resource('gun', GunController::class);
     });
 
     // Group routes under the 'admin/match' prefix
@@ -136,6 +141,7 @@ Route::get('/shop/cp/{cp}', [MainCPController::class, 'cpView'])->name('shop.cp.
 Route::get('/shop/account', [MainAccountController::class, 'shopView'])->name('shop.accounts.view');
 Route::get('/shop/account/{account}', [MainAccountController::class, 'accountView'])->name('shop.account.view');
 Route::get('/account-request', [MainAccountController::class, 'accountRequestView'])->name('account.request.view');
+
 
 Route::prefix('auth')->group(function(){
     Route::get('/login-otp', [LoginOtpController::class, 'view'])->name('login.otp.view');

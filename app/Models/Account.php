@@ -10,7 +10,7 @@ class Account extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = [
-        'title', 'img', 'price', 'description', 'status'
+        'title', 'img', 'price', 'description', 'status', 'gun_id'
     ];
 
 
