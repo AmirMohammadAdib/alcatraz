@@ -90,6 +90,21 @@
                         </div><!-- /.input-group -->
                     </div><!-- /.form-group -->
 
+                    <div class="form-group">
+                        <label>uid اکانت</label>
+                        <div class="input-group @error('uid') has-error @enderror">
+                            <span class="input-group-addon">
+                                <i class="icon-user"></i>
+                            </span>
+                            <input type="number" class="form-control" placeholder="uid اکانت" value="{{ old('uid') }}" name="uid">
+
+                            @error('uid')
+                                <span class="alert-danger">{{ $message }}</span>
+                            @enderror
+
+                        </div><!-- /.input-group -->
+                    </div><!-- /.form-group -->
+
 
                     <div class="form-group">
                         <label>توضیحات تکمیلی اکانت</label>
@@ -112,7 +127,6 @@
 
                             <select name="guns[]" id="guns" class="form-control guns" multiple="multiple">
                                 @foreach ($guns as $gun)
-                                    @dd(in_array($gun->id, $selectedGun))
                                     <option value="{{ $gun->id }}">{{ $gun->name }}</option>
                                 @endforeach
                             </select>

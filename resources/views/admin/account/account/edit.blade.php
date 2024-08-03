@@ -97,6 +97,21 @@
 
 
                     <div class="form-group">
+                        <label>uid اکانت</label>
+                        <div class="input-group @error('uid') has-error @enderror">
+                            <span class="input-group-addon">
+                                <i class="icon-user"></i>
+                            </span>
+                            <input type="number" class="form-control" placeholder="uid اکانت" value="{{ old('uid', $account->uid) }}" name="uid">
+
+                            @error('uid')
+                                <span class="alert-danger">{{ $message }}</span>
+                            @enderror
+
+                        </div><!-- /.input-group -->
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group">
                         <label>توضیحات تکمیلی اکانت</label>
                         <div class="input-group @error('description') has-error @enderror">
                             <span class="input-group-addon">
