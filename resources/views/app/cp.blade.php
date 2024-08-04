@@ -8,99 +8,107 @@
         <div class="single-product col-10 col-md-11 col-lg-6 ">
             <div class="product-box glass-white-bg position-relative border radius-15">
                 <div class="box-img position-absolute">
-                    <img src="{{ asset('asset/src/test/آفر-دوبل-سی-پی-mobile.jpg 1.png') }}" class="w-100 radius-10 border" alt="">
+                    <img src="{{ asset('images/cp/img/' . $cp->img) }}" class="w-100 radius-10 border" alt="">
                 </div>
             </div>
             <div class="product-content mt-100 text-justify">
-                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی</p>
-                <p>
-                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی
-                </p>
+                <h1 style="text-align: center">{{ $cp->title }}</h1>
+
+           
             </div>
             <div class="product-price">
-                <ul class="d-flex justify-content-between p-20">
-                    <h3>قیمت</h3>
-                    <h4>۹۰,۰۰۰ تومان</h4>
+                <ul class="d-flex justify-content-between p-10">
+                    <h3>قیمت فوری</h3>
+                    <h4>{{ number_format($cp->price) }} تومان</h4>
                 </ul>
-                <a class="btn btn-success w-100"  href="">خرید</a>
+                <ul class="d-flex justify-content-between p-10">
+                    <h3>قیمت سوپر فوری</h3>
+                    <h4>{{ number_format($cp->super_price) }} تومان</h4>
+                </ul>
+              
+                <div class="mt-50 d-flex flex-column align-items-center justify-content-between">
+                    <div class="d-flex gap-3 w-100">
+                      <button id="instantSaleButton" class="btn w-100 btn-danger font-bold">فروش فوری</button>
+                      <button id="superInstantSaleButton" class="btn w-100 btn-success font-bold" data-timer="180">فروش سوپر فوری</button>
+                    </div>
+                    <div id="timerContainer" class="mt-20"></div>
+                  </div>
+                  <hr>
             </div>
         </div>
-        <aside class="col-11 col-md-11 col-lg-5 d-flex flex-column gap-4">
-            <!-- دسترسی سریع به صفحات -->
-             <a href="" class="aside-item d-flex justify-content-between align-items-center radius-15 glass-white-bg p-10 d-block">
-                 <div class="item-text d-flex align-items-center gap-2">
-                     <svg width="50" height="50">
-                        <image href="{{ asset('asset/src/svg/services.svg') }}"></image>
-                     </svg>
-                     <div>
-                        <h3 class="font-15 font-bold">پشتیبانی</h3>
-                        <span class="font-15 text-gray">پیشنهاد انتقاد گزارش سوال مشکل</span>
-                     </div>
-                 </div>
-                 <svg width="25" height="16">
-                    <image href="{{ asset('asset/src/svg/angle-left.svg') }}"></image>
-                 </svg>
-             </a>
-             <a href="" class="aside-item d-flex justify-content-between align-items-center radius-15 glass-white-bg p-10 d-block">
-                <div class="item-text d-flex align-items-center gap-2">
-                    <svg width="50" height="50">
-                       <image href="{{ asset('asset/src/svg/question.svg') }}"></image>
-                    </svg>
-                    <div>
-                       <h3 class="font-15 font-bold">سوالات متداول</h3>
-                       <span class="font-15 text-gray">پیشنهاد انتقاد گزارش سوال مشکل</span>
-                    </div>
-                </div>
-                <svg width="25" height="16">
-                   <image href="{{ asset('asset/src/svg/angle-left.svg') }}"></image>
-                </svg>
-            </a>
-            <a href="" class="aside-item d-flex justify-content-between align-items-center radius-15 glass-white-bg p-10 d-block">
-                <div class="item-text d-flex align-items-center gap-2">
-                    <svg width="50" height="50">
-                       <image href="{{ asset('asset/src/svg/about-us.svg') }}"></image>
-                    </svg>
-                    <div>
-                       <h3 class="font-15 font-bold">درباره ما</h3>
-                       <span class="font-15 text-gray">پیشنهاد انتقاد گزارش سوال مشکل</span>
-                    </div>
-                </div>
-                <svg width="25" height="16">
-                   <image href="{{ asset('asset/src/svg/angle-left.svg') }}"></image>
-                </svg>
-            </a>
 
-            <!-- بخش فضای مجازی -->
-            <div class="social-media row gap-4 justify-content-center">
-                <a href="" class="col-3 radius-15 glass-white-bg p-10 d-block">
-                    <div class="item-text d-flex flex-column align-items-center gap-2">
-                        <img src="{{ asset('asset/src/background/instagram.png') }}"  alt="اینستاگرام ما را دنبال کنید">
-                        <div class="text-center">
-                           <h3 class="font-15 font-bold">اینستاگرام</h3>
-                        </div>
-                    </div>
-                </a>
-                <a href="" class="col-4 radius-15 glass-white-bg p-10 d-block">
-                    <div class="item-text d-flex flex-column align-items-center gap-2">
-                        <img src="{{ asset('asset/src/background/telegram.png') }}"  alt="تلگرام ما را دنبال کنید">
-                        <div class="text-center">
-                           <h3 class="font-15 font-bold">تلگرام</h3>
-                        </div>
-                    </div>
-                </a>
-                <a href="" class="col-3 radius-15 glass-white-bg p-10 d-block">
-                    <div class="item-text d-flex flex-column align-items-center gap-2">
-                        <img src="{{ asset('asset/src/background/discord.png') }}"  alt="دیسکورد ما را دنبال کنید">
-                        <div class="text-center">
-                           <h3 class="font-15 font-bold">دیسکورد</h3>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-         </aside>
+        @include('app.layouts.nav-bar')
     </div>
 </section>
+
+<script>
+    // Get the modal
+    const modal = document.getElementById("modal");
+    const modalImg = document.getElementById("modal-image");
+    const captionText = document.getElementById("caption");
+    
+    // Get all images with data-modal attribute
+    const images = document.querySelectorAll('img[data-modal="true"]');
+    
+    // Add click event to each image
+    images.forEach((img) => {
+        img.addEventListener('click', function () {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+            captionText.innerHTML = this.alt;
+        });
+    });
+
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.addEventListener('click', function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+    
+
+    
+    
+    
+    document.getElementById('superInstantSaleButton').addEventListener('click', function() {
+        // Get the timer duration from the data attribute
+        const timerDuration = parseInt(this.getAttribute('data-timer'), 10);
+    
+        // Display the countdown timer
+        startCountdown(timerDuration);
+    });
+    
+    function startCountdown(duration) {
+        const timerContainer = document.getElementById('timerContainer');
+    
+        // Calculate end time
+        const endTime = Date.now() + duration * 1000;
+        
+        function updateTimer() {
+            // Calculate remaining time
+            const now = Date.now();
+            const timeLeft = Math.max(0, endTime - now);
+    
+            if (timeLeft === 0) {
+                timerContainer.textContent = 'پایان زمان!';
+                return;
+            }
+    
+            // Convert time left to minutes and seconds
+            const minutes = Math.floor(timeLeft / 60000);
+            const seconds = Math.floor((timeLeft % 60000) / 1000);
+    
+            timerContainer.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        }
+    
+        // Update the timer every second
+        updateTimer();
+        const timerInterval = setInterval(updateTimer, 1000);
+    }
+    
+    
+        </script>
 @endsection
 
 

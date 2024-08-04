@@ -90,7 +90,7 @@ class AccountController extends Controller
                 return redirect()->route('shop.account.view', $account)->with('success', 'خرید حساب با موفقیت انجام شد، اطلاعات خود را بصورت صحیح وارد کنید');
             }else{
                 $leftOver = intval($account->price) - $walletSum;
-                return redirect()->route('wallet.view', ['deposit' => $leftOver])->with('success', 'لطفا برای پرداخت اقدام کنید');
+                return redirect()->route('wallet.view', ['deposit' => $leftOver, 'redirect' => url()->full()])->with('success', 'لطفا برای پرداخت اقدام کنید');
             }
         }
     }

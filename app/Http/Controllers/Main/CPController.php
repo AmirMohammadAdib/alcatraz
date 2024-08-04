@@ -13,7 +13,7 @@ class CPController extends Controller
         return view('app.cp-shop', compact('cps'));
     }
 
-    public function cpView(){
-        return view('app.cp');
+    public function cpView(CP $cp){
+        return view('app.cp', compact('cp'));
     }
 }

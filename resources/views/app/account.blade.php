@@ -164,7 +164,7 @@
 
           @else
 
-          <form action="{{ route('shop.account.store', $account) }}" class="d-flex gap-3 w-100" method="POST">
+          <form action="{{ route('shop.account.store', [$account]) }}" class="d-flex gap-3 w-100" method="POST">
             @csrf
             <button id="instantSaleButton" class="btn w-100 btn-success font-bold">خرید اکانت</button>
             {{-- <button id="superInstantSaleButton" class="btn w-100 btn-success font-bold" data-timer="180">فروش سوپر فوری</button> --}}
