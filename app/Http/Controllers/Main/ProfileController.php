@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
 use App\Models\BuyAccount;
+use App\Models\CPOrder;
 use App\Models\Player;
 use Illuminate\Http\Request;
 
@@ -15,8 +16,8 @@ class ProfileController extends Controller
         $loseGames = Player::where('user_id', auth()->user()->id)->where('status', 0)->count();
 
         $myAccounts = BuyAccount::where('user_id', auth()->user()->id)->orderBy('created_at')->get();
-
-        return view('app.profile', compact('winGames', 'totalGames', 'loseGames', 'myAccounts'));
+        $cpOrders = CPOrder::where('user_id', auth()->user()->id)->orderBy('created_at')->get();
+        return view('app.profile', compact('winGames', 'totalGames', 'loseGames', 'myAccounts', 'cpOrders'));
     }
 
     public function profileUpdateView(){
