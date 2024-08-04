@@ -47,23 +47,30 @@
               </label>
             </div>
         
-            <div class="box-money d-flex align-items-center gap-3">
-              <div class="d-flex flex-column">
-                <!-- کیف پول -->
-                <span>1,000</span>
-                <span>تومان</span>
-              </div>
-              <div class="d-flex align-items-center gap-2">
-                <!-- دکمه سکه -->
-                <svg width="41" height="41">
-                  <image href="asset/src/svg/coin.svg"></image>
-                </svg>
-                <!-- دکمه افزودن سکه -->
-                <svg width="17" height="17">
-                  <image href="asset/src/svg/plaus.svg"></image>
-                </svg>
-              </div>
-            </div>
+            @if (auth()->check())
+              <a href="{{ route('wallet.view') }}" class="box-money d-flex align-items-center gap-3">
+                <div class="d-flex flex-column">
+                  <!-- کیف پول -->
+                  <span>{{ number_format(intval(auth()->user()->wallet) + intval(auth()->user()->award_wallet)) }}</span>
+                  <span>تومان</span>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                  <!-- دکمه سکه -->
+                  <svg width="41" height="41">
+                    <image href="asset/src/svg/coin.svg"></image>
+                  </svg>
+                  <!-- دکمه افزودن سکه -->
+                  <svg width="17" height="17">
+                    <image href="asset/src/svg/plaus.svg"></image>
+                  </svg>
+                </div>
+              </a>    
+            @else
+              <a href="{{ route('login.otp.view') }}">
+                  <!-- کیف پول -->
+                  ورود/ ثبت نام
+              </a>
+            @endif
           </div>
   
         </div>

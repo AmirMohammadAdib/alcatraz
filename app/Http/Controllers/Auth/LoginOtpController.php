@@ -105,7 +105,7 @@ class LoginOtpController extends Controller
             }
         }
 
-        $otp = Otp::where('token', $token)->where('used', 0)->where('created_at', '>=', Carbon::now()->subMinute(1)->toDateTimeString())->first();
+        $otp = Otp::where('token', $token)->where('used', 0)->where('created_at', '>=', Carbon::now()->subMinute(3)->toDateTimeString())->first();
        if(empty($otp))
        {
         return back()->with('error', 'آدرس وارد شده نامعتبر میباشد');
