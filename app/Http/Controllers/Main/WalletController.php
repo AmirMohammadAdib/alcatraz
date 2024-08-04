@@ -43,7 +43,7 @@ class WalletController extends Controller
         $walletAmount = intval(auth()->user()->award_wallet);
         if($inputs['amount'] <= $walletAmount){ 
             if(auth()->user()->cart_number == null){
-                return back()->with('error', 'ابتدا اطلاعات مالی خود را تکمیل کنید');
+                return redirect()->route('profile.update.view')->with('error', 'ابتدا اطلاعات مالی خود را تکمیل کنید');
                 exit;
             }
 
@@ -66,10 +66,16 @@ class WalletController extends Controller
             'amount' => 'required|numeric|min:1000',
         ]);
         $user = auth()->user();
+        $walletAmount = intval($user->award_wallet);
 
-        $user->wallet = intval($user->wallet) + intval($inputs['amount']);
-        $user->award_wallet = intval($user->award_wallet) - intval($inputs['amount']);
-        $user->save();
-        return back()->with('success', 'درخواست انتقال با موفقیت انجام شد');
+        if($inputs['amount'] <= $walletAmount){ 
+
+            $user->wallet = intval($user->wallet) + intval($inputs['amount']);
+            $user->award_wallet = intval($user->award_wallet) - intval($inputs['amount']);
+            $user->save();
+            return back()->with('success', 'درخواست انتقال با موفقیت انجام شد');
+        }else{
+            return back()->with('error', 'مبلغ درخواستی شما بیشتر از حد کیف پول شماست');
+        }
     }
 }

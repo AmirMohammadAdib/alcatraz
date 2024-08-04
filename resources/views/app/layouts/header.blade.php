@@ -2,15 +2,14 @@
     <header class="navbar container">
         <div class="navbar-box d-flex justify-content-between align-items-center">
           <div class="box-bell d-flex align-items-center gap-3">
-            <div class="bell">
+            <a class="bell">
               <!-- نقطه قرمز پیغام -->
               <span></span>
               <!-- ایکون زنگوله -->
               <svg width="20" height="20">
                 <image href="asset/src/svg/bell.svg"></image>
               </svg>
-            </div>
-            <a href="">گزینه ها</a>
+            </a>
           </div>
   
           <div class="d-flex align-items-center gap-4">

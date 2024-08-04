@@ -43,7 +43,7 @@
                 </div>
                 <div class="input-feild">
                     <label for="" class="font-bold text-white">شماره موبایل</label>
-                    <input type="text" class="w-100 mt-10 font-bold" placeholder="شماره موبایل خود را وارد کنید" value="{{ old('phone', $user->phone) }}" name='phone'>
+                    <input type="text" class="w-100 mt-10 font-bold" placeholder="شماره موبایل خود را وارد کنید" value="{{ old('phone','0' .  $user->phone) }}" name='phone'>
                     @error('phone')
                     <span class="err">{{ $message }}</span>
                 @enderror
