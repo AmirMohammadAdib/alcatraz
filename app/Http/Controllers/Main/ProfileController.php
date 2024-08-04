@@ -58,5 +58,18 @@ class ProfileController extends Controller
         
     }
 
+
+    public function saveUserName(Request $request){
+        $inputs = $request->validate([
+            'username' => 'required|unique:users,username'
+        ]);
+        
+        if(auth()->check()){
+            auth()->user()->update($inputs);
+            return back()->with('success', 'نام کاربری با موفقیت ثبت شد');
+        }else{
+            abort(403);
+        }
+    }
     
 }

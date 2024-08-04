@@ -27,6 +27,7 @@ use App\Http\Controllers\Main\RoomController as MainRoomController;
 use App\Http\Controllers\Main\WalletController;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 // auth()->loginUsingId(1);
 date_default_timezone_set('Iran');
@@ -123,6 +124,7 @@ Route::get('/profile', [ProfileController::class, 'profileView'])->name('profile
 Route::post('/set-email-pass/{account}', [ProfileController::class, 'setEmailPass'])->name('set-email-pass');
 Route::get('/update-profile', [ProfileController::class, 'profileUpdateView'])->name('profile.update.view');
 Route::put('/update-profile', [ProfileController::class, 'profileUpdateUpdate'])->name('profile.update.update');
+Route::post('save-username', [ProfileController::class, 'saveUserName'])->name('save.username');
 
 
 // Wallet pages that run on WalletController
