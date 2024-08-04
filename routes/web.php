@@ -140,6 +140,7 @@ Route::get('/room/{room}', [MainRoomController::class, 'roomView'])->name('room.
 // ShopCP pages that run on MainCPController
 Route::get('/shop/cp', [MainCPController::class, 'shopView'])->name('shop.shop.view');
 Route::get('/shop/cp/{cp}', [MainCPController::class, 'cpView'])->name('shop.cp.view');
+Route::post('/submit-shop/cp/{cp}', [MainCPController::class, 'store'])->name('shop.cp.store');
 
 
 // Shop account pages that run on MainAccountController
@@ -159,5 +160,4 @@ Route::prefix('auth')->group(function(){
     Route::get('/login-pass', [LoginPassController::class, 'view'])->name('login.pass.view');
     Route::post('/login-pass', [LoginPassController::class, 'store'])->name('login.pass.store');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-
 });
