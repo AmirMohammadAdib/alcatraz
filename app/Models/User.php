@@ -70,7 +70,7 @@ class User extends Authenticatable
         if($this->profile == null){
             return 'asset/src/svg/user-1.svg';
         }else{
-            return 'images/profiles/defaults/' . $this->profile;
+            return 'images/profiles/' . $this->profile;
         }
     }
 

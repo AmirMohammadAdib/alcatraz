@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\BuyAccount;
 use App\Models\CPOrder;
 use App\Models\Player;
+use App\Models\User;
+use Faker\Provider\bg_BG\PhoneNumber;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -45,12 +47,27 @@ class ProfileController extends Controller
 
     public function profileUpdateUpdate(Request $request){
         $inputs = $request->validate([
-            'phone' => 'required|string|max:11|min:11|unique:users,phone,' . auth()->user()->id,
+            'phone' => 'required|string|max:11|min:11',
             'username' => 'required|string|max:255||unique:users,username,' . auth()->user()->id,
             'cart_number' => 'required|string|max:255|max:16|min:16',
-            'shabba_number' => 'required|string|max:255|max:24|min:24'
+            'shabba_number' => 'required|string|max:255|max:24|min:24',
+            'profile' => 'nullable|image|mimes:jpg,png,jpeg,webp|max:2048'
         ]);
+        $inputs['phone'] = substr($inputs['phone'], 1);
+        $checkPhone = User::where('phone', $inputs['phone'])->first();
 
+        if($checkPhone != null){
+            if($checkPhone->id != auth()->user()->id){
+                return back()->with('error', 'تلفن از قبل ثبت شده است');
+            }
+        }
+        
+
+        if($request->file('profile')){
+            $secondName = time() . '.' . $request->file('profile')->getClientOriginalExtension();
+            $request->profile->move(public_path('images/profiles/'), $secondName);
+            $inputs['profile'] = $secondName;
+        }
 
 
         auth()->user()->update($inputs);

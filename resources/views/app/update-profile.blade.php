@@ -30,7 +30,7 @@
                     <span class="font-15">میتوانید اطلاعات خود را مشاهده و بروزرسانی کنید</span>
                 </div>
             </div>
-             <form action="{{ route('profile.update.update') }}" class="update-profile d-flex flex-column gap-5" method="POST">
+             <form action="{{ route('profile.update.update') }}" class="update-profile d-flex flex-column gap-5" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
                 <img src="asset/src/user/" alt="">
@@ -43,8 +43,15 @@
                 </div>
                 <div class="input-feild">
                     <label for="" class="font-bold text-white">شماره موبایل</label>
-                    <input type="text" class="w-100 mt-10 font-bold" placeholder="شماره موبایل خود را وارد کنید" value="{{ old('phone','0' .  $user->phone) }}" name='phone'>
+                    <input type="text" class="w-100 mt-10 font-bold" placeholder="شماره موبایل خود را وارد کنید" value="{{ old('phone', '0' .  $user->phone) }}" name='phone'>
                     @error('phone')
+                    <span class="err">{{ $message }}</span>
+                @enderror
+                </div>
+                <div class="input-feild">
+                    <label for="" class="font-bold text-white">پروفایل کاربری</label>
+                    <input type="file" class="w-100 mt-10 font-bold" name='profile'>
+                    @error('profile')
                     <span class="err">{{ $message }}</span>
                 @enderror
                 </div>
