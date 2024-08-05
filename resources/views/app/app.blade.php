@@ -16,9 +16,9 @@
            <span>سوالات متداول</span>
           </a>
           
-          <a href="{{ route('app.contact-us') }}" class="story-item text-center" >
+          <a href="{{ route('tickets.view') }}" class="story-item text-center" >
            <img src="asset/src/icon/services-bg.png" class="w-100" alt="">
-           <span>تماس با ما</span>
+           <span>پشتیبانی</span>
           </a>
           
           <a href="{{ route('shop.shop.view') }}" class="story-item text-center" >
