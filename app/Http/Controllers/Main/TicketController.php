@@ -9,14 +9,40 @@ use Illuminate\Http\Request;
 class TicketController extends Controller
 {
     public function index(){
-        return view('app.tickets');
+        $tickets = Ticket::where('user_id', auth()->user()->id)->where('ticket_id', null)->orderBy('created_at', 'desc')->get();
+        return view('app.tickets', compact('tickets'));
     }
 
     public function show(Ticket $ticket){
         return view('app.ticket', compact('ticket'));
     }
 
-    public function store(Request $request, Ticket $ticket){
+    public function create(){
+        return view('app.create-ticket');
+    }
+
+    public function store(Request $request){
+        $inputs = $request->validate([
+            'subject' => 'required|min:3|max:255',
+            'periority' => 'required|numeric|min:0|max:3',
+            'description' => 'required|min:3|max:500',
+            'file' => 'nullable|file|max:2048|mimes:png,jpg,jpeg,webp,pdf,xsl',
+        ]);
+        if($request->file('file')){
+            $secondName = time() . '.' . $request->file('file')->getClientOriginalExtension();
+            $request->file->move(public_path('images/ticket/'), $secondName);
+            $inputs['file'] = $secondName;
+        }
+
+        $inputs['user_id'] = auth()->user()->id;
+
+        $ticket = Ticket::create($inputs);
+        return redirect()->route('tickets.view')->with('success', 'تیکت جدید با موفقیت ثبت شد، در انتظار برسی کارشناسان');
+
+    }
+
+
+    public function answare(Request $request, Ticket $ticket){
         $inputs = $request->validate([
             'subject' => 'required|min:3|max:255',
             'periority' => 'required|numeric|min:0|max:3',

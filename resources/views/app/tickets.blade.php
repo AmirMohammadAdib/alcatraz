@@ -6,50 +6,42 @@
 
 @section('content')
 <div class="container my-ticket mt-50">
-    <div class="ticket-card">
-        <div class="ticket-header">
-            <span class="ticket-title">مشکل در ثبت سفارش</span>
-            <span class="ticket-status status-open">متن تستی</span>
-        </div>
-        <div class="ticket-body mt-20">
-            تیکت شما به واحد پشتیبانی ارجاع داده شده است و در حال بررسی است.
-        </div>
-        <div class="ticket-footer">
-            <p class="ticket-date">تاریخ ارسال: 2024-08-04</p>
-            <div class="ticket-actions">
-                <button class="btn btn-dark font-bold">مشاهده جزئیات</button>
+    <a href="{{ route('ticket.create') }}" style="margin-bottom: 1rem" class="btn btn-warning">ثبت تیکت جدید</a>
+
+    @foreach ($tickets as $ticket)
+        <div class="ticket-card">
+            <div class="ticket-header">
+                <span class="ticket-title">{{ $ticket->subject }}</span>
+                @if ($ticket->status == 0)
+                    <span class="ticket-status status-open">باز</span>
+                @else
+                <span class="ticket-status status-closed">بسته</span>
+
+                @endif
+            </div>
+            <div class="ticket-body mt-20">
+                @php
+                    $checkAnswareAdmin = \App\Models\Ticket::where('ticket_id', $ticket->id)->where('admin_id', null)->first();
+                @endphp
+
+                @if ($checkAnswareAdmin != null)
+                    @if ($checkAnswareAdmin->user->role == 1)
+                        پاسخ داده شده
+                    @else
+                    در انتظار پاسخ ادمین    
+
+                    @endif
+                @else
+                در انتظار پاسخ ادمین    
+                @endif
+            </div>
+            <div class="ticket-footer">
+                <p class="ticket-date">تاریخ ارسال: {{ verta($ticket->created_at)->format('Y/m/d') }}</p>
+                <div class="ticket-actions">
+                    <a href="{{ route('ticket.view', $ticket) }}" class="btn btn-dark font-bold">مشاهده جزئیات</a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="ticket-card">
-        <div class="ticket-header">
-            <span class="ticket-title">مشکل در ثبت سفارش</span>
-            <span class="ticket-status status-pending">متن تستی</span>
-        </div>
-        <div class="ticket-body mt-20">
-            تیکت شما به واحد پشتیبانی ارجاع داده شده است و در حال بررسی است.
-        </div>
-        <div class="ticket-footer">
-            <p class="ticket-date">تاریخ ارسال: 2024-08-04</p>
-            <div class="ticket-actions">
-                <button class="btn btn-dark font-bold">مشاهده جزئیات</button>
-            </div>
-        </div>
-    </div>
-    <div class="ticket-card">
-        <div class="ticket-header">
-            <span class="ticket-title">مشکل در ثبت سفارش</span>
-            <span class="ticket-status status-closed">متن تستی</span>
-        </div>
-        <div class="ticket-body mt-20">
-            تیکت شما به واحد پشتیبانی ارجاع داده شده است و در حال بررسی است.
-        </div>
-        <div class="ticket-footer">
-            <p class="ticket-date">تاریخ ارسال: 2024-08-04</p>
-            <div class="ticket-actions">
-                <button class="btn btn-dark font-bold">مشاهده جزئیات</button>
-            </div>
-        </div>
-    </div>
+    @endforeach
 </div>
 @endsection

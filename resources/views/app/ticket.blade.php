@@ -48,7 +48,7 @@ color: #7f878e;
 
 <section class="container mt-50">
     @if($ticket->status == 0)
-    <form action="{{ route('ticket.store', $ticket) }}" method="POST" class="" enctype="multipart/form-data">
+    <form action="{{ route('ticket.answare', $ticket) }}" method="POST" class="" enctype="multipart/form-data">
         @csrf
         <h1 class="font-30 font-bold ">پاسخ به تیکت با شناسه {{ '#' . $ticket->id }}</h1>
         <br>
@@ -141,7 +141,7 @@ color: #7f878e;
             @if ($ticket->user->role == 1)
                 <span class="type"style="margin-left: .5rem">ادمین سایت</span>                
             @endif
-            @if($child->user_id == auth()->user()->id)
+            @if($ticket->user_id == auth()->user()->id)
             <span class="type">شما</span>
         @endif
             </div>

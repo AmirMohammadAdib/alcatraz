@@ -156,7 +156,9 @@ Route::get('/account-request', [MainAccountController::class, 'accountRequestVie
 //Tickets pages for users side
 Route::get('tickets', [MainTicketController::class, 'index'])->name('tickets.view');
 Route::get('ticket/{ticket}', [MainTicketController::class, 'show'])->name('ticket.view');
-Route::post('answare/{ticket}', [MainTicketController::class, 'store'])->name('ticket.store');
+Route::post('answare/{ticket}', [MainTicketController::class, 'answare'])->name('ticket.answare');
+Route::get('ticket-create', [MainTicketController::class, 'create'])->name('ticket.create');
+Route::post('store', [MainTicketController::class, 'store'])->name('ticket.store');
 
 Route::prefix('auth')->group(function(){
     Route::get('/login-otp', [LoginOtpController::class, 'view'])->name('login.otp.view');

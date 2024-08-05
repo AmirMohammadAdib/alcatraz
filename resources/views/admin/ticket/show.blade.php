@@ -60,12 +60,18 @@
                 @foreach ($ticket->children as $child)
                     <section class="card m-4">
                         <section class="card-header d-flex justify-content-between">
-                            <div> {{ $child->user->username }} - پاسخ دهنده :
-                                {{ $child->admin ? $child->admin->username : 'نامشخص' }}</div>
+                            <div> {{ $child->user->phone }} - پاسخ دهنده :
+                                {{ $child->admin ? $child->admin->phone : 'نامشخص' }}</div>
                             <small>>{{ verta($child->created_at)->format('H:i:s Y/m/d') }}<</small>
                         </section>
                         <section class="card-header bg-custom-pink">
-                            <p>{{ $child->description }}</p>
+                            @if ($child->subject == $ticket->subject)
+                                <p>{{ $child->description }}</p>
+                            @else
+                                <b>{{ $child->subject }}</b><br>
+                                <p>{{ $child->description }}</p>
+
+                            @endif
                         </section>
 
                     </section>
