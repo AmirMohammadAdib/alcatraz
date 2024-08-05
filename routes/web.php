@@ -113,54 +113,57 @@ Route::group(['prefix' => 'admin'], function(){
 
 // Index or Main pages that run on IndexController
 Route::get('/', [IndexController::class, 'index'])->name('app.index');
-Route::get('/contact-us', [IndexController::class, 'contactUs'])->name('app.contact-us');
-Route::post('/contact-us', [IndexController::class, 'contactUsStore'])->name('app.contact-us.store');
+Route::get('/contact-us', [IndexController::class, 'contactUs'])->name('app.contact-us')->middleware('auth');
+Route::post('/contact-us', [IndexController::class, 'contactUsStore'])->name('app.contact-us.store')->middleware('auth');
 
 Route::get('/question', [IndexController::class, 'question'])->name('app.question');
-Route::get('/notification', [IndexController::class, 'notification'])->name('app.notification');
+Route::get('/notification', [IndexController::class, 'notification'])->name('app.notification')->middleware('auth');
 Route::get('/stars', [IndexController::class, 'stars'])->name('app.stars');
 
 // Profile pages that run on ProfileController
-Route::get('/profile', [ProfileController::class, 'profileView'])->name('profile.view');
-Route::post('/set-email-pass/{account}', [ProfileController::class, 'setEmailPass'])->name('set-email-pass');
-Route::get('/update-profile', [ProfileController::class, 'profileUpdateView'])->name('profile.update.view');
-Route::put('/update-profile', [ProfileController::class, 'profileUpdateUpdate'])->name('profile.update.update');
-Route::post('save-username', [ProfileController::class, 'saveUserName'])->name('save.username');
+Route::get('/profile', [ProfileController::class, 'profileView'])->name('profile.view')->middleware('auth');
+Route::post('/set-email-pass/{account}', [ProfileController::class, 'setEmailPass'])->name('set-email-pass')->middleware('auth');
+Route::get('/update-profile', [ProfileController::class, 'profileUpdateView'])->name('profile.update.view')->middleware('auth');
+Route::put('/update-profile', [ProfileController::class, 'profileUpdateUpdate'])->name('profile.update.update')->middleware('auth');
+Route::post('save-username', [ProfileController::class, 'saveUserName'])->name('save.username')->middleware('auth');
 
 
 // Wallet pages that run on WalletController
-Route::get('/wallet', [WalletController::class, 'walletView'])->name('wallet.view');
-Route::post('/wallet/withdraw', [WalletController::class, 'withdraw'])->name('wallet.withdraw');
-Route::post('/wallet/deposite', [WalletController::class, 'deposite'])->name('wallet.deposite');
-Route::post('/wallet/transport', [WalletController::class, 'transport'])->name('wallet.transport');
+Route::get('/wallet', [WalletController::class, 'walletView'])->name('wallet.view')->middleware('auth');
+Route::post('/wallet/withdraw', [WalletController::class, 'withdraw'])->name('wallet.withdraw')->middleware('auth');
+Route::post('/wallet/deposite', [WalletController::class, 'deposite'])->name('wallet.deposite')->middleware('auth');
+Route::post('/wallet/transport', [WalletController::class, 'transport'])->name('wallet.transport')->middleware('auth');
 
 
 // Room pages that run on MainRoomController
 Route::get('/rooms', [MainRoomController::class, 'roomsView'])->name('rooms.view');
-Route::get('/room/{room}', [MainRoomController::class, 'roomView'])->name('room.view');
+Route::get('/room/{room}', [MainRoomController::class, 'roomView'])->name('room.view')->middleware('auth');
  
 
 // ShopCP pages that run on MainCPController
 Route::get('/shop/cp', [MainCPController::class, 'shopView'])->name('shop.shop.view');
 Route::get('/shop/cp/{cp}', [MainCPController::class, 'cpView'])->name('shop.cp.view');
-Route::post('/submit-shop/cp/{cp}', [MainCPController::class, 'store'])->name('shop.cp.store');
+Route::post('/submit-shop/cp/{cp}', [MainCPController::class, 'store'])->name('shop.cp.store')->middleware('auth');
 
 
 // Shop account pages that run on MainAccountController
 Route::get('/shop/account', [MainAccountController::class, 'shopView'])->name('shop.accounts.view');
 Route::get('/shop/account/{account}', [MainAccountController::class, 'accountView'])->name('shop.account.view');
-Route::post('/shop/account/{account}', [MainAccountController::class, 'accountStore'])->name('shop.account.store');
-Route::get('/account-request', [MainAccountController::class, 'accountRequestView'])->name('account.request.view');
-Route::post('/account-request', [MainAccountController::class, 'accountRequestStore'])->name('account.request.store');
+Route::post('/shop/account/{account}', [MainAccountController::class, 'accountStore'])->name('shop.account.store')->middleware('auth');
+Route::get('/account-request', [MainAccountController::class, 'accountRequestView'])->name('account.request.view')->middleware('auth');
+Route::post('/account-request', [MainAccountController::class, 'accountRequestStore'])->name('account.request.store')->middleware('auth');
 
 
 //Tickets pages for users side
-Route::get('tickets', [MainTicketController::class, 'index'])->name('tickets.view');
-Route::get('ticket/{ticket}', [MainTicketController::class, 'show'])->name('ticket.view');
-Route::post('answare/{ticket}', [MainTicketController::class, 'answare'])->name('ticket.answare');
-Route::get('ticket-create', [MainTicketController::class, 'create'])->name('ticket.create');
-Route::post('store', [MainTicketController::class, 'store'])->name('ticket.store');
+Route::get('tickets', [MainTicketController::class, 'index'])->name('tickets.view')->middleware('auth');
+Route::get('ticket/{ticket}', [MainTicketController::class, 'show'])->name('ticket.view')->middleware('auth');
+Route::post('answare/{ticket}', [MainTicketController::class, 'answare'])->name('ticket.answare')->middleware('auth');
+Route::get('ticket-create', [MainTicketController::class, 'create'])->name('ticket.create')->middleware('auth');
+Route::post('store', [MainTicketController::class, 'store'])->name('ticket.store')->middleware('auth');
 
+Route::get('/login', function(){
+    return redirect()->route('login.otp.view');
+})->name('login');
 Route::prefix('auth')->group(function(){
     Route::get('/login-otp', [LoginOtpController::class, 'view'])->name('login.otp.view');
     Route::post('/login-otp', [LoginOtpController::class, 'store'])->name('login.otp.store');
