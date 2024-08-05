@@ -15,7 +15,7 @@ class LoginPassController extends Controller
 
     public function store(Request $request){
         $inputs = $request->validate([
-            'phone' => 'required|min:9|max:9',
+            'phone' => 'required|min:10|max:10',
             'password' => 'required|min:6|max:12'
         ]);
         $phone = '9' . $inputs['phone'];

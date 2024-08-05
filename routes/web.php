@@ -151,6 +151,7 @@ Route::get('/shop/account', [MainAccountController::class, 'shopView'])->name('s
 Route::get('/shop/account/{account}', [MainAccountController::class, 'accountView'])->name('shop.account.view');
 Route::post('/shop/account/{account}', [MainAccountController::class, 'accountStore'])->name('shop.account.store');
 Route::get('/account-request', [MainAccountController::class, 'accountRequestView'])->name('account.request.view');
+Route::post('/account-request', [MainAccountController::class, 'accountRequestStore'])->name('account.request.store');
 
 
 //Tickets pages for users side

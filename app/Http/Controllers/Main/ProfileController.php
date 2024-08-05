@@ -32,6 +32,11 @@ class ProfileController extends Controller
             'email' => 'required|email|unique:buy_accounts,email',
             'password' => 'required|min:4',
         ]);
+
+        if(auth()->user()->cart_number == null){
+            return redirect()->route('profile.update.view')->with('error', 'ابتدا اطلاعات مالی خود را کامل کنید');
+        }
+
         if($account->email != null){
             return back()->with('error', 'برای این درخواست قبلا ایمیل و رمز عبور ثبت شده است');
 
@@ -48,9 +53,9 @@ class ProfileController extends Controller
     public function profileUpdateUpdate(Request $request){
         $inputs = $request->validate([
             'phone' => 'required|string|max:11|min:11',
-            'username' => 'required|string|max:255||unique:users,username,' . auth()->user()->id,
-            'cart_number' => 'required|string|max:255|max:16|min:16',
-            'shabba_number' => 'required|string|max:255|max:24|min:24',
+            'username' => 'nullable|string|max:255||unique:users,username,' . auth()->user()->id,
+            'cart_number' => 'nullable|string|max:255|max:16|min:16',
+            'shabba_number' => 'nullable|string|max:255|max:24|min:24',
             'profile' => 'nullable|image|mimes:jpg,png,jpeg,webp|max:2048'
         ]);
         $inputs['phone'] = substr($inputs['phone'], 1);

@@ -6,7 +6,8 @@
 <section class="container mt-50">
     <div class="row justify-content-center">
       
-        <form action="" class="col-11 col-md-5">
+        <form action="{{ route('account.request.store') }}" class="col-11 col-md-5" method="POST">
+            @csrf
            <div class="text-center">
               <svg width="174" height="180" viewBox="0 0 174 180" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <path d="M173.5 93.0252C173.5 140.784 134.773 179.5 87 179.5C39.2272 179.5 0.5 140.784 0.5 93.0252C0.5 45.2666 39.2272 6.55042 87 6.55042C134.773 6.55042 173.5 45.2666 173.5 93.0252Z" fill="url(#paint0_linear_104_6)" stroke="white"/>
@@ -28,16 +29,31 @@
               <h2 class="font-20 text-gray">اطلاعات اکانت خودر را وارد نمایید</h2>
            </div>
 
-          <span class="d-block mt-50">اطلاعات خود را وارد نمایید</span>
+          <span class="d-block mt-50">UID</span>
           <div class="input_field mt-10 d-flex align-items-center gap-3">
-              <input type="text" class="w-100 text-left font-bold " placeholder="Enter a Number Mobile">
+              <input type="number" name="game_uid" class="w-100 text-left font-bold " placeholder="uID حساب کاربری خود را وارد کنید">
           </div>
+          @error('game_uid')
+          <span>{{ $message }}</span>
+      @enderror 
 
-          <span class="d-block mt-50">متن تستی جهت وارد کردن</span>
+      <span class="d-block mt-50">قیمت پیشنهادی</span>
+      <div class="input_field mt-10 d-flex align-items-center gap-3">
+          <input type="number" name="saler_price" class="w-100 text-left font-bold" placeholder="قیمت پیشنهادی خود را وارد کنید">
+
+      </div>
+      @error('saler_price')
+      <span>{{ $message }}</span>
+  @enderror
+
+  <span class="d-block mt-50">توضیحات تکمیلی</span>
           <div class="input_field mt-10 d-flex align-items-center gap-3">
-              <input type="text" class="w-100 text-left font-bold " placeholder="Enter a Number Mobile">
-          </div>
+              <textarea style="text-align: right" name="description" id="" class="w-100 text-left font-bold" placeholder="توضیحات تکمیلی خود را وارد کنید" cols="30" rows="10"></textarea>
 
+          </div>
+          @error('description')
+          <span>{{ $message }}</span>
+      @enderror
           <div class="mt-20 text-center">
               <button type="submit" class="btn btn-primary w-100 mt-20 font-bold">تایید و ادامه</button>
           </div>

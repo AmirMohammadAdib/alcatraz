@@ -17,7 +17,7 @@
                 </div>
                 <div class="input_field mt-50 d-flex align-items-center gap-3">
                     <input type="number" class="w-100 text-left font-bold " name="phone" placeholder="Enter Number" value="{{ old('phone') }}">
-                    09+
+                    98+
                     <img src="{{ asset('asset/src/background/iran-flag.jpg') }}" class="w-50-p radius-100" style="height: 50px;" alt="">
                 </div>
                 <br>

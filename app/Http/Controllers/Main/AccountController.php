@@ -6,14 +6,31 @@ use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\AccountGun;
 use App\Models\AccountOrder;
+use App\Models\BuyAccount;
 use App\Models\Gun;
 use Illuminate\Http\Request;
 
 class AccountController extends Controller
 {
     public function accountRequestView(){
-        $accounts = Account::where('status', 0)->orderBy('created_at', 'desc')->get();
-        return view('app.account-request', compact('accounts'));
+        return view('app.account-request');
+    }
+
+
+    public function accountRequestStore(Request $request){
+        $inputs = $request->validate([
+            'game_uid' => 'required|numeric',
+            'saler_price' => 'required|numeric|max:100000000',
+            'description' => 'required|max:1000',
+        ]);
+        if(!auth()->check()){
+            return redirect()->route('login.otp.view')->with('error', 'ابتدا وارد حساب کاربری خود شوید');
+        }
+
+        $inputs['user_id'] = auth()->user()->id;
+        BuyAccount::create($inputs);
+        return redirect()->route('app.index')->with('success', 'درخواست با موفقیت ثبت شد');
+
     }
 
 
