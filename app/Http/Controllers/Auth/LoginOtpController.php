@@ -20,7 +20,7 @@ class LoginOtpController extends Controller
         $inputs = $request->validate([
             'phone' => 'required|min:10|max:10'
         ]);
-        $phone = '9' . $inputs['phone'];
+        $phone = $inputs['phone'];
 
         $user = User::where('phone', $phone)->first();
         if($user == null){

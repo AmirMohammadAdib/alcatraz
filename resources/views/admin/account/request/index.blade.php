@@ -93,7 +93,7 @@ input[type=number] {
                             <tr>
                                 <td>{{ $key += 1 }}</td>
                                 <td>{{ $request->user->phone }}</td>
-                                <td>{{ $request->game_uid }}</td>
+                                <td id="uidText-{{ $key }}" onclick="copyText()">{{ $request->game_uid }}</td>
                                 <td>
                                     {{ number_format($request->saler_price) . ' تومان ' }}
                                 </td>      
@@ -160,6 +160,25 @@ input[type=number] {
                                     });
                                 </script>
                             @endif
+
+
+                            <script>
+                                  function copyText() {
+                                        // Get the text input element
+                                        var copyText = document.getElementById("uidText-{{ $key }}");
+                                    
+                                        // Copy the text inside the text field
+                                        navigator.clipboard.writeText(copyText.innerHTML)
+                                            .then(() => {
+                                                // Optionally, provide feedback to the user
+                                                alert("UID کپی شد: " + copyText.innerHTML);
+                                            })
+                                            .catch(err => {
+                                                console.error('خطا در کپی کردن متن:', err);
+                                            });
+                                    }
+  
+                            </script>
                         @endforeach
                         
                     </tbody>

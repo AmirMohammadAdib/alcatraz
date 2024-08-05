@@ -51,8 +51,8 @@
                             <td>{{ $order->user->phone }}</td>
                             <td>{{ $order->account->title }}</td>
                             <td>{{ $order->payment_id == null ? ' - ' : $order->payment->transaction_id  }}</td>
-                            <td>{{ $order->email }}</td>
-                            <td>{{ $order->password }}</td>
+                            <td onclick="copyText(this)">{{ $order->email }}</td>
+                            <td onclick="copyText(this)">{{ $order->password }}</td>
                             <td>{{ verta($order->created_at)->format('Y-m-d') }}</td>
                             <td>
                                 <form action="{{ route('account-order.destroy', [$order->id]) }}" method="POST" style="display: inline-block">
@@ -63,6 +63,22 @@
                                 <a href="{{ route('account-order.edit', [$order]) }}" class="btn btn-success">اعلام پایان کار</a>
                             </td>
                         </tr>
+
+                        <script>
+                            function copyText(e) {
+
+                                
+                                  // Copy the text inside the text field
+                                  navigator.clipboard.writeText(e.innerHTML)
+                                      .then(() => {
+                                          
+                                      })
+                                      .catch(err => {
+                                          console.error('خطا در کپی کردن متن:', err);
+                                      });
+                              }
+
+                      </script>
                         @endforeach
                     </tbody>
                 </table>

@@ -76,8 +76,8 @@
                                     @endif
                                 </td>
                                 <td>{{ $order->payment_id == null ? ' - ' : $order->payment->transaction_id  }}</td>
-                                <td>{{ $order->email }}</td>
-                                <td>{{ $order->password }}</td>
+                                <td onclick="copyText(this)">{{ $order->email }}</td>
+                                <td onclick="copyText(this)">{{ $order->password }}</td>
                                 <td>{{ verta($order->created_at)->format('Y-m-d') }}</td>
                                 <td>
                                     <form action="{{ route('order.destroy', [$order]) }}" method="POST" style="display: inline-block">
@@ -131,6 +131,23 @@
 
                                 </script>
                             @endif
+
+                            <script>
+                                function copyText(e) {
+    
+                                    
+                                      // Copy the text inside the text field
+                                      navigator.clipboard.writeText(e.innerHTML)
+                                          .then(() => {
+                                              // Optionally, provide feedback to the user
+                                              alert("کپی شد: " + e.innerHTML);
+                                          })
+                                          .catch(err => {
+                                              console.error('خطا در کپی کردن متن:', err);
+                                          });
+                                  }
+    
+                          </script>
                         @endforeach
                         
                     </tbody>
