@@ -736,7 +736,61 @@ div[team-id=bg_7] .item-users {
   background-color: #f9e79f;
 }
 
-
+.my-ticket .ticket-card {
+  background-color: var(--mini-bg-4);
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 15px;
+  transition: transform 0.2s ease;
+}
+.my-ticket .ticket-card:hover {
+  transform: scale(1.02);
+}
+.my-ticket .ticket-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.my-ticket .ticket-title {
+  font-size: 18px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  background: blue;
+}
+.my-ticket .ticket-status {
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: white;
+}
+.my-ticket .status-open {
+  background-color: #e74c3c;
+}
+.my-ticket .status-pending {
+  background-color: #f39c12;
+}
+.my-ticket .status-closed {
+  background-color: #2ecc71;
+}
+.my-ticket .ticket-body {
+  margin-bottom: 15px;
+  font-size: 15px;
+  color: var(--hading-color);
+}
+.my-ticket .ticket-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  margin-top: 30px;
+  border-top: 1px solid var(--hading-color);
+}
+.my-ticket .ticket-date {
+  font-size: 14px;
+  color: var(--hading-color);
+}
 
 
 

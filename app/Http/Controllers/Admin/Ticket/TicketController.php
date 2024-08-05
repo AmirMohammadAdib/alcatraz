@@ -43,7 +43,7 @@ class TicketController extends Controller
         $inputs = $request->validate([
             'description' => 'required|min:2|max:1000|regex:/^[ا-یa-zA-Z0-9\-۰-۹ء-ي., ]+$/u'
         ]);
-        $adminID = 1;
+        $adminID = auth()->user()->id;
         $inputs = $request->all();
         $inputs['subject'] = $ticket->subject;
         $inputs['description'] = $request->description;

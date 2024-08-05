@@ -24,6 +24,7 @@ use App\Http\Controllers\Main\CPController as MainCPController;
 use App\Http\Controllers\Main\IndexController;
 use App\Http\Controllers\Main\ProfileController;
 use App\Http\Controllers\Main\RoomController as MainRoomController;
+use App\Http\Controllers\Main\TicketController as MainTicketController;
 use App\Http\Controllers\Main\WalletController;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
@@ -151,6 +152,11 @@ Route::get('/shop/account/{account}', [MainAccountController::class, 'accountVie
 Route::post('/shop/account/{account}', [MainAccountController::class, 'accountStore'])->name('shop.account.store');
 Route::get('/account-request', [MainAccountController::class, 'accountRequestView'])->name('account.request.view');
 
+
+//Tickets pages for users side
+Route::get('tickets', [MainTicketController::class, 'index'])->name('tickets.view');
+Route::get('ticket/{ticket}', [MainTicketController::class, 'show'])->name('ticket.view');
+Route::post('answare/{ticket}', [MainTicketController::class, 'store'])->name('ticket.store');
 
 Route::prefix('auth')->group(function(){
     Route::get('/login-otp', [LoginOtpController::class, 'view'])->name('login.otp.view');
