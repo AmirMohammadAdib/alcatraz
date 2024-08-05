@@ -31,8 +31,9 @@
                            </svg>
                            <input type="checkbox" id="dropdown-toggle" class="dropdown-toggle">
                            <ul class="dropdown-menu">
-                             <li>ویرایش پروفایل</li>
-                             <li>خروج</li>
+                            <li><a href="{{ route('profile.update.view') }}">ویرایش پروفایل</a></li>
+                            <li><a href="{{ route('wallet.view') }}">کیف پول</a></li>
+                            <li><a href="{{ route('logout') }}">خروج</a></li>
                            </ul>
                          </div>
                          
