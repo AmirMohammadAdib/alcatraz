@@ -107,7 +107,7 @@ color: #7f878e;
             <div class="ticket radius-15 border border-2 markdown-content staff">
                 <div class="date">{{ verta($child->created_at)->format('Y/m/d (H:i)') }}</div>
                 <div class="user">
-                <img src="{{ $child->user->profile() }}" alt="">
+                <img src="{{ asset($child->user->profile()) }}" alt="">
                 <h2 class="name" style="margin-bottom: 0;
                 margin-left: 1rem;">{{ $child->user->username }}</h2>
                 @if ($child->user->role == 1)
@@ -135,7 +135,7 @@ color: #7f878e;
         <div class="ticket radius-15 border border-2 markdown-content staff">
             <div class="date">{{ verta($ticket->created_at)->format('Y/m/d (H:i)') }}</div>
             <div class="user">
-            <img src="{{ $ticket->user->profile() }}" alt="">
+                <img src="{{ asset($ticket->user->profile()) }}" alt="">
             <h2 class="name" style="margin-bottom: 0;
             margin-left: 1rem;">{{ $ticket->user->username }}</h2>
             @if ($ticket->user->role == 1)

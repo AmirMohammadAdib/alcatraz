@@ -26,7 +26,8 @@ class User extends Authenticatable
         'award_wallet',
         'cart_number',
         'shabba_number',
-        'password'
+        'password',
+        'profile'
     ];
 
 
@@ -66,7 +67,11 @@ class User extends Authenticatable
     }
 
     public function profile(){
-        return '';
+        if($this->profile == null){
+            return 'asset/src/svg/user-1.svg';
+        }else{
+            return 'images/profiles/defaults/' . $this->profile;
+        }
     }
 
     public function level(){

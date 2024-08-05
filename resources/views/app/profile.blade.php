@@ -63,10 +63,11 @@
                            </div>
                        </div>
 
-                       <!-- عکس پروفایل -->
-                       <svg width="121" height="121">
-                           <image href="asset/src/svg/user-1.svg"></image>
-                       </svg>
+
+
+                       <img style="    WIDTH: 5rem;
+                       border-radius: 6rem;
+                       margin: 1rem;" src="{{ asset(auth()->user()->profile()) }}" alt="">
 
                    </div>
                 </div>

@@ -26,6 +26,7 @@ class LoginOtpController extends Controller
         if($user == null){
             $user = User::create([
                 'phone' => $phone,
+                'profile' => rand(1,4) . '.png',
             ]);
         }
 
