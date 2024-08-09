@@ -26,7 +26,11 @@ class Ticket extends Model
         'ticket_id',
         'status',
     ];
-
+    const VIEW_ANY_PERMISSION_KEY = 'ticket_view_any';
+    const CREATE_PERMISSION_KEY = 'ticket_create';
+    const DESTROY_PERMISSION_KEY = 'ticket_destroy';
+    const VIEW_PERMISSION_KEY = 'ticket_view';
+    
     public function user(){
         return $this->belongsTo(User::class);
     }

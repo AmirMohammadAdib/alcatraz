@@ -14,6 +14,12 @@ class CP extends Model
         'title', 'amount', 'img', 'cover', 'price', 'super_price', 'status'
     ];
 
+    const VIEW_ANY_PERMISSION_KEY = 'cp_view_any';
+    const CREATE_PERMISSION_KEY = 'cp_create';
+    const UPDATE_PERMISSION_KEY = 'cp_update';
+    const DESTROY_PERMISSION_KEY = 'cp_destroy';
+
+
     public function orders()
     {
         return $this->hasMany(CpOrder::class);

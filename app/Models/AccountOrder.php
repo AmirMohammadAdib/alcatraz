@@ -12,6 +12,12 @@ class AccountOrder extends Model
     protected $fillable = [
         'user_id', 'account_id', 'payment_id', 'receipt', 'description', 'status', 'email', 'password'
     ];
+    const VIEW_ANY_PERMISSION_KEY = 'account_order_view_any';
+    const UPDATE_PERMISSION_KEY = 'account_order_update';
+    const DESTROY_PERMISSION_KEY = 'account_order_destroy';
+    const VIEW_PERMISSION_KEY = 'account_order_view_history';
+
+
 
     public function account()
     {

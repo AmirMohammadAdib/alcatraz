@@ -12,7 +12,9 @@ class Player extends Model
     protected $fillable = [
         'user_id', 'room_id', 'status'
     ];
-
+    const VIEW_ANY_PERMISSION_KEY = 'player_view_any';
+    const UPDATE_PERMISSION_KEY = 'player_update';
+    
     public function user()
     {
         return $this->belongsTo(User::class);

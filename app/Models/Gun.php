@@ -10,7 +10,11 @@ class Gun extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = ['name', 'img'];
-
+    const VIEW_ANY_PERMISSION_KEY = 'gun_view_any';
+    const CREATE_PERMISSION_KEY = 'gun_create';
+    const UPDATE_PERMISSION_KEY = 'gun_update';
+    const DESTROY_PERMISSION_KEY = 'gun_destroy';
+    
     public function accounts(){
         return $this->hasMany(Account::class);
     }

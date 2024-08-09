@@ -13,7 +13,12 @@ class Account extends Model
         'title', 'img', 'price', 'description', 'status', 'gun_id', 'uid'
     ];
 
+    const VIEW_ANY_PERMISSION_KEY = 'account_view_any';
+    const CREATE_PERMISSION_KEY = 'account_create';
+    const UPDATE_PERMISSION_KEY = 'account_update';
+    const DESTROY_PERMISSION_KEY = 'account_destroy';
 
+    
     public function orders()
     {
         return $this->hasMany(CpOrder::class);

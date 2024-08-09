@@ -14,7 +14,11 @@ class CPOrder extends Model
     protected $fillable = [
         'user_id', 'cp_id', 'payment_id', 'status', 'type', 'expire_time', 'email', 'password'
     ];
-
+    const VIEW_ANY_PERMISSION_KEY = 'cp_order_view_any';
+    const UPDATE_PERMISSION_KEY = 'cp_order_update';
+    const DESTROY_PERMISSION_KEY = 'cp_order_destroy';
+    const VIEW_PERMISSION_KEY = 'cp_order_view_history';
+    
     public function cp()
     {
         return $this->belongsTo(CP::class);

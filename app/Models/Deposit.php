@@ -12,6 +12,8 @@ class Deposit extends Model
     protected $fillable = [
         'user_id', 'type', 'status', 'transaction_code', 'receipt', 'amount'
     ];
+    const VIEW_ANY_PERMISSION_KEY = 'deposit_view_any';
+    const VIEW_PERMISSION_KEY = 'deposit_view';
 
     public function user()
     {

@@ -32,6 +32,12 @@ class User extends Authenticatable
         'profile'
     ];
 
+    const VIEW_ANY_PERMISSION_KEY = 'user_view_any';
+    const CREATE_PERMISSION_KEY = 'user_view_any';
+    const UPDATE_PERMISSION_KEY = 'user_view_any';
+    const DESTROY_PERMISSION_KEY = 'user_view_any';
+    const SYNC_ROLES_PERMISSIONS_KEY = 'user_view_any';
+    const VIEW_PERMISSION_KEY = 'user_view';
 
     public function accountOrders()
     {

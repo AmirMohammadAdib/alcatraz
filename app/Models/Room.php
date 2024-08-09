@@ -13,6 +13,12 @@ class Room extends Model
         'link', 'fee', 'award', 'award_type', 'type', 'capacity', 'players', 'status', 'title', 'img'
     ];
 
+    const VIEW_ANY_PERMISSION_KEY = 'room_view_any';
+    const CREATE_PERMISSION_KEY = 'room_create';
+    const UPDATE_PERMISSION_KEY = 'room_update';
+    const DESTROY_PERMISSION_KEY = 'room_destroy';
+
+
     public function players()
     {
         return $this->hasMany(Player::class);
