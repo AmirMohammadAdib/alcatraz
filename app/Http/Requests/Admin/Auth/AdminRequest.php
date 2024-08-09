@@ -23,14 +23,14 @@ class AdminRequest extends FormRequest
     {
         if($this->isMethod('POST')){
             return [
-                'phone' => 'required|string|max:11|min:11|unique:users,phone',
+                'phone' => 'required|string|max:10|min:10|unique:users,phone',
                 'username' => 'required|string|max:255||unique:users,username',
                 'status' => 'required|string',
                 'roles' => 'nullable|array',
             ];
         }else{
             return [
-                'phone' => 'required|string|max:11|min:11|unique:users,phone,' . $this->admin->id,
+                'phone' => 'required|string|max:10|min:10|unique:users,phone,' . $this->admin->id,
                 'username' => 'required|string|max:255||unique:users,username,' . $this->admin->id,
                 'status' => 'required|string',
                 'roles' => 'nullable|array',

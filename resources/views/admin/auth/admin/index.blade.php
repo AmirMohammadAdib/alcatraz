@@ -64,10 +64,17 @@
                                     <span class="alert-danger">غیرفعال</span>
                                 @endif
                             </td>
-                            <td>-</td>
+                            <td>
+                                <ul>
+                                    @forelse ($admin->roles as $role)
+                                        <li>{{ $role->name }}</li>
+                                    @empty
+                                        <li>-</li>
+                                    @endforelse
+                                </ul>
+                            </td>
                             <td>{{ verta($admin->created_at)->format('Y-m-d') }}</td>
                             <td>
-                                <a href="{{ route('admin.edit', [$admin]) }}" class="btn btn-warning">اعطای مجوز</a>
                                 <a href="{{ route('admin.edit', [$admin]) }}" class="btn btn-info">ویرایش</a>
                                 <form action="{{ route('admin.destroy', [$admin]) }}" method="POST" style="display: inline-block">
                                     @method('DELETE')

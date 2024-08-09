@@ -23,7 +23,7 @@ class UserRequest extends FormRequest
     {
         if($this->isMethod('POST')){
             return [
-                'phone' => 'required|string|max:11|min:11|unique:users,phone',
+                'phone' => 'required|string|max:10|min:10|unique:users,phone',
                 'username' => 'required|string|max:255||unique:users,username',
                 'level' => 'required|integer',
                 'role' => 'nullable|string|max:255',
@@ -35,7 +35,7 @@ class UserRequest extends FormRequest
             ];
         }else{
             return [
-                'phone' => 'required|string|max:11|min:11|unique:users,phone,' . $this->player->id,
+                'phone' => 'required|string|max:10|min:10|unique:users,phone,' . $this->player->id,
                 'username' => 'required|string|max:255||unique:users,username,' . $this->player->id,
                 'level' => 'required|integer',
                 'role' => 'nullable|string|max:255',

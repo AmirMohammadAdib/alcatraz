@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Auth\AdminRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class AdminController extends Controller
 {
@@ -24,7 +25,8 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('admin.auth.admin.create');
+        $roles = Role::all();
+        return view('admin.auth.admin.create', compact('roles'));
     }
 
     /**
@@ -35,9 +37,11 @@ class AdminController extends Controller
         $inputs = $request->all();
         $inputs['role'] = '1';
 
+        $user = User::create($inputs);
+        
         //roles create ...
+        $user->syncRoles($inputs['roles']);
 
-        User::create($inputs);
         return redirect()->route('admin.index')->with('alert-success', 'ادمین جدید با موفقیت ساخته شد');
 
 

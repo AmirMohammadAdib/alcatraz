@@ -2,6 +2,9 @@
 
 @section('head-tag')
     <title>فهرست ادمین های سایت - آلکاتراز</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
 
 @section('breadcrumb')
@@ -87,6 +90,22 @@
                         </div><!-- /.input-group -->
                     </div><!-- /.form-group -->
 
+                    <div class="form-group">
+                        <label>انتخاب نقش برای این ادمین</label>
+                        <div class="input-group @error('roles') has-error @enderror">
+
+                            <select name="roles[]" id="roles" class="form-control roles" multiple="multiple">
+                                @foreach ($roles as $key => $role)
+                                    <option value="{{ $role->name }}">{{ $role->name }}</option>
+                                @endforeach
+                            </select>
+
+                            @error('roles')
+                                <span class="alert-danger">{{ $message }}</span>
+                            @enderror
+
+                        </div><!-- /.input-group -->
+                    </div><!-- /.form-group -->
 
                     <input type="hidden" name="role" value="1">
 
@@ -109,4 +128,17 @@
 
 </div><!-- /.col-12 -->
 
+
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
+<script>
+    var select_roles = $('#roles');
+    select_roles.select2({
+        placeholder: 'لطفا نقش ها را وارد نمایید',
+        multiple: true,
+        tags : true
+    })
+</script>
 @endsection
