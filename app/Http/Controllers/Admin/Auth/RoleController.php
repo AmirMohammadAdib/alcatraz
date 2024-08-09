@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
@@ -22,7 +23,8 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('admin.auth.role.create');
+        $permissions = Permission::all();
+        return view('admin.auth.role.create', compact('permissions'));
     }
 
     /**
@@ -30,7 +32,15 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $inputs = $request->validate([
+            'name' => 'required|max:255',
+            'permissions' => 'required|array',
+        ]);
+
+        $role = Role::create(['name' => $inputs['name'], 'guard_name' => 'web']);
+        $role->syncPermissions($inputs['permissions']);
+
+        return redirect()->route('role.index')->with('success', 'نقش با موفقیت ایجاد شد');
     }
 
     /**
@@ -44,17 +54,27 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Role $role)
     {
-        //
+        $permissions = Permission::all();
+        $selectedPermissions = $role->permissions->pluck("id")->toArray();
+        return view('admin.auth.role.edit', compact('permissions', 'role', 'selectedPermissions'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Role $role)
     {
-        //
+        $inputs = $request->validate([
+            'name' => 'required|max:255',
+            'permissions' => 'required|array',
+        ]);
+
+        $role->update(['name' => $inputs['name']]);
+        $role->syncPermissions($inputs['permissions']);
+
+        return redirect()->route('role.index')->with('success', 'نقش با شناسه ' . $role->id . ' با موفقیت ویرایش شد');
     }
 
     /**

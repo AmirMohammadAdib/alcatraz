@@ -32,7 +32,7 @@
             </div><!-- /.buttons-box -->
         </div><!-- /.portlet-heading -->
         <div class="portlet-body">
-            <form role="form" method="POST" accept="{{ route('role.store') }}">
+            <form role="form" method="POST" action="{{ route('role.store') }}">
                 @csrf
 
                 <div class="form-body">
@@ -56,26 +56,16 @@
                         <label>مجوز ها</label>
                         <div class="input-group">
                             
-                            <div class="col-12 d-flex">
-                                <div class="col-3">
-                                    <input type="checkbox" name="" id="1">
-                                    <label for="1">نمایش</label>
-                                </div>
-                                <div class="col-3">
-                                    <input type="checkbox" name="" id="2">
-                                    <label for="2">ساخت</label>
-                                </div>
-                                <div class="col-3">
-                                    <input type="checkbox" name="" id="3">
-                                    <label for="3">ویرایش</label>
-                                </div>
-                                <div class="col-3">
-                                    <input type="checkbox" name="" id="4">
-                                    <label for="4">حذف</label>
-                                </div>
+                            <div class="col-12 d-flex flex-wrap">
+                                @foreach ($permissions as $permission)
+                                    <div class="col-3">
+                                        <input type="checkbox" name="permissions[]" value="{{ $permission->name }}" id="{{ $permission->id }}">
+                                        <label for="{{ $permission->id }}">{{ $permission->description }}</label>
+                                    </div>
+                                @endforeach
                             </div>
 
-                            @error('name')
+                            @error('permissions')
                                 <span class="alert-danger">{{ $message }}</span>
                             @enderror
 
