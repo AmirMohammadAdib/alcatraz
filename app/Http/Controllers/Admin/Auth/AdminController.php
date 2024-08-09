@@ -60,7 +60,9 @@ class AdminController extends Controller
      */
     public function edit(User $admin)
     {
-        return view('admin.auth.admin.edit', compact('admin'));
+        $roles = Role::all();
+
+        return view('admin.auth.admin.edit', compact('admin', 'roles'));
     }
 
     /**
@@ -71,6 +73,7 @@ class AdminController extends Controller
         $inputs = $request->all();
 
         //roles create ...
+        $admin->syncRoles($inputs['roles']);
 
         $admin->update($inputs);
         return redirect()->route('admin.index')->with('alert-success', 'ادمین ' . $admin->username . ' با موفقیت ویرایش شد');
@@ -83,6 +86,6 @@ class AdminController extends Controller
     {
         $username = $admin->username;
         $admin->delete();
-        return redirect()->route('player.index')->with('alert-success', 'کاربر ' . $username . ' با موفقیت حذف شد');
+        return redirect()->route('admin.index')->with('alert-success', 'کاربر ' . $username . ' با موفقیت حذف شد');
     }
 }
