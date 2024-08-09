@@ -105,6 +105,9 @@ return [
         ),
     ],
 
+    'aliases' => [
+        'isAdmin' => \App\Http\Middleware\AdminCheck::class,
+    ],
     /*
     |--------------------------------------------------------------------------
     | Maintenance Mode Driver

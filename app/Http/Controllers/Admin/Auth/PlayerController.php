@@ -10,6 +10,7 @@ use App\Models\Player;
 use App\Models\User;
 use App\Models\Withdraw;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class PlayerController extends Controller
 {

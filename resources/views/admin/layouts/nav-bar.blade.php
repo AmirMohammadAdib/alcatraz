@@ -19,6 +19,7 @@
                 </a>
             </li>
 
+            @if (in_array('auth-admin', auth()->user()->roles->pluck('name')->toArray()) or in_array('super-admin', auth()->user()->roles->pluck('name')->toArray()))
             <li>
                 <a href="#" class="dropdown-toggle">
                     <i class="fas fa-unlock-keyhole"></i>
@@ -45,7 +46,8 @@
                     </li>
                 </ul>
             </li>
-
+            @endif
+            @if (in_array('financial-admin', auth()->user()->roles->pluck('name')->toArray()) or in_array('super-admin', auth()->user()->roles->pluck('name')->toArray()))
 
             <li>
                 <a href="#" class="dropdown-toggle">
@@ -67,6 +69,10 @@
                     </li>
                 </ul>
             </li>
+
+            @endif
+            @if (in_array('shop-admin', auth()->user()->roles->pluck('name')->toArray()) or in_array('super-admin', auth()->user()->roles->pluck('name')->toArray()))
+
 
 
             <li>
@@ -95,6 +101,9 @@
                     </li>
                 </ul>
             </li>
+            @endif
+            @if (in_array('account-admin', auth()->user()->roles->pluck('name')->toArray()) or in_array('super-admin', auth()->user()->roles->pluck('name')->toArray()))
+
 
 
             <li>
@@ -136,6 +145,10 @@
                     </li>
                 </ul>
             </li>
+            @endif
+            @if (in_array('match-admin', auth()->user()->roles->pluck('name')->toArray()) or in_array('super-admin', auth()->user()->roles->pluck('name')->toArray()))
+
+
 
 
             <li>
@@ -164,9 +177,8 @@
                     </li>
                 </ul>
             </li>
-
-
-
+            @endif
+            @if (in_array('ticket-admin', auth()->user()->roles->pluck('name')->toArray()) or in_array('super-admin', auth()->user()->roles->pluck('name')->toArray()))
             <li>
                 <a href="#" class="dropdown-toggle">
                     <i class="  far fa-comments"></i>
@@ -199,6 +211,8 @@
                     </li>
                 </ul>
             </li>
+            @endif
+
 
             <li>
                 <a href="#" class="">

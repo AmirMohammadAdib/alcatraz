@@ -41,7 +41,7 @@ Route::group(['prefix' => 'admin'], function(){
 
 
     // Group routes under the 'admin/auth' prefix
-    Route::group(['prefix' => 'auth'], function(){
+    Route::group(['prefix' => 'auth', 'middleware' => 'role:auth-admin'], function(){
         
         // Define resource routes for 'player' which will map to PlayerController
         Route::resource('player', PlayerController::class);
@@ -54,7 +54,7 @@ Route::group(['prefix' => 'admin'], function(){
     });
 
     // Group routes under the 'admin/financial' prefix
-    Route::group(['prefix' => 'financial'], function(){
+    Route::group(['prefix' => 'financial', 'middleware' => 'role:financial-admin'], function(){
         // Define resource routes for 'depoceit' which will map to DepoceitController
         Route::resource('depoceit', DepoceitController::class);
         
@@ -63,7 +63,7 @@ Route::group(['prefix' => 'admin'], function(){
     });
 
     // Group routes under the 'admin/shop' prefix
-    Route::group(['prefix' => 'shop'], function(){
+    Route::group(['prefix' => 'shop', 'middleware' => 'role:shop-admin'], function(){
         // Define resource routes for 'cp' which will map to CPController
         Route::resource('cp', CPController::class);
         
@@ -73,7 +73,7 @@ Route::group(['prefix' => 'admin'], function(){
 
 
     // Group routes under the 'admin/account' prefix
-    Route::group(['prefix' => 'account'], function(){
+    Route::group(['prefix' => 'account', 'middleware' => 'role:account-admin'], function(){
         // Define resource routes for 'request' which will map to RequestController
         Route::resource('request', RequestController::class);
         
@@ -93,7 +93,7 @@ Route::group(['prefix' => 'admin'], function(){
     });
 
     // Group routes under the 'admin/match' prefix
-    Route::group(['prefix' => 'match'], function(){
+    Route::group(['prefix' => 'match', 'middleware' => 'role:match-admin'], function(){
         // Define resource routes for 'request' which will map to RoomController
         Route::resource('room', RoomController::class);
         
@@ -103,7 +103,7 @@ Route::group(['prefix' => 'admin'], function(){
 
 
     // Group routes under the 'admin/ticket' prefix
-    Route::group(['prefix' => 'ticket'], function(){
+    Route::group(['prefix' => 'ticket', 'middleware' => 'role:ticket-admin'], function(){
         // Define resource routes for '/' which will map to TicketController
         Route::get('/', [TicketController::class, 'index'])->name('admin.ticket.index');
         Route::get('/show/{ticket}', [TicketController::class, 'show'])->name('admin.ticket.show');
