@@ -26,9 +26,11 @@ use App\Http\Controllers\Main\ProfileController;
 use App\Http\Controllers\Main\RoomController as MainRoomController;
 use App\Http\Controllers\Main\TicketController as MainTicketController;
 use App\Http\Controllers\Main\WalletController;
+use App\Http\Middleware\AdminCheck;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\Profiler\Profile;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 // auth()->loginUsingId(1);
 date_default_timezone_set('Iran');
@@ -138,7 +140,7 @@ Route::post('/wallet/transport', [WalletController::class, 'transport'])->name('
 // Room pages that run on MainRoomController
 Route::get('/rooms', [MainRoomController::class, 'roomsView'])->name('rooms.view');
 Route::get('/room/{room}', [MainRoomController::class, 'roomView'])->name('room.view')->middleware('auth');
- 
+
 
 // ShopCP pages that run on MainCPController
 Route::get('/shop/cp', [MainCPController::class, 'shopView'])->name('shop.shop.view');
@@ -162,16 +164,17 @@ Route::get('ticket-create', [MainTicketController::class, 'create'])->name('tick
 Route::post('store', [MainTicketController::class, 'store'])->name('ticket.store')->middleware('auth');
 
 Route::get('/login', function(){
-    return redirect()->route('login.otp.view');
+return redirect()->route('login.otp.view');
 })->name('login');
-Route::prefix('auth')->group(function(){
-    Route::get('/login-otp', [LoginOtpController::class, 'view'])->name('login.otp.view');
-    Route::post('/login-otp', [LoginOtpController::class, 'store'])->name('login.otp.store');
-    Route::get('/login-resend-otp/{token}', [LoginOtpController::class, 'loginResendOtp'])->name('login.otp.resend');
 
-    Route::get('/login-confirm/{token}', [LoginOtpController::class, 'confirmView'])->name('confirm.view');
-    Route::post('/login-confirm/{token}', [LoginOtpController::class, 'confirmStore'])->name('confirm.store');
-    Route::get('/login-pass', [LoginPassController::class, 'view'])->name('login.pass.view');
-    Route::post('/login-pass', [LoginPassController::class, 'store'])->name('login.pass.store');
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::prefix('auth')->group(function(){
+Route::get('/login-otp', [LoginOtpController::class, 'view'])->name('login.otp.view');
+Route::post('/login-otp', [LoginOtpController::class, 'store'])->name('login.otp.store');
+Route::get('/login-resend-otp/{token}', [LoginOtpController::class, 'loginResendOtp'])->name('login.otp.resend');
+
+Route::get('/login-confirm/{token}', [LoginOtpController::class, 'confirmView'])->name('confirm.view');
+Route::post('/login-confirm/{token}', [LoginOtpController::class, 'confirmStore'])->name('confirm.store');
+Route::get('/login-pass', [LoginPassController::class, 'view'])->name('login.pass.view');
+Route::post('/login-pass', [LoginPassController::class, 'store'])->name('login.pass.store');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
