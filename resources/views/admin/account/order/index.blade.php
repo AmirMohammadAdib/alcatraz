@@ -71,7 +71,8 @@
                                   // Copy the text inside the text field
                                   navigator.clipboard.writeText(e.innerHTML)
                                       .then(() => {
-                                          
+                                        alert("کپی شد: " + e.innerHTML);
+
                                       })
                                       .catch(err => {
                                           console.error('خطا در کپی کردن متن:', err);

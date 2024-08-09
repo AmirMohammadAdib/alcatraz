@@ -17,7 +17,7 @@ class CPOrder extends Model
 
     public function cp()
     {
-        return $this->belongsTo(Cp::class);
+        return $this->belongsTo(CP::class);
     }
 
     public function user()

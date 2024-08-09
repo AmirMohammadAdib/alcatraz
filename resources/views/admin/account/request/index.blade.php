@@ -171,7 +171,7 @@ input[type=number] {
                                         navigator.clipboard.writeText(copyText.innerHTML)
                                             .then(() => {
                                                 // Optionally, provide feedback to the user
-                                                alert("UID کپی شد: " + copyText.innerHTML);
+                                                alert("کپی شد: " + copyText.innerHTML);
                                             })
                                             .catch(err => {
                                                 console.error('خطا در کپی کردن متن:', err);
