@@ -50,23 +50,29 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>ادمین کل</td>
-                            <td>
-                                <ul>
-                                    <li>نمایش پلیر ها</li>
-                                    <li>ساخت پلیر</li>
-                                    <li>ویرایش پلیر</li>
-                                </ul>
-                            </td>
-                            <td>4</td>
-                            <td>{{ verta(time())->format('Y-m-d') }}</td>
-                            <td>
-                                <a href="#" class="btn btn-info">ویرایش</a>
-                                <a href="#" class="btn btn-danger">حذف</a>
-                            </td>
-                        </tr>
+                        @foreach ($roles as $key => $role)
+                            <tr>
+                                <td>{{ $key += 1 }}</td>
+                                <td>{{ $role->name }}</td>
+                                <td>
+                                    <ul>
+                                        @foreach ($role->permissions as $permission)
+                                            <li>{{ $permission->name }}</li>
+                                        @endforeach
+                                    </ul>
+                                </td>
+                                <td>{{ \App\Models\User::role($role->name)->count() }}</td>
+                                <td>{{ verta($role->created_at)->format('Y-m-d') }}</td>
+                                <td>
+                                    <a href="{{ route('role.edit', $role) }}" class="btn btn-info">ویرایش</a>
+                                    <form action="{{ route('role.destroy', [$role]) }}" method="POST" style="display: inline-block">
+                                        @method('DELETE')
+                                        @csrf
+                                        <input type="submit" class="btn btn-danger" value="حذف">                                
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
                         
                     </tbody>
                 </table>
