@@ -178,3 +178,30 @@ Route::get('/games/{player}', function(User $player){
         ],
     ]);
 });
+
+
+Route::get('new-orders', function(){
+    $orders = CPOrder::where('status', '!=', 2)->orderBy('created_at', 'desc')->orderBy('type', 'desc')->get();
+    foreach($orders as $order){
+        $order->user;
+        $order->cp;
+        $order->superClass = '';
+        if($order->type == 1){
+            $order->superClass = 'class="super"';
+        }
+        if($order->type == 0){
+            $order->type = 'فوری';
+        }else{
+            $order->type = 'سوپر فوری';
+        }
+        $order->created_atk = verta($order->created_at)->format('Y-m-d');
+        $order->deleteRoute = route('order.destroy', [$order]); 
+        $order->editRoute = route('order.edit', [$order]); 
+
+    }
+
+    return response()->json([
+        'httpCode' => 200,
+        'result' => $orders
+    ]);
+});

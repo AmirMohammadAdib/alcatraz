@@ -102,5 +102,7 @@
             </div><!-- /.table-responsive -->
         </div><!-- /.portlet-body -->
     </div><!-- /.portlet -->
-</div><!-- /.col-lg-12 -->                  
+</div><!-- /.col-lg-12 -->      
+
+
 @endsection

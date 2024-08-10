@@ -61,7 +61,7 @@
                             <td>عملیات</td>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="dataOrder">
                         
                         @foreach ($orders as $key => $order)
                             <tr>
@@ -72,7 +72,7 @@
                                     @if ($order->type == '0')
                                         فوری
                                     @else
-                                        <p class="super">سوپر فوری (<span id="timer-{{ $key }}">2:31</span>)</p>
+                                        <p class="super">سوپر فوری <span id="timer-{{ $key }}"></span></p>
                                     @endif
                                 </td>
                                 <td>{{ $order->payment_id == null ? ' - ' : $order->payment->transaction_id  }}</td>
@@ -90,7 +90,7 @@
                             </tr>
 
                             @if ($order->type == '1')
-                                <script>
+                                {{-- <script>
                                     // زمان‌های شروع و پایان را مشخص کنید (مثلاً زمان پایان 1 دقیقه بعد از زمان شروع)
                                     let startTime = new Date();
                                     let targetTime = new Date('{{ $order->expire_time }}'); // 60,000 میلی‌ثانیه برابر 1 دقیقه
@@ -129,25 +129,10 @@
                                     // اولین به‌روزرسانی تایمر بلافاصله بعد از بارگذاری صفحه
                                     updateTimer(timerSpan);
 
-                                </script>
+                                </script> --}}
                             @endif
 
-                            <script>
-                                function copyText(e) {
-    
-                                    
-                                      // Copy the text inside the text field
-                                      navigator.clipboard.writeText(e.innerHTML)
-                                          .then(() => {
-                                              // Optionally, provide feedback to the user
-                                              alert("کپی شد: " + e.innerHTML);
-                                          })
-                                          .catch(err => {
-                                              console.error('خطا در کپی کردن متن:', err);
-                                          });
-                                  }
-    
-                          </script>
+                           
                         @endforeach
                         
                     </tbody>
@@ -155,9 +140,67 @@
             </div><!-- /.table-responsive -->
         </div><!-- /.portlet-body -->
     </div><!-- /.portlet -->
-</div><!-- /.col-lg-12 -->                  
+</div><!-- /.col-lg-12 -->               
+<script>
+    function copyText(e) {
+
+        
+          // Copy the text inside the text field
+          navigator.clipboard.writeText(e.innerHTML)
+              .then(() => {
+                  // Optionally, provide feedback to the user
+                  alert("کپی شد: " + e.innerHTML);
+              })
+              .catch(err => {
+                  console.error('خطا در کپی کردن متن:', err);
+              });
+      }
+
+</script>   
 @endsection
 
-@section('scripts')
+@section('script')
+
+<script>
+    setInterval(function(){
+        $.ajax({
+            url: '/api/new-orders',
+            success: function(res){
+                let dom = ``;
+                let n = 1;
+                res.result.forEach(order => {
+                    
+                    dom += `
+                                <tr>
+                                <td>${n}</td>
+                                <td>${order.user.username}</td>
+                                <td>${order.cp.title}</td>
+                                <td><p  ${order.superClass}>${order.type}</p></td>
+                                <td>-</td>
+                                <td onclick="copyText(this)">${order.email}</td>
+                                <td onclick="copyText(this)">${order.password}</td>
+                                <td>${order.created_atk}</td>
+                                <td>
+                                    <form action="${order.deleteRoute}" method="POST" style="display: inline-block">
+                                        @method('DELETE')
+                                        @csrf
+                                        <input type="submit" class="btn btn-danger" value="کنسل کردن">                                
+                                    </form>
+                                    <a href="${order.editRoute}" class="btn btn-success">اعلام پایان کار</a>
+                                </td>
+                            </tr>
+
+                            
+                    `
+
+
+                })
+                document.querySelector('.dataOrder').innerHTML = dom
+
+            }
+        })
+    }, 5000)
+
+</script>
 
 @endsection
