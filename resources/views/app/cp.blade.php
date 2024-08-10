@@ -25,6 +25,16 @@
 
     font-family: 'payda-Regular';
       }
+
+      .price {
+        display: none !important
+      }
+      #finalSubmit{
+        display: none 
+      }
+      .d-block-i{
+        display: flex !important
+      }
     </style>
 @endsection
 
@@ -44,11 +54,11 @@
            
             </div>
             <div class="product-price">
-                <ul class="d-flex justify-content-between p-10">
+                <ul class="d-flex justify-content-between p-10 price" id="normalBox">
                     <h3>قیمت فوری</h3>
                     <h4>{{ number_format($cp->price) }} تومان</h4>
                 </ul>
-                <ul class="d-flex justify-content-between p-10">
+                <ul class="d-flex justify-content-between p-10 price" id="superBox">
                     <h3>قیمت سوپر فوری</h3>
                     <h4>{{ number_format($cp->super_price) }} تومان</h4>
                 </ul>
@@ -128,22 +138,24 @@
                             @endif
                         @else
                             @if ($cp->status ==1)
-                                <form action="{{ route('shop.cp.store', [$cp, 'type' => 'normal']) }}" method="POST" style="width: 50%;">
-                                    @csrf
-                                    <input type="submit" value="فروش فوری" id="instantSaleButton" class="btn w-100 btn-danger font-bold">
-                                </form>
+                            <input type="submit" value="فروش فوری" id="instantSaleButton" class="btn w-100 btn-danger font-bold" style="width: 50%;">
 
-                                <form action="{{ route('shop.cp.store', [$cp, 'type' => 'super']) }}" method="POST" style="width: 50%;">
-                                    @csrf
-                                    <input type="submit" value="فروش سوپر فوری" id="superInstantSaleButton" class="btn w-100 btn-success font-bold" data-timer="180">
-                                </form>
+
+                            <input type="submit" value="فروش سوپر فوری" id="superInstantSaleButton" class="btn w-100 btn-success font-bold" style="width: 50%;">
+
+
+                                
                             @else
                                 <a id="superInstantSaleButton" class="btn w-100 btn-success font-bold">ناموجود</a>
                             @endif
                         @endif
 
                     </div>
-                    <div id="timerContainer" class="mt-20"></div>
+                    <br>
+                    <form action="" method="POST" style="width: 100%;" id="finalSubmit">
+                        @csrf
+                        <input type="submit" value="ثبت خرید" id="" class="btn w-100 btn-info font-bold" >
+                    </form>
                   </div>
                   <hr>
             </div>
@@ -154,72 +166,25 @@
 </section>
 
 <script>
-    // Get the modal
-    const modal = document.getElementById("modal");
-    const modalImg = document.getElementById("modal-image");
-    const captionText = document.getElementById("caption");
-    
-    // Get all images with data-modal attribute
-    const images = document.querySelectorAll('img[data-modal="true"]');
-    
-    // Add click event to each image
-    images.forEach((img) => {
-        img.addEventListener('click', function () {
-            modal.style.display = "block";
-            modalImg.src = this.src;
-            captionText.innerHTML = this.alt;
-        });
-    });
+    let instantSaleButton = document.querySelector("#instantSaleButton")
+    let superInstantSaleButton = document.querySelector("#superInstantSaleButton")
 
-    
-    // When the user clicks anywhere outside of the modal, close it
-    window.addEventListener('click', function (event) {
-        if (event.target === modal) {
-            modal.style.display = "none";
-        }
-    });
-    
+    instantSaleButton.addEventListener('click', () => {
+        document.getElementById('normalBox').classList.add('d-block-i')
+        document.getElementById('superBox').classList.remove('d-block-i')
 
-    
-    
-    
-    document.getElementById('superInstantSaleButton').addEventListener('click', function() {
-        // Get the timer duration from the data attribute
-        const timerDuration = parseInt(this.getAttribute('data-timer'), 10);
-    
-        // Display the countdown timer
-        startCountdown(timerDuration);
-    });
-    
-    function startCountdown(duration) {
-        const timerContainer = document.getElementById('timerContainer');
-    
-        // Calculate end time
-        const endTime = Date.now() + duration * 1000;
-        
-        function updateTimer() {
-            // Calculate remaining time
-            const now = Date.now();
-            const timeLeft = Math.max(0, endTime - now);
-    
-            if (timeLeft === 0) {
-                timerContainer.textContent = 'پایان زمان!';
-                return;
-            }
-    
-            // Convert time left to minutes and seconds
-            const minutes = Math.floor(timeLeft / 60000);
-            const seconds = Math.floor((timeLeft % 60000) / 1000);
-    
-            timerContainer.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-        }
-    
-        // Update the timer every second
-        updateTimer();
-        const timerInterval = setInterval(updateTimer, 1000);
-    }
-    
-    
+        document.getElementById('finalSubmit').action=`{{ route('shop.cp.store', [$cp, 'type' => 'normal']) }}`
+        document.getElementById('finalSubmit').classList.add('d-block-i')
+    })
+
+    superInstantSaleButton.addEventListener('click', () => {
+        document.getElementById('normalBox').classList.remove('d-block-i')
+        document.getElementById('superBox').classList.add('d-block-i')
+        document.getElementById('finalSubmit').action=`{{ route('shop.cp.store', [$cp, 'type' => 'super']) }}`
+        document.getElementById('finalSubmit').classList.add('d-block-i')
+    })
+
+
         </script>
 @endsection
 
