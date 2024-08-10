@@ -42,7 +42,7 @@ class WalletController extends Controller
         //checking on wallet
         $walletAmount = intval(auth()->user()->award_wallet);
         if($inputs['amount'] <= $walletAmount){ 
-            if(auth()->user()->cart_number == null){
+            if(auth()->user()->cart_number == null Or auth()->user()->shabba_number == null){
                 return redirect()->route('profile.update.view')->with('error', 'ابتدا اطلاعات مالی خود را تکمیل کنید');
                 exit;
             }

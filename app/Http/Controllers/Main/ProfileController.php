@@ -37,7 +37,7 @@ class ProfileController extends Controller
                 'email' => 'required|email|unique:buy_accounts,email',
                 'password' => 'required|min:4',
             ]);
-            if(auth()->user()->cart_number == null){
+            if(auth()->user()->cart_number == null Or auth()->user()->shabba_number == null){
                 return redirect()->route('profile.update.view')->with('error', 'ابتدا اطلاعات مالی خود را کامل کنید');
             }
     
