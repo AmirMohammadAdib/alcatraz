@@ -29,22 +29,36 @@ class ProfileController extends Controller
 
     public function setEmailPass(Request $request, BuyAccount $account){
         $inputs = $request->validate([
-            'email' => 'required|email|unique:buy_accounts,email',
-            'password' => 'required|min:4',
+            'type' => 'required|max:255',
         ]);
 
-        if(auth()->user()->cart_number == null){
-            return redirect()->route('profile.update.view')->with('error', 'ابتدا اطلاعات مالی خود را کامل کنید');
+        if($inputs['type'] == 'email-pass'){
+            $inputs = $request->validate([
+                'email' => 'required|email|unique:buy_accounts,email',
+                'password' => 'required|min:4',
+            ]);
+            if(auth()->user()->cart_number == null){
+                return redirect()->route('profile.update.view')->with('error', 'ابتدا اطلاعات مالی خود را کامل کنید');
+            }
+    
+            if($account->email != null){
+                return back()->with('error', 'برای این درخواست قبلا ایمیل و رمز عبور ثبت شده است');
+    
+            }
+            $inputs['status'] = 2;
+    
+            $account->update($inputs);
+            return back()->with('success', 'ایمیل و رمز عبور حساب شما با موفقیت ثبت شد, منتظر باشید');
+
+        }else{
+            $inputs = $request->validate([
+                'code' => 'required|max:255',
+            ]);
+
+            $account->update(['verify_code' => $inputs['code']]);
+            return back()->with('success', 'کد وریفای ارسال شد، منتظر تایید کارشناسان باشید');
+
         }
-
-        if($account->email != null){
-            return back()->with('error', 'برای این درخواست قبلا ایمیل و رمز عبور ثبت شده است');
-
-        }
-        $inputs['status'] = 2;
-
-        $account->update($inputs);
-        return back()->with('success', 'ایمیل و رمز عبور حساب شما با موفقیت ثبت شد, منتظر باشید');
         
     }
 

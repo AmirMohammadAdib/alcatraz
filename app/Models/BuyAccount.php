@@ -11,7 +11,7 @@ class BuyAccount extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'user_id', 'game_uid', 'saler_price', 'description', 'site_price', 'transaction_id', 'email', 'password', 'status', 'user_confirm'
+        'user_id', 'game_uid', 'saler_price', 'description', 'site_price', 'transaction_id', 'email', 'password', 'status', 'user_confirm', 'verify_code'
     ];
 
     const VIEW_ANY_PERMISSION_KEY = 'buy_account_view_any';

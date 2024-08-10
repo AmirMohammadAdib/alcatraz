@@ -76,7 +76,8 @@ Route::group(['prefix' => 'admin'], function(){
     Route::group(['prefix' => 'account', 'middleware' => 'role:account-admin'], function(){
         // Define resource routes for 'request' which will map to RequestController
         Route::resource('request', RequestController::class);
-        
+        Route::get('request/bad/code/{request}', [RequestController::class, 'badCode'])->name('request.bad.code');
+
         // Define resource routes for 'order' which will map to AccountOrderController
         Route::resource('account-order', AccountOrderController::class);
 

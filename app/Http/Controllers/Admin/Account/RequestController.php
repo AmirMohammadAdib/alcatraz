@@ -105,4 +105,11 @@ class RequestController extends Controller
         return back()->with('alert-success', 'درخواست با شماره ' . $request->id . ' با موفقیت لغو شد');
 
     }
+
+    public function badCode(BuyAccount $request){
+        //send sms
+
+        return redirect()->route('request.index')->with('alert-success', 'برای کاربر ' . $request->user->username . ' با موفقیت پیامک ارسال شد');
+
+    }
 }

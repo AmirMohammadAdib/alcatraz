@@ -68,20 +68,35 @@
                             </div><!-- /.input-group -->
                         </div><!-- /.form-group -->
 
-                    <div class="form-group">
-                        <label>کد رهگیری</label>
-                        <div class="input-group @error('transaction_id') has-error @enderror">
-                            <span class="input-group-addon">
-                                <i class="icon-user"></i>
-                            </span>
-                            <input type="text" class="form-control" placeholder="کد رهگیری" value="{{ old('transaction_id') }}" name="transaction_id">
+                        <div class="form-group">
+                            <label>کد رهگیری</label>
+                            <div class="input-group @error('transaction_id') has-error @enderror">
+                                <span class="input-group-addon">
+                                    <i class="icon-user"></i>
+                                </span>
+                                <input type="text" class="form-control" placeholder="کد رهگیری" value="{{ old('transaction_id') }}" name="transaction_id">
+    
+                                @error('transaction_id')
+                                    <span class="alert-danger">{{ $message }}</span>
+                                @enderror
+    
+                            </div><!-- /.input-group -->
+                        </div><!-- /.form-group -->
 
-                            @error('transaction_id')
-                                <span class="alert-danger">{{ $message }}</span>
-                            @enderror
-
-                        </div><!-- /.input-group -->
-                    </div><!-- /.form-group -->
+                        <div class="form-group">
+                            <label>کد وریفای اکتیویژن</label>
+                            <div class="input-group @error('verify_code') has-error @enderror">
+                                <span class="input-group-addon">
+                                    <i class="icon-user"></i>
+                                </span>
+                                <input type="text" class="form-control" placeholder="کد وریفای" value="{{ old('verify_code', $request->verify_code) }}" name="verify_code">
+    
+                                @error('verify_code')
+                                    <span class="alert-danger">{{ $message }}</span>
+                                @enderror
+    
+                            </div><!-- /.input-group -->
+                        </div><!-- /.form-group -->
 
                     
                 </div><!-- /.form-body -->
@@ -91,10 +106,15 @@
                         <i class="icon-check"></i>
                         پایان معامله
                     </button>
+                    <a href="{{ route('request.bad.code', $request) }}" class="btn btn-danger btn-round">
+                        کد اشتباه ارسال کرده
+                        <i class="icon-close"></i>
+                    </a>
                     <a href="{{ route('request.index') }}" class="btn btn-warning btn-round">
                         بازگشت
                         <i class="icon-close"></i>
                     </a>
+                    
                 </div><!-- /.form-actions -->
             </form>
         </div><!-- /.portlet-body -->

@@ -144,7 +144,7 @@
                                      @elseif($account->status == 2)
                                      در انتظار تایید ادمین
                                      @elseif($account->status == 3)
-                                         درانتظار پرداخت
+                                         درانتظار دریافت کد از سمت شما
                                      @elseif($account->status == 4)
                                          پایان یافته
                                      @endif
@@ -155,8 +155,23 @@
                                      <span class="font-bold ">کد رهگیری‌: {{ $account->transaction_id }}</span>
                                      
                                  @endif
+
+                                 @if ($account->status == 3)
+                                    <div class="form-group" style="margin-top: 1rem">
+                                        <label style="color: #a4a6b6">ایمیل تاییدیه از سمت اکتیویژن</label>
+                                        <input type="text" placeholder="کد ارسال شده" name="code" class="form-control" style="width: 100%;font-family: 'payda-Regular';
+                                        color: #808291;" value="{{ old('code', $account->verify_code) }}">
+                                        @error('code')
+                                            <span class="err">{{ $message }}</span>
+                                        @enderror
+                                    </div><br>
+                                    <input type="submit" value="تایید" class="btn btn-warning" style="font-family: payda-Regular">
+                                    <input type="hidden" name="type" value="code">
+                                 @endif
  
                                  @if($account->status == 1)
+                                 <input type="hidden" name="type" value="email-pass">
+
                                      <div class="form-group" style="margin-top: 1rem">
                                          <label style="color: #a4a6b6">ایمیل اکانت بازی</label>
                                          <input type="text" placeholder="لطفا ایمیل خود را وارد کنید" name="email" class="form-control" style="width: 100%;font-family: 'payda-Regular';
