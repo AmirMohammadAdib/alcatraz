@@ -140,8 +140,11 @@
                             @if ($cp->status ==1)
                             <input type="submit" value="فروش فوری" id="instantSaleButton" class="btn w-100 btn-danger font-bold" style="width: 50%;">
 
-
+                            @if ($cp->super_status_sale == 1)
                             <input type="submit" value="فروش سوپر فوری" id="superInstantSaleButton" class="btn w-100 btn-success font-bold" style="width: 50%;">
+
+                            @endif
+
 
 
                                 
