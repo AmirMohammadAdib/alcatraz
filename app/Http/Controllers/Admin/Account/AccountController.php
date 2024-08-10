@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin\Account;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Account\AccountRequest;
 use App\Models\Account;
+use App\Models\AccountCharacter;
 use App\Models\AccountGun;
+use App\Models\Character;
 use App\Models\Gun;
 use Illuminate\Http\Request;
 
@@ -26,7 +28,8 @@ class AccountController extends Controller
     public function create()
     {
         $guns = Gun::all();
-        return view('admin.account.account.create', compact('guns'));
+        $characters = Character::all();
+        return view('admin.account.account.create', compact('guns', 'characters'));
     }
 
     /**
@@ -50,6 +53,14 @@ class AccountController extends Controller
             ]);
         }
 
+        foreach($inputs['characters'] as $character){
+            AccountCharacter::create([
+                'account_id' => $account->id,
+                'character_id' => $character,
+            ]);
+        }
+
+
         return redirect()->route('account.index')->with('alert-success', 'محصول جدید با موفقیت ایجاد شد');
     }
 
@@ -67,8 +78,10 @@ class AccountController extends Controller
     public function edit(Account $account)
     {
         $guns = Gun::all();
+        $characters = Character::all();
         $selectedGun = AccountGun::where('account_id', $account->id)->pluck('gun_id')->toArray();
-        return view('admin.account.account.edit', compact('account', 'guns', 'selectedGun'));
+        $selectedCharacter = AccountCharacter::where('account_id', $account->id)->pluck('character_id')->toArray();
+        return view('admin.account.account.edit', compact('account', 'guns', 'selectedGun', 'characters', 'selectedCharacter'));
     }
 
     /**
@@ -93,6 +106,18 @@ class AccountController extends Controller
             AccountGun::create([
                 'account_id' => $account->id,
                 'gun_id' => $gun,
+            ]);
+        }
+
+        $currentCharacter = AccountCharacter::where('account_id', $account->id)->get();
+        foreach($currentCharacter as $character){
+            $character->delete();
+        }
+
+        foreach($inputs['characters'] as $character){
+            AccountCharacter::create([
+                'account_id' => $account->id,
+                'character_id' => $character,
             ]);
         }
         $account->update($inputs);

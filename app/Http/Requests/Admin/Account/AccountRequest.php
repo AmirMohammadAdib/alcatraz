@@ -20,6 +20,7 @@ class AccountRequest extends FormRequest
                 'price' => 'required|numeric',
                 'description' => 'nullable|string',
                 'guns' => 'required|array',
+                'characters' => 'required|array',
                 'uid' => 'required|numeric',
             ];
         }else{
@@ -29,6 +30,8 @@ class AccountRequest extends FormRequest
                 'price' => 'required|numeric',
                 'description' => 'nullable|string',
                 'guns' => 'required|array',
+                'characters' => 'required|array',
+
                 'uid' => 'required|numeric',
 
             ];

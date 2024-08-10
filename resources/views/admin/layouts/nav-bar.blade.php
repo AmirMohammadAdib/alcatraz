@@ -131,6 +131,14 @@
                             <span>گان ها</span>
                         </a>
                     </li>
+
+
+                    <li>
+                        <a href="{{ route('character.index') }}" class="">
+                            <i class="  fas fa-mask"></i>
+                            <span>کاراکتر ها</span>
+                        </a>
+                    </li>
                     <li>
                         <a href="{{ route('account-order.index') }}" class="">
                             <i class=" fas fa-cart-shopping"></i>

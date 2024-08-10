@@ -143,6 +143,24 @@
                         </div><!-- /.input-group -->
                     </div><!-- /.form-group -->
                     
+
+                    <div class="form-group">
+                        <label>انتخاب کاراکتر برای این اکانت</label>
+                        <div class="input-group @error('characters') has-error @enderror">
+
+                            <select name="characters[]" id="characters" class="form-control characters" multiple="multiple">
+                                @foreach ($characters as $character)
+                                    <option @if(in_array($character->id, $selectedCharacter)) selected @endif value="{{ $character->id }}">{{ $character->name }}</option>
+                                @endforeach
+                            </select>
+
+                            @error('characters')
+                                <span class="alert-danger">{{ $message }}</span>
+                            @enderror
+
+                        </div><!-- /.input-group -->
+                    </div><!-- /.form-group -->
+
                 </div><!-- /.form-body -->
 
                 <div class="form-actions">
@@ -169,6 +187,13 @@
 <script>
     var select_roles = $('#guns');
     select_roles.select2({
+        placeholder: 'لطفا نقش ها را وارد نمایید',
+        multiple: true,
+        tags : true
+    })
+
+    var select_role2 = $('#characters');
+    select_role2.select2({
         placeholder: 'لطفا نقش ها را وارد نمایید',
         multiple: true,
         tags : true
