@@ -11,7 +11,7 @@ class CP extends Model
     use HasFactory, SoftDeletes;
     protected $table = 'cps';
     protected $fillable = [
-        'title', 'amount', 'img', 'cover', 'price', 'super_price', 'status'
+        'title', 'amount', 'img', 'cover', 'price', 'super_price', 'status', 'super_status_sale'
     ];
 
     const VIEW_ANY_PERMISSION_KEY = 'cp_view_any';

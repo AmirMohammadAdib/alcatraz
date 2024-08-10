@@ -48,6 +48,7 @@
                             <th>مبلغ</th>
                             <th>مبلغ سوپر فوری</th>
                             <th>وضعیت</th>
+                            <th>وضعیت فروش سوپر فوری</th>
                             <th>تاریخ ساخت</th>
                             <td>عملیات</td>
                         </tr>
@@ -69,6 +70,13 @@
                                         <span class="alert-danger">ناموجود</span>
                                     @else
                                         <span class="alert-success">موجود</span>             
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($cp->super_status_sale == '0')
+                                        <span class="alert-danger">غیرفعال</span>
+                                    @else
+                                        <span class="alert-success">فعال</span>             
                                     @endif
                                 </td>
                                 <td>{{ verta($cp->created_at)->format('Y-m-d') }}</td>

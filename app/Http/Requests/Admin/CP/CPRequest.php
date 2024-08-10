@@ -21,7 +21,8 @@ class CPRequest extends FormRequest
                 'cover' => 'required|file|max:2048|mimes:png,jpg,jpeg,gif,webp',
                 'price' => 'required|numeric',
                 'super_price' => 'required|numeric',
-                'status' => 'required|integer'
+                'status' => 'required|integer',
+                'super_status_sale' => 'required|in:0,1'
             ];
         }else{
             return [
@@ -31,7 +32,9 @@ class CPRequest extends FormRequest
                 'cover' => 'nullable|file|max:2048|mimes:png,jpg,jpeg,gif,webp',
                 'price' => 'required|numeric',
                 'super_price' => 'required|numeric',
-                'status' => 'required|integer'
+                'status' => 'required|integer',
+                'super_status_sale' => 'required|in:0,1'
+
             ];
         }
     }

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('cps', function (Blueprint $table) {
-            //
+            $table->tinyInteger('super_status_sale')->default(0)->comment('0 => inactive, 1 => active')->after('status');
         });
     }
 

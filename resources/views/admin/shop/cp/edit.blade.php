@@ -161,7 +161,23 @@
 
                         </div><!-- /.input-group -->
                     </div><!-- /.form-group -->
+                    <div class="form-group">
+                        <label>فروش سوپر فوری</label>
+                        <div class="input-group @error('super_price') has-error @enderror">
+                            <span class="input-group-addon">
+                                <i class="icon-user"></i>
+                            </span>
+                            <select name="super_status_sale" class="form-control" id="">
+                                <option value="0" {{ old('super_status_sale', $cp->super_status_sale) == 0 ? 'selected' : '' }}>غیرفعال</option>
+                                <option value="1" {{ old('super_status_sale', $cp->super_status_sale) == 1 ? 'selected' : '' }}>فعال</option>
+                            </select>
 
+                            @error('super_status_sale')
+                                <span class="alert-danger">{{ $message }}</span>
+                            @enderror
+
+                        </div><!-- /.input-group -->
+                    </div><!-- /.form-group -->
                     
                 </div><!-- /.form-body -->
 
