@@ -70,6 +70,7 @@ Route::group(['prefix' => 'admin'], function(){
         
         // Define resource routes for 'order' which will map to OrderController
         Route::resource('order', OrderController::class);
+        Route::get('order/mistake/pass/{order}', [OrderController::class, 'mistakePass'])->name('order.mistake-pass');
     });
 
 

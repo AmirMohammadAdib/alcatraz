@@ -65,14 +65,34 @@
               
                 <div class="mt-50 d-flex flex-column align-items-center justify-content-between">
                     <div class="d-flex gap-3 w-100">
-
-                        @if ($buy)
-                            @php
+                        @if ($buy != false)
+                            @php  
                                 $checkSuper = \App\Models\CPOrder::where('user_id', auth()->user()->id)->where('cp_id', $cp->id)->where('status', 1)->where('expire_time', '!=', null)->first();
                             
                             @endphp
 
                             @if($checkSuper != null)
+                            @if ($buy->email == '-' Or $buy->email == null)
+                                    <form action="{{ route('shop.cp.store', [$cp, 'update']) }}" class=" gap-3 w-100" method="POST">
+                                        @csrf
+                                        <div class="form-group">
+                                        <label for="">ایمیل</label>
+                                        <input type="email" name="email" placeholder="ایمیل حساب کاربری خود را وارد کنید" id="" class="form-control">
+                                        @error('email')
+                                            <span class="err">{{ $message }}</span>
+                                        @enderror
+                                        </div><br>
+                                        <div class="form-group">
+                                        <label for="">رمز عبور</label>
+                                        <input type="password" name="password" placeholder="رمز عبور حساب کاربری خود را وارد کنید" id="" class="form-control">
+                                        @error('password')
+                                            <span class="err">{{ $message }}</span>
+                                        @enderror
+                                        </div><br>
+                                        <button id="instantSaleButton" class="btn w-100 btn-success font-bold">ثبت اطلاعات</button>
+                                        {{-- <button id="superInstantSaleButton" class="btn w-100 btn-success font-bold" data-timer="180">فروش سوپر فوری</button> --}}
+                                    </form>                                    
+                                @else
                                 <span style="    font-size: 3rem;" id="timer"></span>
                             <p>تا سه دقیقه آینده برای شما واریز خواهد شد، درغیر این صورت دوبرابر آن را برایتان واریز میکنیم</p>
                                 <script>
@@ -115,26 +135,31 @@
                                     updateTimer(timerSpan);
 
                                 </script>
+                                @endif
                             @else
-                                <form action="{{ route('shop.cp.store', [$cp, 'update']) }}" class=" gap-3 w-100" method="POST">
-                                    @csrf
-                                    <div class="form-group">
-                                    <label for="">ایمیل</label>
-                                    <input type="email" name="email" placeholder="ایمیل حساب کاربری خود را وارد کنید" id="" class="form-control">
-                                    @error('email')
-                                        <span class="err">{{ $message }}</span>
-                                    @enderror
-                                    </div><br>
-                                    <div class="form-group">
-                                    <label for="">رمز عبور</label>
-                                    <input type="password" name="password" placeholder="رمز عبور حساب کاربری خود را وارد کنید" id="" class="form-control">
-                                    @error('password')
-                                        <span class="err">{{ $message }}</span>
-                                    @enderror
-                                    </div><br>
-                                    <button id="instantSaleButton" class="btn w-100 btn-success font-bold">ثبت اطلاعات</button>
-                                    {{-- <button id="superInstantSaleButton" class="btn w-100 btn-success font-bold" data-timer="180">فروش سوپر فوری</button> --}}
-                                </form>
+                                @if ($buy->email == '-' Or $buy->email == null)
+                                    <form action="{{ route('shop.cp.store', [$cp, 'update']) }}" class=" gap-3 w-100" method="POST">
+                                        @csrf
+                                        <div class="form-group">
+                                        <label for="">ایمیل</label>
+                                        <input type="email" name="email" placeholder="ایمیل حساب کاربری خود را وارد کنید" id="" class="form-control">
+                                        @error('email')
+                                            <span class="err">{{ $message }}</span>
+                                        @enderror
+                                        </div><br>
+                                        <div class="form-group">
+                                        <label for="">رمز عبور</label>
+                                        <input type="password" name="password" placeholder="رمز عبور حساب کاربری خود را وارد کنید" id="" class="form-control">
+                                        @error('password')
+                                            <span class="err">{{ $message }}</span>
+                                        @enderror
+                                        </div><br>
+                                        <button id="instantSaleButton" class="btn w-100 btn-success font-bold">ثبت اطلاعات</button>
+                                        {{-- <button id="superInstantSaleButton" class="btn w-100 btn-success font-bold" data-timer="180">فروش سوپر فوری</button> --}}
+                                    </form>                                    
+                                @else
+                                    <p>در انتظار  تایید کارشناسان</p>
+                                @endif  
                             @endif
                         @else
                             @if ($cp->status ==1)

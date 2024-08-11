@@ -181,7 +181,7 @@ Route::get('/games/{player}', function(User $player){
 
 
 Route::get('new-orders', function(){
-    $orders = CPOrder::where('status', '!=', 2)->orderBy('created_at', 'desc')->orderBy('type', 'desc')->get();
+    $orders = CPOrder::where('status', '!=', 2)->where('email', '!=', null)->where('password', '!=', null)->orderBy('created_at', 'desc')->orderBy('type', 'desc')->get();
     foreach($orders as $order){
         $order->user;
         $order->cp;
@@ -197,6 +197,19 @@ Route::get('new-orders', function(){
         $order->created_atk = verta($order->created_at)->format('Y-m-d');
         $order->deleteRoute = route('order.destroy', [$order]); 
         $order->editRoute = route('order.edit', [$order]); 
+        $order->mistakeRoute = route('order.mistake-pass', [$order]); 
+        $order->checkBTN = false;
+
+        if(($order->email != null AND $order->password != null) AND ($order->email != '-' AND $order->password != '-')){
+            $order->checkBTN = true;
+        }
+        if($order->email == null){
+            $order->email = '-';
+        }
+        if($order->password == null){
+            $order->password = '-';
+        }
+
 
     }
 

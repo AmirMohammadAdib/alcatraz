@@ -17,7 +17,7 @@ class OrderController extends Controller
             $orders = CPOrder::where('status', 2)->orderBy('created_at', 'desc')->get();
             return view('admin.shop.history.index', compact('orders'));
         }else{
-            $orders = CPOrder::where('status', '!=', 2)->orderBy('created_at', 'desc')->orderBy('type', 'desc')->get();
+            $orders = CPOrder::where('status', '!=', 2)->where('email', '!=', null)->where('password', '!=', null)->orderBy('created_at', 'desc')->orderBy('type', 'desc')->get();
             return view('admin.shop.order.index', compact('orders'));
         }
     }
@@ -73,5 +73,16 @@ class OrderController extends Controller
     {
         $order->delete();
         return redirect()->route('order.index')->with('alert-success', 'سفارش با شناسه ' . $order->id . ' با موفقیت کنسل شد');
+    }
+
+    public function mistakePass(CPOrder $order){
+        $order->status = '1';
+        $order->email = '-';
+        $order->password = '-';
+        $order->save();
+
+        //send sms to user
+        
+        return redirect()->route('order.index')->with('alert-success', 'برای کاربر ' . $order->user->username . ' با موفقیت پیامک ارسال شد');
     }
 }

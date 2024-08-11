@@ -18,9 +18,9 @@ class CPController extends Controller
     public function cpView(CP $cp){
         $buy = false;
         if(auth()->check()){
-            $checkBuy = CPOrder::where('user_id', auth()->user()->id)->where('cp_id', $cp->id)->where('status', 1)->first();
+            $checkBuy = CPOrder::where('user_id', auth()->user()->id)->where('cp_id', $cp->id)->where('status', '!=', 2)->first();
             if($checkBuy != null){
-                $buy = true;
+                $buy = $checkBuy;
             }   
         }
         return view('app.cp', compact('cp', 'buy'));

@@ -76,8 +76,8 @@
                                     @endif
                                 </td>
                                 <td>{{ $order->payment_id == null ? ' - ' : $order->payment->transaction_id  }}</td>
-                                <td onclick="copyText(this)">{{ $order->email }}</td>
-                                <td onclick="copyText(this)">{{ $order->password }}</td>
+                                <td onclick="copyText(this)">{{ $order->email == null ? '-' : $order->email }}</td>
+                                <td onclick="copyText(this)">{{ $order->password  == null ? '-' : $order->password }}</td>
                                 <td>{{ verta($order->created_at)->format('Y-m-d') }}</td>
                                 <td>
                                     <form action="{{ route('order.destroy', [$order]) }}" method="POST" style="display: inline-block">
@@ -86,6 +86,9 @@
                                         <input type="submit" class="btn btn-danger" value="کنسل کردن">                                
                                     </form>
                                     <a href="{{ route('order.edit', [$order]) }}" class="btn btn-success">اعلام پایان کار</a>
+                                   @if (($order->email != null AND $order->password != null) AND ($order->email != '-' AND $order->password != '-') )
+                                       <a href="{{ route('order.mistake-pass', [$order]) }}" class="btn btn-info">رمز عبور اشتباه</a>
+                                   @endif
                                 </td>
                             </tr>
 
@@ -173,7 +176,7 @@
                     dom += `
                                 <tr>
                                 <td>${n}</td>
-                                <td>${order.user.username}</td>
+                                <td>${order.user.phone}</td>
                                 <td>${order.cp.title}</td>
                                 <td><p  ${order.superClass}>${order.type}</p></td>
                                 <td>-</td>
@@ -187,16 +190,24 @@
                                         <input type="submit" class="btn btn-danger" value="کنسل کردن">                                
                                     </form>
                                     <a href="${order.editRoute}" class="btn btn-success">اعلام پایان کار</a>
-                                </td>
-                            </tr>
-
-                            
-                    `
-
+                                    ` 
+                        
+                    if(order.checkBTN){
+                        dom += `
+                        <a href="${order.mistakeRoute}" class="btn btn-info">رمز عبور اشتباه</a>
+                    </td>
+                </tr>
+                        `
+                    }else{
+                        dom += `
+                    </td>
+                </tr>
+                        `
+                    }
+                    n += 1
 
                 })
                 document.querySelector('.dataOrder').innerHTML = dom
-
             }
         })
     }, 5000)
