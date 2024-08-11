@@ -75,6 +75,10 @@
                         <i class="icon-check"></i>
                         تایید انتقال
                     </button>
+                    <a href="{{ route('request.mistake-pass', $request) }}" class="btn btn-danger btn-round">
+                        رمز اشتباه ارسال شده
+                        <i class="icon-close"></i>
+                    </a>
                     <a href="{{ route('request.index') }}" class="btn btn-warning btn-round">
                         بازگشت
                         <i class="icon-close"></i>

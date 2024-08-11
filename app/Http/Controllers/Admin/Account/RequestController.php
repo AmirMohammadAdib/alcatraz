@@ -112,4 +112,16 @@ class RequestController extends Controller
         return redirect()->route('request.index')->with('alert-success', 'برای کاربر ' . $request->user->username . ' با موفقیت پیامک ارسال شد');
 
     }
+
+
+    public function mistakePass(BuyAccount $request){
+        $request->status = '1';
+        $request->email = null;
+        $request->password = null;
+        $request->save();
+
+        //send sms to user
+        
+        return redirect()->route('request.index')->with('alert-success', 'برای کاربر ' . $request->user->username . ' با موفقیت پیامک ارسال شد');
+    }
 }
