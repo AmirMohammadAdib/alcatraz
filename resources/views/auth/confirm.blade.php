@@ -2,7 +2,7 @@
 
 
 @section('head-tag')
-    
+
 @endsection
 
 
@@ -23,8 +23,8 @@
               <input type="text" class="text-center font-bold " id="input4" placeholder="0" name="otp[]">
           </div>
           <div class="mt-50 d-flex justify-content-between">
-              <div><a href="{{ route('login.otp.resend', $token) }}" style="color: var(--hading-color);">ارسال مجدد کد</a></div>
-              <div style="color: var(--hading-color);" id="timer" data-duration="180"></div>
+              <div><a id="resend" href="{{ route('login.otp.resend', $token) }}" class="d-none" style="color: var(--hading-color);">ارسال مجدد کد</a></div>
+              <div style="color: var(--hading-color);" id="timer" ></div>
           </div>
 
           <div class="mt-100 text-center">
@@ -67,33 +67,47 @@
       });
     });
     
-    function startCountdown() {
-        const timerElement = document.getElementById('timer');
-        const duration = parseInt(timerElement.getAttribute('data-duration'), 10);
-        let timeLeft = duration;
     
-        function updateTimer() {
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = timeLeft % 60;
-    
-            // نمایش تایمر
-            timerElement.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-    
-            if (timeLeft <= 0) {
-                clearInterval(timerInterval);
-                timerElement.textContent = 'پایان زمان!';
-            } else {
-                timeLeft--;
+  
+    // زمان‌های شروع و پایان را مشخص کنید (مثلاً زمان پایان 1 دقیقه بعد از زمان شروع)
+    let startTime = new Date('{{ $otp->created_at }}');
+    let targetTime = new Date('{{ date("Y-m-d H:i:s",strtotime($otp->created_at . "+ 3 minutes")) }}'); // 60,000 میلی‌ثانیه برابر 1 دقیقه
+    console.log(targetTime);
+    // عنصر span که زمان باقی‌مانده را نمایش می‌دهد را انتخاب کنید
+    let timerSpan = document.getElementById('timer');
+
+    function updateTimer() {
+        // زمان فعلی را بدست آورید
+        let now = new Date();
+
+        // تفاوت بین زمان هدف و زمان فعلی را حساب کنید
+        let timeDifference = targetTime - now;
+
+        if (timeDifference <= 0) {
+            // اگر زمان به پایان رسید
+            timerSpan.textContent = "پایان یافت";
+            document.querySelector('#resend').classList.remove('d-none')
+            clearInterval(timerInterval);
+        } else {
+            // تبدیل میلی‌ثانیه به ثانیه
+            let seconds = Math.floor((timeDifference / 1000) % 60);
+            let minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
+            let hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
+
+            if(hours == 0){
+                timerSpan.textContent = `${minutes}:${seconds}`;
+            }else{
+                timerSpan.textContent = `${hours}:${minutes}:${seconds}`;
             }
         }
-    
-        // به‌روزرسانی تایمر هر ثانیه
-        updateTimer(); // به‌روزرسانی اولیه
-        const timerInterval = setInterval(updateTimer, 1000);
     }
-    
-    // شروع تایمر بعد از بارگذاری صفحه
-    document.addEventListener('DOMContentLoaded', startCountdown);
+
+    // به‌روزرسانی تایمر هر ثانیه
+    let timerInterval = setInterval(updateTimer, 1000);
+
+    // اولین به‌روزرسانی تایمر بلافاصله بعد از بارگذاری صفحه
+    updateTimer(timerSpan);
+
         </script>
     
 @endsection

@@ -87,7 +87,7 @@ class LoginOtpController extends Controller
             return redirect()->route('login.otp.view')->with('error', 'آدرس وارد شده نامعتبر میباشد');
         }
 
-        return view('auth.confirm', compact('token'));
+        return view('auth.confirm', compact('token', 'otp'));
 
     }
 
